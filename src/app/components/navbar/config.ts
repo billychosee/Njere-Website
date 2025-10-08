@@ -1,16 +1,14 @@
-import { 
-  FiHome, 
-  FiInfo, 
-  FiGrid, 
-  FiBox, 
-  FiUsers, 
+import {
+  FiHome,
+  FiInfo,
+  FiGrid,
+  FiUsers,
   FiMail,
   FiSearch,
   FiMenu,
   FiX,
   FiChevronDown,
   FiChevronUp,
-  FiGlobe
 } from 'react-icons/fi';
 
 export const NAV_ITEMS = [
@@ -71,27 +69,21 @@ export const NAV_ITEMS = [
           label: 'Software Development',
           href: '/services/software-development',
         },
-      ] as const,
+      ],
     },
   },
-  // {
-  //   label: 'PRICING',
-  //   href: '/contact-us',
-  //   icon: FiMail,
-  //   iconClass: 'text-current',
-  // },
   {
     label: 'CONTACT',
     href: '/contact-us',
     icon: FiMail,
     iconClass: 'text-current',
   },
-] as const;
+];
 
 export const ICONS = {
   search: FiSearch,
   bars: FiMenu,
   times: FiX,
   chevronDown: FiChevronDown,
-  chevronUp: FiChevronUp
-} as const;
+  chevronUp: FiChevronUp,
+};
