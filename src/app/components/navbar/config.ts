@@ -25,13 +25,27 @@ export const NAV_ITEMS = [
     iconClass: 'text-current',
   },
   {
-    label: 'SERVICES',
-    href: '/services',
-    icon: FiGrid,
+    label: 'MODULES',
+    href: '/contact-us',
+    icon: FiMail,
+    iconClass: 'text-current',
+    dropdown: {
+      items: [
+        {
+          label: 'Administrative',
+          href: '/services/ai-and-machine-learning',
+        },
+        { label: 'Cyber Security', href: '/services/cyber-security' },
+        {
+          label: 'Academics',
+          href: '/services/software-development',
+        },
+      ],
+    },
   },
   {
     label: 'INTEGRATIONS',
-    href: '/industries',
+    href: '/integrations',
     icon: FiGrid,
     iconClass: 'text-current',
   },
@@ -52,25 +66,6 @@ export const NAV_ITEMS = [
     href: '/contact-us',
     icon: FiMail,
     iconClass: 'text-current',
-  },
-  {
-    label: 'MODULES',
-    href: '/contact-us',
-    icon: FiMail,
-    iconClass: 'text-current',
-    dropdown: {
-      items: [
-        {
-          label: 'AI & Machine Learning',
-          href: '/services/ai-and-machine-learning',
-        },
-        { label: 'Cyber Security', href: '/services/cyber-security' },
-        {
-          label: 'Software Development',
-          href: '/services/software-development',
-        },
-      ],
-    },
   },
   {
     label: 'CONTACT',

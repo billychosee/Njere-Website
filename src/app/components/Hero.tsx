@@ -1,6 +1,33 @@
 import React from 'react';
 import { FaLinkedin, FaInstagram, FaTwitter } from 'react-icons/fa';
 
+// Scenario images for floating cards
+const TEACHER_USING_SOFTWARE = '/teacher-using-software.jpg';
+const PARENT_CHECKING_PROGRESS = '/parent-checking-progress.jpg';
+const ADMINISTRATOR_DASHBOARD = '/administrator-dashboard.jpg';
+const STUDENTS_IN_CLASSROOM = '/students-in-classroom.jpg';
+const VIRTUAL_TEACHER_PARENT_MEETING = '/virtual-teacher-parent-meeting.jpg';
+const DASHBOARD_CLOSEUP = '/dashboard-closeup.jpg';
+const MOBILE_APP_MONITORING = '/mobile-app-monitoring.jpg';
+const TEACHER_COLLABORATION = '/teacher-collaboration.jpg';
+
+// Array of scenario images for cards
+const NJERE_CARD_IMAGES = [
+  TEACHER_USING_SOFTWARE,
+  PARENT_CHECKING_PROGRESS,
+  ADMINISTRATOR_DASHBOARD,
+  STUDENTS_IN_CLASSROOM,
+  VIRTUAL_TEACHER_PARENT_MEETING,
+  DASHBOARD_CLOSEUP,
+  MOBILE_APP_MONITORING,
+  TEACHER_COLLABORATION,
+];
+
+// Constants for profile images (assuming these are available)
+const PROFILE_IMAGE_1 = '/founder-profile1.jpg';
+const PROFILE_IMAGE_2 = '/founder-profile2.jpg';
+const PROFILE_IMAGE_3 = '/founder-profile3.jpg';
+
 const socialIcons = [
   {
     name: 'LinkedIn',
@@ -14,15 +41,6 @@ const socialIcons = [
   },
   { name: 'X', icon: FaTwitter, link: 'https://twitter.com/your-njere-page' },
 ];
-
-const SINGLE_CARD_IMAGE = '/student-with-laptop.jpg';
-const PROFILE_IMAGE_1 = '/founder-profile1.jpg';
-const PROFILE_IMAGE_2 = '/founder-profile2.jpg';
-const PROFILE_IMAGE_3 = '/founder-profile3.jpg';
-const NJERE_ONBOARD = '/njere-onboard.png';
-const NJERE_DASHBOARD = '/njere-dashboard.png';
-const NJERE_EXAM  = '/njere-exam-group.png';
-const NJERE_VISITOR = '/njere-visitor-book.png';
 
 const HeroNjereCSRConnect: React.FC = () => {
   const staggeredCardLayout = [
@@ -92,7 +110,7 @@ const HeroNjereCSRConnect: React.FC = () => {
       {/* Main Content */}
       <div className="relative z-10 flex flex-col items-center justify-center flex-grow w-full max-w-4xl px-4 mx-auto text-center">
         {/* Logo */}
-        <div className="mb-8 w-20 h-20 flex items-center justify-center bg-[#0296ad2c] text-white rounded-2xl shadow-xl transform transition-transform duration-300 hover:scale-110 p-2">
+        <div className="mb-8 w-20 h-20 flex items-center justify-center bg-[#0296ad2c] text-white rounded-2xl shadow-xl transform transition-transform duration-300 hover:scale-110 p-2 opacity-0 animate-fade-in-up">
           <img
             src="/njere-n-logo.png"
             alt="Njere N Logo"
@@ -100,60 +118,72 @@ const HeroNjereCSRConnect: React.FC = () => {
           />
         </div>
 
-        {/* Headline */}
-        <h1 className="mb-4 text-4xl font-extrabold leading-tight sm:text-5xl md:text-6xl lg:text-4xl animate-fade-in-up">
-          Support Schools.{' '}
+        {/* Headline - UPDATED for "School Management" in black and "Software" in gradient */}
+        <h1
+          className="mb-4 text-4xl font-extrabold leading-tight text-gray-900 opacity-0 sm:text-5xl md:text-6xl lg:text-4xl animate-fade-in-up"
+          style={{ animationDelay: '0.2s' }}
+        >
+          School Management
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0296AD] to-blue-600">
-            Empower Futures.
+            {' '}
+            Software
           </span>
         </h1>
 
-        {/* Subheading */}
-        <p className="mb-8 text-lg leading-relaxed text-gray-600 sm:text-xl md:text-xl animate-fade-in-up animate-delay-200">
-          Njere CSR Connect links schools in need with companies and
-          organizations ready to sponsor education initiatives.
+        {/* Subheading (Kept from previous update) */}
+        <p
+          className="mb-8 text-lg leading-relaxed text-gray-600 opacity-0 sm:text-xl md:text-xl animate-fade-in-up"
+          style={{ animationDelay: '0.4s' }}
+        >
+          Our school management software provides end-to-end monitoring
+          capabilities, granting parents, administrators, and teachers a
+          comprehensive view of students’ academic and social activities at
+          school.
         </p>
 
-        {/* Call to Action Buttons */}
-        <div className="flex flex-col items-center justify-center gap-4 mb-8 sm:flex-row animate-fade-in-up animate-delay-400">
+        {/* Call to Action Button - Single CTA "Register Today" (Kept) */}
+        <div
+          className="flex flex-col items-center justify-center gap-4 mb-8 opacity-0 sm:flex-row animate-fade-in-up"
+          style={{ animationDelay: '0.6s' }}
+        >
           <a
-            href="/register-school"
+            href="/register-today"
             className="px-8 py-3 bg-gradient-to-r from-[#0296AD] to-blue-600 text-white text-lg font-bold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:-translate-y-1"
           >
-            Register Your School
-          </a>
-          <a
-            href="/sponsor-schools"
-            className="px-8 py-3 bg-white border-2 border-[#0296AD] text-[#0296AD] text-lg font-bold rounded-full shadow-lg hover:bg-[#e6f6fa] transition-all duration-300 ease-in-out transform hover:-translate-y-1"
-          >
-            Find a School to Sponsor
+            Register Today
           </a>
         </div>
 
-        {/* Trusted Users */}
-        <div className="flex items-center justify-center mb-6 animate-fade-in-up animate-delay-300">
+        {/* Trusted Users (KEPT) */}
+        <div
+          className="flex items-center justify-center mb-6 opacity-0 animate-fade-in-up"
+          style={{ animationDelay: '0.8s' }}
+        >
           <div className="flex mr-3 -space-x-2 overflow-hidden">
             <img
               className="inline-block object-cover w-8 h-8 rounded-full ring-2 ring-white"
-              src={NJERE_ONBOARD}
-              alt="User Avatar"
+              src={PROFILE_IMAGE_1}
+              alt="User Avatar 1"
             />
             <img
               className="inline-block object-cover w-8 h-8 rounded-full ring-2 ring-white"
               src={PROFILE_IMAGE_2}
-              alt="User Avatar"
+              alt="User Avatar 2"
             />
             <img
               className="inline-block object-cover w-8 h-8 rounded-full ring-2 ring-white"
-              src={NJERE_DASHBOARD}
-              alt="User Avatar"
+              src={PROFILE_IMAGE_3}
+              alt="User Avatar 3"
             />
           </div>
           <span className="font-medium text-gray-700">4M+ trusted users</span>
         </div>
 
-        {/* Social Media */}
-        <div className="flex items-center justify-center mt-12 space-x-6 animate-fade-in-up animate-delay-600">
+        {/* Social Media (KEPT) */}
+        <div
+          className="flex items-center justify-center mt-12 space-x-6 opacity-0 animate-fade-in-up"
+          style={{ animationDelay: '1s' }}
+        >
           {socialIcons.map((social) => (
             <a
               key={social.name}
@@ -168,11 +198,11 @@ const HeroNjereCSRConnect: React.FC = () => {
         </div>
       </div>
 
-      {/* Floating Cards */}
+      {/* Floating Cards (KEPT) */}
       {staggeredCardLayout.map((card, index) => (
         <div
           key={index}
-          className={`absolute z-0 ${card.size} shadow-2xl rounded-2xl overflow-hidden transition-all duration-500 hover:scale-105 opacity-90 hidden lg:block animate-${card.animation}`}
+          className={`absolute z-0 ${card.size} shadow-2xl rounded-2xl overflow-hidden transition-all duration-500 hover:scale-105 opacity-90 hidden lg:block animate-fade-in-up animate-${card.animation}`}
           style={{
             top: card.top,
             bottom: card.bottom,
@@ -183,14 +213,14 @@ const HeroNjereCSRConnect: React.FC = () => {
           }}
         >
           <img
-            src={SINGLE_CARD_IMAGE}
-            alt="CSR Card Illustration"
+            src={NJERE_CARD_IMAGES[index]}
+            alt={`Scenario Screenshot ${index + 1}: a demonstration of the Njere system`}
             className="object-cover w-full h-full"
           />
         </div>
       ))}
 
-      {/* Decorative Elements */}
+      {/* Decorative Elements (KEPT) */}
       <div className="absolute hidden w-16 h-16 bg-blue-100 rounded-full top-12 left-1/4 opacity-70 animate-pulse lg:block"></div>
       <div className="absolute hidden w-12 h-12 bg-purple-100 top-16 right-1/4 opacity-70 animate-pulse lg:block"></div>
       <div className="absolute hidden bg-teal-100 rounded-full w-14 h-14 bottom-20 left-1/3 opacity-60 animate-pulse lg:block"></div>
@@ -245,21 +275,6 @@ const HeroNjereCSRConnect: React.FC = () => {
         }
         .animate-fade-in-up {
           animation: fade-in-up 0.6s ease-out forwards;
-        }
-        .animate-delay-200 {
-          animation-delay: 0.2s;
-        }
-        .animate-delay-300 {
-          animation-delay: 0.3s;
-        }
-        .animate-delay-400 {
-          animation-delay: 0.4s;
-        }
-        .animate-delay-500 {
-          animation-delay: 0.5s;
-        }
-        .animate-delay-600 {
-          animation-delay: 0.6s;
         }
         .animate-float-card-one {
           animation: float-card-one 6s ease-in-out infinite;

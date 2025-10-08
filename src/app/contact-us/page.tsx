@@ -1,116 +1,271 @@
-import React from 'react';
-import Footer from '../components/Footer';
-import ContactUsForm from './ContactUsForm';
-import { FiPhone, FiMapPin, FiMessageSquare } from 'react-icons/fi';
+// app/contact/page.tsx
 
-export const metadata = {
-  title: 'Contact SmaTech Group | IT Solutions Experts in Zimbabwe & South Africa',
-  description: 'Get in touch with our IT specialists for customized business solutions. Offices in Harare, Zimbabwe and Johannesburg, South Africa.',
-  openGraph: {
-    title: 'Contact SmaTech Group | IT Solutions Experts',
-    description: 'Reach our technology specialists for tailored business solutions.',
-    url: "https://www.smatechgroup.com/contact-us",
-    siteName: 'SmaTech Group'
-  }
+import type { Metadata } from 'next';
+import Script from 'next/script';
+import Footer from '../components/Footer';
+
+// --- Import the new Map Component
+import ContactMap from '../components/ContactMap';
+
+// --- Font Awesome Imports for Icons
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faPhone,
+  faMapMarkerAlt,
+  faEnvelope,
+} from '@fortawesome/free-solid-svg-icons';
+
+// Define the site base URL and contact information variables
+const siteUrl = 'https://njere.africa';
+const pageTitle = 'Contact Us - Njere Africa';
+const pageDescription =
+  'Get in touch with Njere Africa. Find our location at 13 Brentwood Avenue, Mt Harare, Zimbabwe.';
+const locationAddress = '13 Brentwood Avenue, Mount Pleasant, Harare, Zimbabwe'; // Updated address
+const phoneNumber = '+263 789 566 427';
+const emailAddress = 'info@njere.africa';
+
+// **IMPORTANT: Define the Map Coordinates (find exact coordinates for your address)**
+const MAP_CENTER = {
+  // These are approximate coordinates for Mount Pleasant, Harare (Update these!)
+  lat: -17.7801,
+  lng: 31.0505,
 };
 
+// Define custom colors for clarity
+const PRIMARY_COLOR = '#00204f'; // Your deep blue
+const ACCENT_COLOR = '#02ACC3'; // Vibrant teal
+
+// =======================
+// 1. PAGE-SPECIFIC METADATA
+// =======================
+export const metadata: Metadata = {
+  // Primary Meta Tags
+  title: pageTitle,
+  description: pageDescription,
+
+  // Open Graph / Social Sharing Meta Tags
+  openGraph: {
+    title: pageTitle,
+    description: pageDescription,
+    url: `${siteUrl}/contact`,
+    type: 'website',
+  },
+
+  // Twitter Meta Tags
+  twitter: {
+    card: 'summary_large_image',
+    title: pageTitle,
+    description: pageDescription,
+  },
+
+  // Canonical Link
+  alternates: {
+    canonical: `${siteUrl}/contact`,
+  },
+};
+
+// =======================
+// 2. CONTACT PAGE COMPONENT
+// =======================
 const ContactPage = () => {
   return (
-    <section className='text-black bg-white pt-14'>
-      <div className="px-4 py-6 md:py-14 md:px-24">
-        <div className="flex flex-col gap-8 md:flex-row">
-          {/* Left Column */}
-          <div className="items-center text-center md:w-1/2 md:items-start md:text-start">
-            <div className="flex flex-col items-center justify-center mb-6 md:flex-row md:justify-start">
-              <div className="p-2 mr-4 bg-[#8DC440] rounded-full">
-                <FiMessageSquare className="text-xl text-white" />
-              </div>
-              <p className="text-sm font-bold text-[#8DC440]">Let&apos;s talk</p>
-            </div>
-            <h1 className='text-3xl xl:text-[53px] font-bold lg:!text-4xl mb-6'>Talk to our product analytics expert</h1>
-            <p className="mb-6 text-gray-600">
-              Our <strong>IT experts</strong> provide customized plans and exceed expectations with excellent solutions. 
-              <strong>Partner</strong> with us to optimize your <strong>Business</strong>.
-            </p>
+    <>
+      {/* JSON-LD Structured Data - Updated with a more general address structure */}
+      <Script
+        id="contact-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'ContactPage',
+            url: `${siteUrl}/contact`,
+            description: pageDescription,
+            address: {
+              '@type': 'PostalAddress',
+              // Note: Using the single combined address here for simplicity
+              streetAddress: '13 Brentwood Avenue, Mount Pleasant',
+              addressLocality: 'Harare',
+              addressCountry: 'ZW',
+            },
+            telephone: phoneNumber,
+            email: emailAddress,
+          }),
+        }}
+      />
 
-            <div className="w-full">
-              <img 
-                src="/talk_to_us_lady.png"
-                alt="Contact us lady"
-                width={500}
-                height={400}
-                className="w-full h-auto rounded-xl"
-              />
-            </div>
-            <p className="my-6 text-gray-600">
-              We are present in more than two African countries and know the problems that Africa faces, <strong>Talk to Us Today</strong>.
-            </p>
-            
-            <div className="space-y-6">
-              <div className="p-6 rounded-lg bg-gray-50">
-                <div className="flex items-center mb-4">
-                  <div className="p-2 mr-3 bg-green-100 rounded-full">
-                    <FiMapPin className="text-green-600" />
+      <main>
+        {/* HERO SECTION */}
+        <section
+          className="relative pb-24 overflow-hidden text-white shadow-xl"
+          style={{
+            backgroundImage: `url('/hero-bg.jpg')`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+            backgroundColor: PRIMARY_COLOR,
+          }}
+        >
+          <div className={`absolute inset-0 bg-[${PRIMARY_COLOR}]/50`}></div>
+          <div className="container relative z-10 px-6 mx-auto text-center pt-36">
+            <h1 className="mb-4 text-2xl font-bold leading-tight md:text-3xl">
+              Contact us
+            </h1>
+            <p className="text-lg font-medium opacity-90">{locationAddress}</p>
+          </div>
+        </section>
+
+        {/* ===================================== */}
+        {/* GET IN TOUCH SECTION (Teal/White Layout) */}
+        {/* ===================================== */}
+        <section className="py-16 md:py-24 bg-gray-50">
+          <div className="container px-4 mx-auto md:px-6">
+            {/* Main Contact Container (Form and Info) */}
+            <div className="flex flex-col max-w-6xl mx-auto overflow-hidden shadow-2xl rounded-3xl">
+              {/* --- 1. Top Section: Info & Form --- */}
+              <div className="flex flex-col lg:flex-row">
+                {/* Left Column: Contact Information (Teal Background) */}
+                <div
+                  className={`w-full lg:w-2/5 p-10 md:p-12 text-white relative z-10`}
+                  style={{ backgroundColor: ACCENT_COLOR }}
+                >
+                  {/* Background circles for flair */}
+                  <div className="absolute w-40 h-40 bg-white/10 rounded-full bottom-[-20px] left-[-20px]"></div>
+                  <div className="absolute w-60 h-60 bg-white/10 rounded-full top-[-50px] right-[-50px] opacity-50"></div>
+
+                  <h2 className="relative z-20 mb-4 text-3xl font-bold">
+                    Contact Information
+                  </h2>
+                  <p className="relative z-20 mb-10 text-gray-100">
+                    Empowering Schools, Transforming Education: Partner with
+                    Njere.
+                  </p>
+
+                  {/* Contact Items */}
+                  <div className="relative z-20 space-y-8">
+                    {/* Phone */}
+                    <div className="flex items-start">
+                      <FontAwesomeIcon
+                        icon={faPhone}
+                        className="w-6 mt-1 mr-4 text-2xl"
+                      />
+                      <div>
+                        <p className="text-lg font-semibold">Phone Number :</p>
+                        <a
+                          href={`tel:${phoneNumber}`}
+                          className="text-white hover:underline"
+                        >
+                          {phoneNumber}
+                        </a>
+                      </div>
+                    </div>
+
+                    {/* Email */}
+                    <div className="flex items-start">
+                      <FontAwesomeIcon
+                        icon={faEnvelope}
+                        className="w-6 mt-1 mr-4 text-2xl"
+                      />
+                      <div>
+                        <p className="text-lg font-semibold">Email Address :</p>
+                        <a
+                          href={`mailto:${emailAddress}`}
+                          className="text-white hover:underline"
+                        >
+                          {emailAddress}
+                        </a>
+                      </div>
+                    </div>
+
+                    {/* Location */}
+                    <div className="flex items-start">
+                      <FontAwesomeIcon
+                        icon={faMapMarkerAlt}
+                        className="w-6 mt-1 mr-4 text-2xl"
+                      />
+                      <div>
+                        <p className="text-lg font-semibold">
+                          Location Address :
+                        </p>
+                        <p>{locationAddress}</p>
+                      </div>
+                    </div>
                   </div>
-                  <h3 className="text-lg font-semibold text-gray-800">Harare, ZIM</h3>
                 </div>
-                <p className="text-gray-600 ml-11">
-                  13 Brentwood Ave, Groombridge, Harare, Zimbabwe
-                </p>
-                <div className='flex flex-col md:flex-row'>
-                  <div className="flex items-center mt-3 ml-11">
-                    <FiPhone className="mr-2 text-gray-400" />
-                    <span className="text-gray-600">+263 86 880 08361</span>
-                  </div>
-                  <div className="flex items-center mt-3 ml-11">
-                    <FiPhone className="mr-2 text-gray-400" />
-                    <span className="text-gray-600">+263 78 956 6427</span>
-                  </div>
+
+                {/* Right Column: Contact Form */}
+                <div className="w-full p-8 bg-white lg:w-3/5 md:p-12">
+                  <form className="space-y-6">
+                    {/* Name and Email */}
+                    <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+                      <div>
+                        <input
+                          type="text"
+                          placeholder="Your Name..."
+                          className="w-full p-4 text-gray-800 transition-all duration-300 border-b-2 border-gray-300 rounded-none focus:border-b-2 focus:border-gray-500 focus:outline-none focus:ring-0 bg-gray-50"
+                        />
+                      </div>
+                      <div>
+                        <input
+                          type="email"
+                          placeholder="Your Email..."
+                          className="w-full p-4 text-gray-800 transition-all duration-300 border-b-2 border-gray-300 rounded-none focus:border-b-2 focus:border-gray-500 focus:outline-none focus:ring-0 bg-gray-50"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Phone and Subject */}
+                    <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+                      <div>
+                        <input
+                          type="tel"
+                          placeholder="Phone Number..."
+                          className="w-full p-4 text-gray-800 transition-all duration-300 border-b-2 border-gray-300 rounded-none focus:border-b-2 focus:border-gray-500 focus:outline-none focus:ring-0 bg-gray-50"
+                        />
+                      </div>
+                      <div>
+                        <input
+                          type="text"
+                          placeholder="Your Subject..."
+                          className="w-full p-4 text-gray-800 transition-all duration-300 border-b-2 border-gray-300 rounded-none focus:border-b-2 focus:border-gray-500 focus:outline-none focus:ring-0 bg-gray-50"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Message */}
+                    <div>
+                      <textarea
+                        placeholder="Write here your message..."
+                        rows={6}
+                        className="w-full p-4 text-gray-800 transition-all duration-300 border border-gray-300 rounded-md resize-y focus:border-b-2 focus:border-gray-500 focus:outline-none focus:ring-0 bg-gray-50"
+                      ></textarea>
+                    </div>
+
+                    {/* Submit Button */}
+                    <button
+                      type="submit"
+                      className={`w-full text-white font-bold py-4 px-6 rounded-lg hover:opacity-90 transition-opacity duration-300 text-lg shadow-md`}
+                      style={{ backgroundColor: ACCENT_COLOR }}
+                    >
+                      Send Message
+                    </button>
+                  </form>
                 </div>
               </div>
-              
-              <div className="p-6 rounded-lg bg-gray-50">
-                <div className="flex items-center mb-4">
-                  <div className="p-2 mr-3 bg-green-100 rounded-full">
-                    <FiMapPin className="text-green-600" />
-                  </div>
-                  <h3 className="text-lg font-semibold text-gray-800">Johannesburg, SA</h3>
-                </div>
-                <p className="text-gray-600 ml-11">
-                  12 Riversands Road, Beverly, Sandton, South Africa, 2191
-                </p>
-                <div className="flex items-center mt-3 ml-11">
-                  <FiPhone className="mr-2 text-gray-400" />
-                  <span className="text-gray-600">+27 10 786 0259</span>
-                </div>
+
+              {/* --- 2. Bottom Section: Google Map --- */}
+              <div className="w-full">
+                <ContactMap lat={MAP_CENTER.lat} lng={MAP_CENTER.lng} />
               </div>
             </div>
           </div>
+        </section>
 
-          {/* Right Column - Contact Form (client component) */}
-          <div className="md:w-1/2">
-            <div className="h-full p-8 bg-[#8DC440] rounded-lg shadow-md">
-              <ContactUsForm />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Google Map */}
-      <div className="mx-5 my-6 overflow-hidden rounded-lg md:mx-24 h-60 md:my-14">
-        <iframe
-          width="100%"
-          height="100%"
-          frameBorder="0"
-          scrolling="no"
-          marginHeight={0}
-          marginWidth={0}
-          src="https://maps.google.com/maps?q=13+Brentwood+Ave,+Groombridge,+Harare,+Zimbabwe&output=embed"
-        ></iframe>
-      </div>
-
+        {/* ======================= */}
+        {/* FURTHER SECTIONS WILL GO HERE */}
+        {/* ======================= */}
+      </main>
       <Footer />
-    </section>
+    </>
   );
 };
 

@@ -8,9 +8,9 @@ const IntegratedSyllabusAI: React.FC = () => {
           {/* Left Column: Image with Floating Elements */}
           <div className="relative flex items-center justify-center w-full md:w-1/2">
             <img
-              src="/ai_chip_icon.jpg"
+              src="/black-girl.png"
               alt="Njere Integrated Syllabus Management and AI Generator"
-              className="w-full h-full object-cover rounded-lg transition-transform duration-500 ease-in-out hover:scale-[1.02]"
+              className="w-full h-full object-cover rounded-full transition-transform duration-500 ease-in-out hover:scale-[1.02]"
             />
 
             <div className="absolute w-12 h-12 bg-orange-500 rounded-full top-10 left-10 opacity-60 animate-float-one"></div>
