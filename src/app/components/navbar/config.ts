@@ -33,12 +33,12 @@ export const NAV_ITEMS = [
       items: [
         {
           label: 'Administrative',
-          href: '/services/ai-and-machine-learning',
+          href: '/',
         },
-        { label: 'Cyber Security', href: '/services/cyber-security' },
+        { label: 'Finances', href: '/' },
         {
           label: 'Academics',
-          href: '/services/software-development',
+          href: '/',
         },
       ],
     },
@@ -51,7 +51,7 @@ export const NAV_ITEMS = [
   },
   {
     label: 'CAREERS',
-    href: 'https://erp.smatechgroup.com/recruitment/recruitment_portal',
+    href: '/',
     icon: FiUsers,
     iconClass: 'text-current',
   },
@@ -63,7 +63,7 @@ export const NAV_ITEMS = [
   },
   {
     label: 'AFFILIATE',
-    href: '/contact-us',
+    href: '/affiliate',
     icon: FiMail,
     iconClass: 'text-current',
   },
