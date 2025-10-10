@@ -16,6 +16,7 @@ import {
   ChartBarIcon,
   LightBulbIcon,
 } from '@heroicons/react/24/outline';
+import Footer from '../components/Footer'; 
 
 // Define the primary and accent colors for a sleek, professional look
 const PRIMARY_COLOR = '#00204f'; // Njere Blue
@@ -67,7 +68,7 @@ const CSRPage = () => {
       location: 'Johannesburg, Gauteng',
       level: 'Primary',
       needs: ['ICT Equipment', 'Textbooks'],
-      image: '/school1.jpg',
+      image: '/black-girl.png',
       urgent: true,
     },
     {
@@ -76,7 +77,7 @@ const CSRPage = () => {
       location: 'Mthatha, Eastern Cape',
       level: 'Secondary',
       needs: ['Infrastructure', 'Stationery'],
-      image: '/school2.jpg',
+      image: '/black-girl.png',
       urgent: false,
     },
     {
@@ -85,7 +86,7 @@ const CSRPage = () => {
       location: 'Polokwane, Limpopo',
       level: 'Primary',
       needs: ['Fees Support', 'Computer Lab'],
-      image: '/school3.jpg',
+      image: '/black-girl.png',
       urgent: true,
     },
   ];
@@ -103,7 +104,7 @@ const CSRPage = () => {
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
       <section
-        className="relative py-20 overflow-hidden text-white"
+        className="relative pt-40 pb-20 overflow-hidden text-white"
         style={{
           backgroundColor: PRIMARY_COLOR,
         }}
@@ -1062,97 +1063,7 @@ const CSRPage = () => {
       </section>
 
       {/* Footer Section */}
-      <footer className="py-12 text-white bg-gray-900">
-        <div className="container px-4 mx-auto md:px-6">
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
-            <div>
-              <h3 className="mb-4 text-xl font-bold">Njere ERP</h3>
-              <p className="text-gray-400">
-                Empowering education through technology and meaningful
-                partnerships.
-              </p>
-            </div>
-            <div>
-              <h4 className="mb-4 font-semibold">Quick Links</h4>
-              <ul className="space-y-2 text-gray-400">
-                <li>
-                  <a
-                    href="#"
-                    className="transition-colors cursor-pointer hover:text-white"
-                  >
-                    About Us
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="transition-colors cursor-pointer hover:text-white"
-                  >
-                    CSR Connect
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="transition-colors cursor-pointer hover:text-white"
-                  >
-                    Contact
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="mb-4 font-semibold">Resources</h4>
-              <ul className="space-y-2 text-gray-400">
-                <li>
-                  <a
-                    href="#"
-                    className="transition-colors cursor-pointer hover:text-white"
-                  >
-                    FAQ
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="transition-colors cursor-pointer hover:text-white"
-                  >
-                    How It Works
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="transition-colors cursor-pointer hover:text-white"
-                  >
-                    Success Stories
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="mb-4 font-semibold">Contact Us</h4>
-              <p className="text-gray-400">
-                123 Education Street
-                <br />
-                Johannesburg, South Africa
-                <br />
-                <a
-                  href="mailto:info@njere.co.za"
-                  className="transition-colors cursor-pointer hover:text-white"
-                >
-                  info@njere.co.za
-                </a>
-              </p>
-            </div>
-          </div>
-          <div className="pt-8 mt-8 text-center text-gray-400 border-t border-gray-800">
-            <p>
-              &copy; {new Date().getFullYear()} Njere ERP. All rights reserved.
-            </p>
-          </div>
-        </div>
-      </footer>
+      <Footer/>
     </div>
   );
 };

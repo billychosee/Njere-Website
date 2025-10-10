@@ -30,7 +30,7 @@ const schoolData = {
     location: 'Johannesburg, Gauteng',
     level: 'Primary',
     type: 'Rural',
-    image: '/school1.jpg',
+    image: '/black-girl.png',
     about: 'Sunrise Primary is a community school serving 450 learners. Our focus is on literacy and digital skills, but we face resource shortages that affect delivery.',
     needs: {
       'ICT Equipment': 'Laptops, projectors, and tablets for digital learning',
@@ -71,7 +71,7 @@ const schoolData = {
     location: 'Mthatha, Eastern Cape',
     level: 'Secondary',
     type: 'Urban',
-    image: '/school2.jpg',
+    image: '/black-girl.png',
     about: 'Mthatha High School is a public school with 800 students. We strive for academic excellence but lack adequate science and technology resources.',
     needs: {
       'Science Lab Equipment': 'Microscopes, lab tools, and chemicals',
@@ -112,7 +112,7 @@ const schoolData = {
     location: 'Polokwane, Limpopo',
     level: 'Primary',
     type: 'Rural',
-    image: '/school3.jpg',
+    image: '/black-girl.png',
     about: 'Rural Hope Academy serves 300 learners from surrounding farming communities. We are committed to providing quality education despite limited resources.',
     needs: {
       'Fees Support': 'Scholarships for 50 vulnerable learners',
