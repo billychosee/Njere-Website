@@ -17,7 +17,6 @@ import {
 } from '@heroicons/react/24/outline';
 import { motion, AnimatePresence } from 'framer-motion';
 
-// Define the primary and accent colors for a sleek, professional look
 const PRIMARY_COLOR = '#00204f'; // Dark Blue
 const ACCENT_COLOR = '#02ACC3'; // Teal/Cyan
 
@@ -92,7 +91,6 @@ const AffiliateContent = () => {
     </div>
   );
 
-  // Custom transition for the tab content
   const contentVariants = {
     initial: { opacity: 0, y: 20 },
     animate: { opacity: 1, y: 0 },
@@ -112,7 +110,6 @@ const AffiliateContent = () => {
           backgroundColor: PRIMARY_COLOR,
         }}
       >
-        {/* Gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-br from-[#00204f]/80 to-[#02ACC3]/60"></div>
         <div className="container relative z-10 px-4 mx-auto md:px-6">
           <div className="max-w-4xl pt-20 mx-auto text-center">
@@ -124,7 +121,6 @@ const AffiliateContent = () => {
               recurring commissions today.
             </p>
             <div className="flex flex-col justify-center gap-4 sm:flex-row">
-              {/* Updated First Button to Sign Up (Hypothetical /sign-up) */}
               <a
                 href="/sign-up"
                 className="flex items-center justify-center px-8 py-4 font-bold text-blue-900 transition-all transform bg-white rounded-full shadow-lg cursor-pointer hover:bg-gray-100 hover:scale-105"
@@ -132,7 +128,6 @@ const AffiliateContent = () => {
                 Sign Up Now
                 <ArrowRightIcon className="w-5 h-5 ml-2" />
               </a>
-              {/* Updated Second Button to Contact Us (Hypothetical /contact-us) */}
               <a
                 href="/contact-us"
                 className="flex items-center justify-center px-8 py-4 font-bold text-white transition-all border-2 border-white rounded-full cursor-pointer hover:bg-white hover:text-blue-900"
@@ -171,7 +166,7 @@ const AffiliateContent = () => {
               },
               {
                 title: 'Earn',
-                desc: 'Receive **quarterly recurring commissions** for every school that signs up and stays a customer through your link.',
+                desc: 'Receive quarterly recurring commissions for every school that signs up and stays a customer through your link.',
               },
             ].map((item, index) => (
               <motion.div
@@ -209,7 +204,6 @@ const AffiliateContent = () => {
           </div>
 
           <div className="mt-16 text-center">
-            {/* Redirect to /sign-up */}
             <a
               href="/sign-up"
               style={{ backgroundColor: PRIMARY_COLOR }}
@@ -222,9 +216,8 @@ const AffiliateContent = () => {
         </div>
       </section>
 
-      {/* Why Become an Affiliate Section - Enhanced with Better Feel */}
+      {/* Why Become an Affiliate Section */}
       <section className="relative py-20 overflow-hidden bg-white">
-        {/* Background decoration */}
         <div
           className="absolute top-0 left-0 w-64 h-64 rounded-full opacity-10 blur-3xl"
           style={{ backgroundColor: ACCENT_COLOR }}
@@ -250,7 +243,6 @@ const AffiliateContent = () => {
             </p>
           </div>
 
-          {/* Enhanced Grid with animations and better visual appeal */}
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
             {[
               {
@@ -263,7 +255,7 @@ const AffiliateContent = () => {
               {
                 icon: CurrencyDollarIcon,
                 title: 'Lucrative',
-                desc: 'Benefit from **recurring, high-percentage commissions** with unlimited earning potential.',
+                desc: 'Benefit from recurring, high-percentage commissions with unlimited earning potential.',
                 color: '#10B981', // Green
                 bgColor: '#ECFDF5', // Light Green
               },
@@ -346,14 +338,13 @@ const AffiliateContent = () => {
             <div className="relative flex-shrink-0 lg:w-1/2">
               <div className="overflow-hidden shadow-2xl rounded-2xl h-80 lg:h-full">
                 <Image
-                  src="/black-girl.png" // Placeholder image
+                  src="/black-girl.png"
                   alt="A successful affiliate working on a laptop"
                   fill
                   style={{ objectFit: 'cover' }}
                   className="transition-transform duration-500 hover:scale-105"
                 />
               </div>
-              {/* Floating element for added flair */}
               <div
                 className="absolute p-4 text-center text-white transform -translate-x-1/2 shadow-lg rounded-xl -bottom-6 left-1/2"
                 style={{ backgroundColor: ACCENT_COLOR }}
@@ -365,7 +356,6 @@ const AffiliateContent = () => {
 
             {/* Right Column: Tabbed Content */}
             <div className="lg:w-1/2">
-              {/* Tab Navigation - Added cursor-pointer */}
               <div className="flex p-1 mb-8 bg-gray-200 rounded-xl">
                 {['connect', 'earn', 'fusion'].map((tab) => (
                   <button
@@ -386,7 +376,6 @@ const AffiliateContent = () => {
                 ))}
               </div>
 
-              {/* Tab Content - Added AnimatePresence and motion.div */}
               <div className="p-8 bg-white rounded-xl shadow-lg border border-gray-100 min-h-[350px]">
                 <AnimatePresence mode="wait">
                   {activeTab === 'connect' && (
@@ -405,7 +394,7 @@ const AffiliateContent = () => {
                         NJERE CONNECT
                       </h3>
                       <p className="mb-6 text-gray-600">
-                        Designed for partners who excel at **generating leads**
+                        Designed for partners who excel at generating leads
                         but prefer to leave the complex sales process, demos,
                         and closing to our expert team.
                       </p>
@@ -431,7 +420,7 @@ const AffiliateContent = () => {
                         </li>
                       </ul>
                       <a
-                        href="/sign-up" // Redirect to /sign-up
+                        href="/sign-up"
                         className="flex items-center justify-center w-full py-3 mt-4 font-bold text-white transition-all rounded-lg cursor-pointer hover:opacity-90"
                         style={{ backgroundColor: ACCENT_COLOR }}
                       >
@@ -455,8 +444,8 @@ const AffiliateContent = () => {
                         NJERE EARN
                       </h3>
                       <p className="mb-6 text-gray-600">
-                        Perfect for **influencers, website publishers, and
-                        content creators** looking to monetize their audience by
+                        Perfect for influencers, website publishers, and
+                        content creators looking to monetize their audience by
                         driving traffic directly to our sales page.
                       </p>
                       <ul className="mb-6 space-y-3">
@@ -481,7 +470,7 @@ const AffiliateContent = () => {
                         </li>
                       </ul>
                       <a
-                        href="/sign-up" // Redirect to /sign-up
+                        href="/sign-up"
                         className="flex items-center justify-center w-full py-3 mt-4 font-bold text-white transition-all rounded-lg cursor-pointer hover:opacity-90"
                         style={{ backgroundColor: ACCENT_COLOR }}
                       >
@@ -505,8 +494,8 @@ const AffiliateContent = () => {
                         NJERE FUSION
                       </h3>
                       <p className="mb-6 text-gray-600">
-                        The ultimate flexible program. **Maximize your
-                        earnings** by getting commission for both successfully
+                        The ultimate flexible program. Maximize your
+                        earnings by getting commission for both successfully
                         referred leads and direct sales from your links.
                       </p>
                       <ul className="mb-6 space-y-3">
@@ -531,7 +520,7 @@ const AffiliateContent = () => {
                         </li>
                       </ul>
                       <a
-                        href="/sign-up" // Redirect to /sign-up
+                        href="/sign-up"
                         className="flex items-center justify-center w-full py-3 mt-4 font-bold text-white transition-all rounded-lg cursor-pointer hover:opacity-90"
                         style={{ backgroundColor: ACCENT_COLOR }}
                       >
@@ -570,7 +559,7 @@ const AffiliateContent = () => {
               >
                 <StarRating rating={testimonial.rating} />
                 <p className="my-6 text-lg italic text-gray-700">
-                  **&quot;{testimonial.content}&quot;**
+                  &quot;{testimonial.content}&quot;
                 </p>
                 <div className="flex items-center">
                   <div
@@ -594,7 +583,6 @@ const AffiliateContent = () => {
 
       {/* FAQ Section - Enhanced with Sleek Animations */}
       <section className="relative py-20 overflow-hidden bg-gray-50">
-        {/* Background decoration */}
         <div
           className="absolute top-0 right-0 w-64 h-64 rounded-full opacity-10 blur-3xl"
           style={{ backgroundColor: ACCENT_COLOR }}
@@ -603,7 +591,6 @@ const AffiliateContent = () => {
           className="absolute bottom-0 left-0 rounded-full w-96 h-96 opacity-10 blur-3xl"
           style={{ backgroundColor: PRIMARY_COLOR }}
         ></div>
-
         <div className="container relative z-10 px-4 mx-auto md:px-6">
           <div className="max-w-4xl mx-auto mb-16 text-center">
             <h2
@@ -619,7 +606,6 @@ const AffiliateContent = () => {
               Find answers to common questions about our affiliate program
             </p>
           </div>
-
           <div className="max-w-4xl mx-auto">
             {faqs.map((faq, index) => (
               <motion.div
@@ -630,7 +616,6 @@ const AffiliateContent = () => {
                 viewport={{ once: true }}
                 className="mb-4 overflow-hidden bg-white border border-gray-100 shadow-lg rounded-xl"
               >
-                {/* Added cursor-pointer to the FAQ button */}
                 <motion.button
                   className="flex items-center justify-between w-full p-6 text-left transition-colors cursor-pointer hover:bg-gray-50"
                   onClick={() =>
@@ -679,10 +664,8 @@ const AffiliateContent = () => {
               </motion.div>
             ))}
           </div>
-
           <div className="mt-12 text-center">
             <p className="mb-4 text-gray-600">Still have questions?</p>
-            {/* Redirect to /contact-us */}
             <a
               href="/contact-us"
               className="inline-block px-8 py-3 font-semibold text-white transition-all rounded-full cursor-pointer hover:opacity-90"
@@ -710,7 +693,6 @@ const AffiliateContent = () => {
             Join our affiliate program today and start earning recurring
             commissions with Njere ERP.
           </p>
-          {/* Redirect to /sign-up */}
           <a
             href="/sign-up"
             className="flex items-center justify-center px-8 py-4 mx-auto font-bold text-blue-900 transition-transform bg-white rounded-full shadow-lg cursor-pointer hover:bg-gray-100 hover:scale-105 w-fit"

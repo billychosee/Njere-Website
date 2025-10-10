@@ -68,7 +68,6 @@ function Footer() {
       {/* Main content container */}
       <div className="mx-auto w-full max-w-[1400px] px-5 py-16 md:px-24 md:py-20">
         <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-5 lg:gap-8">
-          
           {/* Column 1: Logo and Introductory Text */}
           <div className="flex flex-col items-start col-span-1 lg:col-span-2">
             <div className="mb-6">
@@ -77,11 +76,11 @@ function Footer() {
                   Using an <img> tag for the 'njere-white-logo.svg'
                 */}
                 <img
-                    src="/njere-white-logo.svg" 
-                    alt="NJERE School ERP Logo"
-                    width={150} 
-                    height={30}
-                    className="h-auto"
+                  src="/njere-white-logo.svg"
+                  alt="NJERE School ERP Logo"
+                  width={150}
+                  height={30}
+                  className="h-auto"
                 />
               </a>
             </div>
@@ -94,7 +93,7 @@ function Footer() {
             <div className="flex items-center gap-3 mt-5">
               {/* Facebook */}
               <a
-                href="#"
+                href="https://www.facebook.com/profile.php?id=61553934834650"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Facebook"
@@ -107,7 +106,7 @@ function Footer() {
               </a>
               {/* Instagram */}
               <a
-                href="#"
+                href="https://www.instagram.com/njere_erp/?hl=en"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
@@ -120,7 +119,7 @@ function Footer() {
               </a>
               {/* LinkedIn */}
               <a
-                href="#"
+                href="https://www.linkedin.com/showcase/njere-erp/?originalSubdomain=zw"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
@@ -210,12 +209,11 @@ function Footer() {
             <a
               href="#"
               // Default styling
-              style={{ 
-                backgroundColor: BUTTON_BG, 
-                borderColor: BUTTON_BG 
+              style={{
+                backgroundColor: BUTTON_BG,
+                borderColor: BUTTON_BG,
               }}
               className={`w-full text-center text-white px-8 py-3 rounded-full font-bold text-sm transition-all duration-300 border-2`}
-              
               // Hover styling (white border, transparent background, white text/border)
               onMouseOver={(e) => {
                 e.currentTarget.style.backgroundColor = 'transparent';
@@ -284,7 +282,7 @@ function Footer() {
 
         {/* WhatsApp Icon/Button */}
         <a
-          href="https://wa.me/"
+          href="https://wa.me/+263789566428"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Chat on WhatsApp"
