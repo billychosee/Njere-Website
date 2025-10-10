@@ -2,6 +2,7 @@
 import { Metadata } from 'next';
 import AffiliateContent from './AffiliateContent';
 import StructuredData from './StructuredData';
+import Footer from '../components/Footer';
 
 export const metadata: Metadata = {
   title: 'Become an Affiliate - Njere ERP',
@@ -29,6 +30,7 @@ export default function AffiliatePage() {
     <>
       <StructuredData />
       <AffiliateContent />
+      <Footer />
     </>
   );
 }
