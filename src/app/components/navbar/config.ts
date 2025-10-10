@@ -57,7 +57,7 @@ export const NAV_ITEMS = [
   },
   {
     label: 'CSR',
-    href: '/contact-us',
+    href: '/csr',
     icon: FiMail,
     iconClass: 'text-current',
   },
