@@ -1,166 +1,64 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useParams } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
-import { 
-  MapPinIcon, 
-  ComputerDesktopIcon, 
-  BookOpenIcon, 
-  BuildingOfficeIcon, 
+import {
+  MapPinIcon,
+  ComputerDesktopIcon,
+  BookOpenIcon,
+  BuildingOfficeIcon,
   AcademicCapIcon,
   ArrowRightIcon,
   CheckCircleIcon,
   UserGroupIcon,
   CurrencyDollarIcon,
   EnvelopeIcon,
-  PhoneIcon
+  PhoneIcon,
+  XMarkIcon
 } from '@heroicons/react/24/outline';
 
 // Define the primary and accent colors for a sleek, professional look
 const PRIMARY_COLOR = '#00204f'; // Njere Blue
 const ACCENT_COLOR = '#04baab'; // Njere Teal
 
-// Sample school data (in a real app, this would come from an API)
-const schoolData = {
-  1: {
-    name: 'Sunrise Primary School',
-    location: 'Johannesburg, Gauteng',
-    level: 'Primary',
-    type: 'Rural',
-    image: '/black-girl.png',
-    about: 'Sunrise Primary is a community school serving 450 learners. Our focus is on literacy and digital skills, but we face resource shortages that affect delivery.',
-    needs: {
-      'ICT Equipment': 'Laptops, projectors, and tablets for digital learning',
-      'Learning Resources': 'Textbooks for grades 1-7, reading materials',
-      'Infrastructure': 'Classroom repairs, library renovation',
-      'Fees Support': 'Scholarships for 20 vulnerable learners'
-    },
-    impact: 'Your support will help us improve digital learning access for over 450 learners and create a more engaging classroom environment.',
-    sponsorshipOptions: [
-      {
-        name: 'ICT Pack',
-        description: 'Sponsor laptops and Wi-Fi setup',
-        amount: '$5,000',
-        impact: 'Equip 3 classrooms with digital learning tools'
-      },
-      {
-        name: 'Learning Pack',
-        description: 'Fund textbooks for 100 learners',
-        amount: '$2,500',
-        impact: 'Provide essential learning materials for a full academic year'
-      },
-      {
-        name: 'Infrastructure',
-        description: 'Support classroom renovations',
-        amount: '$10,000',
-        impact: 'Renovate 2 classrooms and create a library space'
-      }
-    ],
-    contact: {
-      name: 'Mrs. Thandi Ndlovu',
-      position: 'School Principal',
-      email: 'principal@sunriseprimary.edu.za',
-      phone: '+27 11 123 4567'
-    }
-  },
-  2: {
-    name: 'Mthatha High School',
-    location: 'Mthatha, Eastern Cape',
-    level: 'Secondary',
-    type: 'Urban',
-    image: '/black-girl.png',
-    about: 'Mthatha High School is a public school with 800 students. We strive for academic excellence but lack adequate science and technology resources.',
-    needs: {
-      'Science Lab Equipment': 'Microscopes, lab tools, and chemicals',
-      'Computer Lab': '30 computers for computer literacy classes',
-      'Library Resources': 'Reference books and study materials',
-      'Sports Equipment': 'Sports gear for physical education'
-    },
-    impact: 'Your support will enhance our science and technology programs, preparing students for higher education and future careers.',
-    sponsorshipOptions: [
-      {
-        name: 'Science Lab Pack',
-        description: 'Equip science laboratory',
-        amount: '$7,500',
-        impact: 'Provide hands-on science learning for 400 students'
-      },
-      {
-        name: 'Computer Lab Pack',
-        description: 'Fund 30 computers',
-        amount: '$8,000',
-        impact: 'Enable digital literacy classes for all students'
-      },
-      {
-        name: 'Library Pack',
-        description: 'Stock library with reference materials',
-        amount: '$3,000',
-        impact: 'Enhance research and study resources'
-      }
-    ],
-    contact: {
-      name: 'Mr. John Zulu',
-      position: 'School Principal',
-      email: 'principal@mthathahigh.edu.za',
-      phone: '+27 47 123 4567'
-    }
-  },
-  3: {
-    name: 'Rural Hope Academy',
-    location: 'Polokwane, Limpopo',
-    level: 'Primary',
-    type: 'Rural',
-    image: '/black-girl.png',
-    about: 'Rural Hope Academy serves 300 learners from surrounding farming communities. We are committed to providing quality education despite limited resources.',
-    needs: {
-      'Fees Support': 'Scholarships for 50 vulnerable learners',
-      'Computer Lab': 'Basic computer setup for digital literacy',
-      'Water System': 'Installation of water harvesting system',
-      'Nutrition Program': 'Daily meals for underprivileged students'
-    },
-    impact: 'Your support will ensure that children from farming communities receive quality education and proper nutrition, breaking the cycle of poverty.',
-    sponsorshipOptions: [
-      {
-        name: 'Fees Support Pack',
-        description: 'Sponsor 10 students for a year',
-        amount: '$1,500',
-        impact: 'Provide education for 10 vulnerable learners'
-      },
-      {
-        name: 'Computer Lab Pack',
-        description: 'Basic computer setup',
-        amount: '$4,000',
-        impact: 'Introduce digital literacy to all students'
-      },
-      {
-        name: 'Nutrition Pack',
-        description: 'Daily meals for 50 students',
-        amount: '$2,000',
-        impact: 'Ensure proper nutrition for better learning outcomes'
-      }
-    ],
-    contact: {
-      name: 'Ms. Sarah Malan',
-      position: 'School Principal',
-      email: 'principal@ruralhope.edu.za',
-      phone: '+27 15 123 4567'
-    }
-  }
-};
-
 const SchoolProfilePage = () => {
   const params = useParams();
   const schoolId = params.id as string;
   const [selectedSponsorship, setSelectedSponsorship] = useState<string | null>(null);
+  const [showDonationModal, setShowDonationModal] = useState(false);
+  const [school, setSchool] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchSchool = async () => {
+      try {
+        const response = await fetch('/api/schools');
+        const data = await response.json();
+        const foundSchool = data.schools.find((s: any) => s.id.toString() === schoolId);
+        setSchool(foundSchool);
+      } catch (error) {
+        console.error('Error fetching school:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (schoolId) {
+      fetchSchool();
+    }
+  }, [schoolId]);
   
-  // Convert string ID to number to match the keys in schoolData
-  const schoolIdNum = parseInt(schoolId, 10);
-  
-  // Get school data based on ID
-  const school = schoolData[schoolIdNum as keyof typeof schoolData];
-  
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-gray-50">
+        <div className="w-12 h-12 border-4 border-blue-500 rounded-full border-t-transparent animate-spin"></div>
+      </div>
+    );
+  }
+
   if (!school) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-gray-50">
@@ -202,19 +100,19 @@ const SchoolProfilePage = () => {
                     <span>{school.location}</span>
                   </div>
                   <div className="flex gap-2">
-                    <span 
-                      className="px-3 py-1 text-sm rounded-full"
-                      style={{ backgroundColor: ACCENT_COLOR }}
-                    >
-                      {school.level}
-                    </span>
-                    <span 
-                      className="px-3 py-1 text-sm rounded-full"
-                      style={{ backgroundColor: PRIMARY_COLOR }}
-                    >
-                      {school.type}
-                    </span>
-                  </div>
+                      <span
+                        className="px-3 py-1 text-sm rounded-full"
+                        style={{ backgroundColor: ACCENT_COLOR }}
+                      >
+                        {school.level}
+                      </span>
+                      <span
+                        className="px-3 py-1 text-sm rounded-full"
+                        style={{ backgroundColor: PRIMARY_COLOR }}
+                      >
+                        {school.province}
+                      </span>
+                    </div>
                 </div>
               </motion.div>
             </div>
@@ -232,13 +130,13 @@ const SchoolProfilePage = () => {
               transition={{ duration: 0.5 }}
               viewport={{ once: true }}
             >
-              <h2 
+              <h2
                 className="mb-6 text-2xl font-bold text-gray-900"
                 style={{ color: PRIMARY_COLOR }}
               >
                 About the School
               </h2>
-              <p className="text-lg text-gray-700">{school.about}</p>
+              <p className="text-lg text-gray-700">{school.motivation || 'This school is seeking support to improve educational opportunities for its students.'}</p>
             </motion.div>
           </div>
         </div>
@@ -261,19 +159,19 @@ const SchoolProfilePage = () => {
                 Areas of Need
               </h2>
               <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-                {Object.entries(school.needs).map(([need, description], index) => (
+                {school.needs.map((need: string, index: number) => (
                   <div key={index} className="flex items-start p-4 rounded-lg bg-gray-50">
-                    <div 
+                    <div
                       className="flex items-center justify-center flex-shrink-0 w-10 h-10 mr-4 text-white rounded-full"
                       style={{ backgroundColor: ACCENT_COLOR }}
                     >
                       {need.includes('ICT') || need.includes('Computer') ? (
                         <ComputerDesktopIcon className="w-5 h-5" />
-                      ) : need.includes('Learning') || need.includes('Library') || need.includes('Science') ? (
+                      ) : need.includes('Textbook') || need.includes('Stationery') ? (
                         <BookOpenIcon className="w-5 h-5" />
-                      ) : need.includes('Infrastructure') || need.includes('Water') ? (
+                      ) : need.includes('Infrastructure') ? (
                         <BuildingOfficeIcon className="w-5 h-5" />
-                      ) : need.includes('Fees') || need.includes('Nutrition') ? (
+                      ) : need.includes('Fees') ? (
                         <CurrencyDollarIcon className="w-5 h-5" />
                       ) : (
                         <AcademicCapIcon className="w-5 h-5" />
@@ -281,7 +179,7 @@ const SchoolProfilePage = () => {
                     </div>
                     <div>
                       <h3 className="mb-1 font-semibold text-gray-900">{need}</h3>
-                      <p className="text-gray-600">{description}</p>
+                      <p className="text-gray-600">Support needed for {need.toLowerCase()}</p>
                     </div>
                   </div>
                 ))}
@@ -304,13 +202,13 @@ const SchoolProfilePage = () => {
               style={{ backgroundColor: PRIMARY_COLOR }}
             >
               <h2 className="mb-4 text-2xl font-bold text-white">Impact Statement</h2>
-              <p className="text-lg text-white/90">{school.impact}</p>
+              <p className="text-lg text-white/90">Your support will help improve educational opportunities and resources for students at {school.school_name}.</p>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Sponsorship Options */}
+      {/* Support This School */}
       <section className="py-12 bg-white">
         <div className="container px-4 mx-auto md:px-6">
           <div className="max-w-4xl mx-auto">
@@ -320,94 +218,32 @@ const SchoolProfilePage = () => {
               transition={{ duration: 0.5 }}
               viewport={{ once: true }}
             >
-              <h2 
+              <h2
                 className="mb-6 text-2xl font-bold text-gray-900"
                 style={{ color: PRIMARY_COLOR }}
               >
-                Sponsorship Options
+                Support This School
               </h2>
-              <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-                {school.sponsorshipOptions.map((option, index) => (
-                  <div 
-                    key={index} 
-                    className={`p-6 border-2 rounded-xl cursor-pointer transition-all ${
-                      selectedSponsorship === option.name 
-                        ? 'border-blue-500 shadow-lg' 
-                        : 'border-gray-200 hover:border-gray-300'
-                    }`}
-                    onClick={() => setSelectedSponsorship(option.name)}
+              <div className="text-center">
+                <p className="mb-6 text-gray-600">
+                  Make a difference in the lives of students at {school.school_name}. Your contribution will directly support their educational needs.
+                </p>
+                <div className="flex justify-center">
+                  <button
+                    className="flex items-center px-8 py-3 font-bold text-white transition-all rounded-lg cursor-pointer hover:opacity-90"
+                    style={{ backgroundColor: PRIMARY_COLOR }}
+                    onClick={() => setShowDonationModal(true)}
                   >
-                    <h3 className="mb-2 text-xl font-bold text-gray-900">{option.name}</h3>
-                    <p className="mb-4 text-gray-600">{option.description}</p>
-                    <div className="mb-4">
-                      <span 
-                        className="text-2xl font-bold"
-                        style={{ color: ACCENT_COLOR }}
-                      >
-                        {option.amount}
-                      </span>
-                    </div>
-                    <p className="mb-4 text-sm text-gray-600">{option.impact}</p>
-                    <button
-                      className="w-full py-2 font-medium text-white rounded-lg cursor-pointer"
-                      style={{ backgroundColor: PRIMARY_COLOR }}
-                    >
-                      Select This Option
-                    </button>
-                  </div>
-                ))}
-              </div>
-              <div className="mt-6 text-center">
-                <p className="mb-4 text-gray-600">Or contribute a custom amount</p>
-                <button
-                  className="px-6 py-2 font-medium text-white rounded-lg cursor-pointer"
-                  style={{ backgroundColor: ACCENT_COLOR }}
-                >
-                  Custom Contribution
-                </button>
+                    Make a Donation
+                    <ArrowRightIcon className="w-5 h-5 ml-2" />
+                  </button>
+                </div>
               </div>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Call-to-Action */}
-      <section className="py-12 bg-gray-50">
-        <div className="container px-4 mx-auto md:px-6">
-          <div className="max-w-4xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
-              className="text-center"
-            >
-              <h2 
-                className="mb-6 text-2xl font-bold text-gray-900"
-                style={{ color: PRIMARY_COLOR }}
-              >
-                Ready to Make a Difference?
-              </h2>
-              <div className="flex flex-col justify-center gap-4 sm:flex-row">
-                <button
-                  className="flex items-center justify-center px-8 py-3 font-bold text-white transition-all rounded-lg cursor-pointer"
-                  style={{ backgroundColor: PRIMARY_COLOR }}
-                >
-                  Sponsor this School
-                  <ArrowRightIcon className="w-5 h-5 ml-2" />
-                </button>
-                <button
-                  className="flex items-center justify-center px-8 py-3 font-medium text-white transition-all rounded-lg cursor-pointer"
-                  style={{ backgroundColor: ACCENT_COLOR }}
-                >
-                  Contact the School
-                  <EnvelopeIcon className="w-5 h-5 ml-2" />
-                </button>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
 
       {/* Transparency Section */}
       <section className="py-12 bg-white">
@@ -448,55 +284,12 @@ const SchoolProfilePage = () => {
         </div>
       </section>
 
-      {/* School Contact Information */}
-      <section className="py-12 bg-gray-50">
-        <div className="container px-4 mx-auto md:px-6">
-          <div className="max-w-4xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
-              className="p-8 bg-white shadow-lg rounded-2xl"
-            >
-              <h2 
-                className="mb-6 text-2xl font-bold text-gray-900"
-                style={{ color: PRIMARY_COLOR }}
-              >
-                Contact Information
-              </h2>
-              <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-                <div>
-                  <h3 className="mb-2 font-semibold text-gray-900">School Representative</h3>
-                  <p className="text-gray-700">{school.contact.name}</p>
-                  <p className="text-gray-600">{school.contact.position}</p>
-                </div>
-                <div>
-                  <h3 className="mb-2 font-semibold text-gray-900">Contact Details</h3>
-                  <div className="flex items-center mb-2 text-gray-700">
-                    <EnvelopeIcon className="w-4 h-4 mr-2" />
-                    <a href={`mailto:${school.contact.email}`} className="hover:underline">
-                      {school.contact.email}
-                    </a>
-                  </div>
-                  <div className="flex items-center text-gray-700">
-                    <PhoneIcon className="w-4 h-4 mr-2" />
-                    <a href={`tel:${school.contact.phone}`} className="hover:underline">
-                      {school.contact.phone}
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
 
       {/* Back to CSR Connect */}
       <section className="py-12 bg-white">
         <div className="container px-4 mx-auto md:px-6">
           <div className="max-w-4xl mx-auto text-center">
-            <Link 
+            <Link
               href="/csr"
               className="inline-flex items-center font-medium text-blue-600 hover:underline"
             >
@@ -506,6 +299,68 @@ const SchoolProfilePage = () => {
           </div>
         </div>
       </section>
+
+      {/* Donation Modal */}
+      {showDonationModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="w-full max-w-sm p-6 mx-4 bg-white shadow-xl rounded-2xl">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-xl font-bold text-gray-900">Make a Donation</h3>
+              <button
+                onClick={() => setShowDonationModal(false)}
+                className="text-gray-400 hover:text-gray-600"
+              >
+                <XMarkIcon className="w-6 h-6" />
+              </button>
+            </div>
+            <form onSubmit={(e) => { e.preventDefault(); alert('Donation feature coming soon!'); }}>
+              <div className="mb-4">
+                <label className="block mb-2 text-sm font-medium text-gray-900">Donation Amount (ZAR)</label>
+                <input
+                  type="number"
+                  min="1"
+                  className="w-full px-4 py-3 text-gray-900 bg-white border border-gray-400 rounded-lg focus:ring-2 focus:outline-none focus:border-blue-500"
+                  placeholder="Enter amount"
+                  required
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block mb-2 text-sm font-medium text-gray-900">Your Name</label>
+                <input
+                  type="text"
+                  className="w-full px-4 py-3 text-gray-900 bg-white border border-gray-400 rounded-lg focus:ring-2 focus:outline-none focus:border-blue-500"
+                  placeholder="Enter your name"
+                  required
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block mb-2 text-sm font-medium text-gray-900">Email Address</label>
+                <input
+                  type="email"
+                  className="w-full px-4 py-3 text-gray-900 bg-white border border-gray-400 rounded-lg focus:ring-2 focus:outline-none focus:border-blue-500"
+                  placeholder="Enter your email"
+                  required
+                />
+              </div>
+              <div className="mb-6">
+                <label className="block mb-2 text-sm font-medium text-gray-900">Company/Organization (Optional)</label>
+                <input
+                  type="text"
+                  className="w-full px-4 py-3 text-gray-900 bg-white border border-gray-400 rounded-lg focus:ring-2 focus:outline-none focus:border-blue-500"
+                  placeholder="Enter company name"
+                />
+              </div>
+              <button
+                type="submit"
+                className="w-full py-3 font-bold text-white rounded-lg cursor-pointer"
+                style={{ backgroundColor: PRIMARY_COLOR }}
+              >
+                Proceed to Payment
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

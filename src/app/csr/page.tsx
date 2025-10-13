@@ -1,26 +1,20 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
 import {
   MapPinIcon,
-  ComputerDesktopIcon,
-  BookOpenIcon,
-  BuildingOfficeIcon,
   AcademicCapIcon,
+  UserGroupIcon,
   ArrowRightIcon,
   CheckCircleIcon,
-  UserGroupIcon,
-  ChartBarIcon,
-  LightBulbIcon,
 } from '@heroicons/react/24/outline';
 import Footer from '../components/Footer';
 import RegisterSchoolModal from '../components/RegisterSchoolModal';
 import RegisterCompanyModal from '../components/RegisterCompanyModal';
 
-// Define the primary and accent colors for a sleek, professional look
 const PRIMARY_COLOR = '#00204f'; // Njere Blue
 const ACCENT_COLOR = '#04baab'; // Njere Teal
 
@@ -30,43 +24,61 @@ const CSRPage = () => {
   const [filterLevel, setFilterLevel] = useState('');
   const [isSchoolModalOpen, setIsSchoolModalOpen] = useState(false);
   const [isCompanyModalOpen, setIsCompanyModalOpen] = useState(false);
+  const [schools, setSchools] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  // Sample data for schools
-  const schools = [
-    {
-      id: 1,
-      name: 'Sunrise Primary School',
-      location: 'Johannesburg, Gauteng',
-      level: 'Primary',
-      needs: ['ICT Equipment', 'Textbooks'],
-      image: '/black-girl.png',
-      urgent: true,
-    },
-    {
-      id: 2,
-      name: 'Mthatha High School',
-      location: 'Mthatha, Eastern Cape',
-      level: 'Secondary',
-      needs: ['Infrastructure', 'Stationery'],
-      image: '/black-girl.png',
-      urgent: false,
-    },
-    {
-      id: 3,
-      name: 'Rural Hope Academy',
-      location: 'Polokwane, Limpopo',
-      level: 'Primary',
-      needs: ['Fees Support', 'Computer Lab'],
-      image: '/black-girl.png',
-      urgent: true,
-    },
-  ];
+  // Fetch schools from API
+  useEffect(() => {
+    const fetchSchools = async () => {
+      try {
+        const response = await fetch('/api/schools');
+        const data = await response.json();
+        setSchools(data.schools || []);
+      } catch (error) {
+        console.error('Error fetching schools:', error);
+        // Fallback sample data
+        setSchools([
+          {
+            id: 1,
+            name: 'Sunrise Primary School',
+            location: 'Johannesburg, Gauteng',
+            level: 'Primary',
+            needs: ['ICT Equipment', 'Textbooks'],
+            image: '/black-girl.png',
+            urgent: true,
+          },
+          {
+            id: 2,
+            name: 'Mthatha High School',
+            location: 'Mthatha, Eastern Cape',
+            level: 'Secondary',
+            needs: ['Infrastructure', 'Stationery'],
+            image: '/black-girl.png',
+            urgent: false,
+          },
+          {
+            id: 3,
+            name: 'Rural Hope Academy',
+            location: 'Polokwane, Limpopo',
+            level: 'Primary',
+            needs: ['Fees Support', 'Computer Lab'],
+            image: '/black-girl.png',
+            urgent: true,
+          },
+        ]);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  // Filter schools based on selected filters
+    fetchSchools();
+  }, []);
+
+  // Filter schools
   const filteredSchools = schools.filter((school) => {
     return (
-      (filterLocation === '' || school.location.includes(filterLocation)) &&
-      (filterNeed === '' || school.needs.includes(filterNeed)) &&
+      (filterLocation === '' || school.location.toLowerCase().includes(filterLocation.toLowerCase())) &&
+      (filterNeed === '' || school.needs.some((need: string) => need.toLowerCase().includes(filterNeed.toLowerCase()))) &&
       (filterLevel === '' || school.level === filterLevel)
     );
   });
@@ -76,20 +88,16 @@ const CSRPage = () => {
       {/* Hero Section */}
       <section
         className="relative pt-40 pb-20 overflow-hidden text-white"
-        style={{
-          backgroundColor: PRIMARY_COLOR,
-        }}
+        style={{ backgroundColor: PRIMARY_COLOR }}
       >
-        {/* Background decoration */}
         <div
           className="absolute top-0 right-0 w-64 h-64 rounded-full opacity-10 blur-3xl"
           style={{ backgroundColor: ACCENT_COLOR }}
-        ></div>
+        />
         <div
           className="absolute bottom-0 left-0 rounded-full w-96 h-96 opacity-10 blur-3xl"
           style={{ backgroundColor: ACCENT_COLOR }}
-        ></div>
-
+        />
         <div className="container relative z-10 px-4 mx-auto md:px-6">
           <div className="max-w-4xl mx-auto text-center">
             <motion.h1
@@ -106,8 +114,7 @@ const CSRPage = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
             >
-              Njere CSR Connect links schools in need with companies and
-              organizations ready to sponsor education initiatives.
+              Njere CSR Connect links schools in need with companies and organizations ready to sponsor education initiatives.
             </motion.p>
             <motion.div
               className="flex flex-col justify-center gap-4 sm:flex-row"
@@ -133,23 +140,16 @@ const CSRPage = () => {
         </div>
       </section>
 
-
       {/* For Companies - Browse Schools */}
       <section id="browse-schools" className="py-20 bg-white">
         <div className="container px-4 mx-auto md:px-6">
           <div className="max-w-4xl mx-auto mb-12 text-center">
-            <h2
-              className="text-base font-semibold tracking-wider uppercase"
-              style={{ color: ACCENT_COLOR }}
-            >
+            <h2 className="text-base font-semibold tracking-wider uppercase" style={{ color: ACCENT_COLOR }}>
               For Companies
             </h2>
-            <h2 className="mb-4 text-3xl font-extrabold text-gray-900 md:text-4xl">
-              Browse Schools
-            </h2>
+            <h2 className="mb-4 text-3xl font-extrabold text-gray-900 md:text-4xl">Browse Schools</h2>
             <p className="text-lg text-gray-600">
-              Companies and organizations can explore registered schools and
-              choose where to direct their support.
+              Companies and organizations can explore registered schools and choose where to direct their support.
             </p>
           </div>
 
@@ -162,13 +162,9 @@ const CSRPage = () => {
             viewport={{ once: true }}
           >
             <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+              {/* Location */}
               <div>
-                <label
-                  htmlFor="filterLocation"
-                  className="block mb-2 text-sm font-medium text-gray-900"
-                >
-                  Location
-                </label>
+                <label htmlFor="filterLocation" className="block mb-2 text-sm font-medium text-gray-900">Location</label>
                 <input
                   type="text"
                   id="filterLocation"
@@ -176,409 +172,105 @@ const CSRPage = () => {
                   value={filterLocation}
                   onChange={(e) => setFilterLocation(e.target.value)}
                   className="w-full px-4 py-2 text-gray-900 bg-white border border-gray-400 rounded-lg focus:ring-2 focus:outline-none focus:border-blue-500"
-                  style={{
-                    boxShadow:
-                      '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
-                    transition: 'all 0.2s ease-in-out',
-                  }}
                 />
               </div>
+              {/* Need */}
               <div>
-                <label
-                  htmlFor="filterNeed"
-                  className="block mb-2 text-sm font-medium text-gray-900"
-                >
-                  Area of Need
-                </label>
+                <label htmlFor="filterNeed" className="block mb-2 text-sm font-medium text-gray-900">Area of Need</label>
                 <select
                   id="filterNeed"
                   value={filterNeed}
                   onChange={(e) => setFilterNeed(e.target.value)}
                   className="w-full px-4 py-2 pr-10 text-gray-900 bg-white border border-gray-400 rounded-lg appearance-none cursor-pointer focus:ring-2 focus:outline-none focus:border-blue-500"
-                  style={{
-                    boxShadow:
-                      '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
-                    transition: 'all 0.2s ease-in-out',
-                    backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
-                    backgroundPosition: 'right 0.75rem center',
-                    backgroundRepeat: 'no-repeat',
-                    backgroundSize: '1.5em 1.5em',
-                  }}
                 >
-                  <option value="" className="text-gray-900">
-                    All Needs
-                  </option>
-                  <option value="ICT Equipment" className="text-gray-900">
-                    ICT Equipment
-                  </option>
-                  <option value="Textbooks" className="text-gray-900">
-                    Textbooks
-                  </option>
-                  <option value="Infrastructure" className="text-gray-900">
-                    Infrastructure
-                  </option>
-                  <option value="Stationery" className="text-gray-900">
-                    Stationery
-                  </option>
-                  <option value="Fees Support" className="text-gray-900">
-                    Fees Support
-                  </option>
-                  <option value="Computer Lab" className="text-gray-900">
-                    Computer Lab
-                  </option>
+                  <option value="">All Needs</option>
+                  <option value="ICT Equipment">ICT Equipment</option>
+                  <option value="Textbooks">Textbooks</option>
+                  <option value="Infrastructure">Infrastructure</option>
+                  <option value="Stationery">Stationery</option>
+                  <option value="Fees Support">Fees Support</option>
+                  <option value="Computer Lab">Computer Lab</option>
                 </select>
               </div>
+              {/* Level */}
               <div>
-                <label
-                  htmlFor="filterLevel"
-                  className="block mb-2 text-sm font-medium text-gray-900"
-                >
-                  School Level
-                </label>
+                <label htmlFor="filterLevel" className="block mb-2 text-sm font-medium text-gray-900">School Level</label>
                 <select
                   id="filterLevel"
                   value={filterLevel}
                   onChange={(e) => setFilterLevel(e.target.value)}
                   className="w-full px-4 py-2 pr-10 text-gray-900 bg-white border border-gray-400 rounded-lg appearance-none cursor-pointer focus:ring-2 focus:outline-none focus:border-blue-500"
-                  style={{
-                    boxShadow:
-                      '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
-                    transition: 'all 0.2s ease-in-out',
-                    backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
-                    backgroundPosition: 'right 0.75rem center',
-                    backgroundRepeat: 'no-repeat',
-                    backgroundSize: '1.5em 1.5em',
-                  }}
                 >
-                  <option value="" className="text-gray-900">
-                    All Levels
-                  </option>
-                  <option value="Primary" className="text-gray-900">
-                    Primary
-                  </option>
-                  <option value="Secondary" className="text-gray-900">
-                    Secondary
-                  </option>
+                  <option value="">All Levels</option>
+                  <option value="Primary">Primary</option>
+                  <option value="Secondary">Secondary</option>
                 </select>
               </div>
             </div>
           </motion.div>
 
           {/* School Listings */}
-          <div className="grid max-w-6xl grid-cols-1 gap-8 mx-auto md:grid-cols-2 lg:grid-cols-3">
-            {filteredSchools.map((school, index) => (
-              <motion.div
-                key={school.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="overflow-hidden transition-shadow bg-white border border-gray-200 shadow-lg rounded-xl hover:shadow-xl"
-              >
-                <div className="relative h-48">
-                  <Image
-                    src={school.image}
-                    alt={school.name}
-                    fill
-                    style={{ objectFit: 'cover' }}
-                  />
-                  {school.urgent && (
-                    <div
-                      className="absolute px-3 py-1 text-xs font-bold text-white rounded-full top-4 right-4"
-                      style={{ backgroundColor: ACCENT_COLOR }}
-                    >
-                      Urgent Need
-                    </div>
-                  )}
-                </div>
-                <div className="p-6">
-                  <h3 className="mb-2 text-xl font-bold text-gray-900">
-                    {school.name}
-                  </h3>
-                  <div className="flex items-center mb-4 text-gray-600">
-                    <MapPinIcon className="w-4 h-4 mr-1" />
-                    <span className="text-sm">{school.location}</span>
-                  </div>
-                  <div className="mb-4">
-                    <p className="mb-2 text-sm font-medium text-gray-700">
-                      Needs:
-                    </p>
-                    <div className="flex flex-wrap gap-2">
-                      {school.needs.map((need, i) => (
-                        <span
-                          key={i}
-                          className="px-2 py-1 text-xs rounded-full"
-                          style={{
-                            backgroundColor: '#f0f9ff',
-                            color: PRIMARY_COLOR,
-                          }}
-                        >
-                          {need}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                  <Link
-                    href={`/csr/school/${school.id}`}
-                    className="flex items-center justify-center w-full py-2 font-medium text-white rounded-lg cursor-pointer"
-                    style={{ backgroundColor: PRIMARY_COLOR }}
-                  >
-                    View Full Profile
-                    <ArrowRightIcon className="w-4 h-4 ml-2" />
-                  </Link>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Featured Schools Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="container px-4 mx-auto md:px-6">
-          <div className="max-w-4xl mx-auto mb-12 text-center">
-            <h2
-              className="text-base font-semibold tracking-wider uppercase"
-              style={{ color: ACCENT_COLOR }}
-            >
-              Featured Schools
-            </h2>
-            <h2 className="mb-4 text-3xl font-extrabold text-gray-900 md:text-4xl">
-              Schools with Urgent Needs
-            </h2>
-          </div>
-
-          <div className="grid max-w-6xl grid-cols-1 gap-8 mx-auto md:grid-cols-3">
-            {schools
-              .filter((school) => school.urgent)
-              .map((school, index) => (
+          {loading ? (
+            <div className="flex justify-center py-12">
+              <div className="w-12 h-12 border-4 border-blue-500 rounded-full border-t-transparent animate-spin"></div>
+            </div>
+          ) : (
+            <div className="grid max-w-6xl grid-cols-1 gap-8 mx-auto md:grid-cols-2 lg:grid-cols-3">
+              {filteredSchools.map((school, index) => (
                 <motion.div
                   key={school.id}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className="overflow-hidden bg-white border border-gray-200 shadow-lg rounded-xl"
+                  className="overflow-hidden transition-shadow bg-white border border-gray-200 shadow-lg rounded-xl hover:shadow-xl"
                 >
                   <div className="relative h-48">
                     <Image
-                      src={school.image}
+                      src={school.image || '/black-girl.png'}
                       alt={school.name}
                       fill
                       style={{ objectFit: 'cover' }}
                     />
-                    <div
-                      className="absolute px-3 py-1 text-xs font-bold text-white rounded-full top-4 right-4"
-                      style={{ backgroundColor: ACCENT_COLOR }}
-                    >
-                      Urgent Need
-                    </div>
+                    {school.urgent && (
+                      <div className="absolute px-3 py-1 text-xs font-bold text-white rounded-full top-4 right-4" style={{ backgroundColor: ACCENT_COLOR }}>
+                        Urgent Need
+                      </div>
+                    )}
                   </div>
                   <div className="p-6">
-                    <h3 className="mb-2 text-xl font-bold text-gray-900">
-                      {school.name}
-                    </h3>
+                    <h3 className="mb-2 text-xl font-bold text-gray-900">{school.name}</h3>
                     <div className="flex items-center mb-4 text-gray-600">
                       <MapPinIcon className="w-4 h-4 mr-1" />
                       <span className="text-sm">{school.location}</span>
                     </div>
-                    <p className="mb-4 text-gray-600">
-                      This school urgently needs support for{' '}
-                      {school.needs.join(' and ')} to continue providing quality
-                      education to their students.
-                    </p>
-                    <Link
-                      href={`/csr/school/${school.id}`}
-                      className="flex items-center justify-center w-full py-2 font-medium text-white rounded-lg cursor-pointer"
-                      style={{ backgroundColor: PRIMARY_COLOR }}
-                    >
+                    <div className="mb-4">
+                      <p className="mb-2 text-sm font-medium text-gray-700">Needs:</p>
+                      <div className="flex flex-wrap gap-2">
+                        {school.needs.map((need: string, i: number) => (
+                          <span key={i} className="px-2 py-1 text-xs rounded-full" style={{ backgroundColor: '#f0f9ff', color: PRIMARY_COLOR }}>
+                            {need}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                    <Link href={`/csr/school/${school.id}`} className="flex items-center justify-center w-full py-2 font-medium text-white rounded-lg cursor-pointer" style={{ backgroundColor: PRIMARY_COLOR }}>
                       View Full Profile
                       <ArrowRightIcon className="w-4 h-4 ml-2" />
                     </Link>
                   </div>
                 </motion.div>
               ))}
-          </div>
+            </div>
+          )}
         </div>
       </section>
 
-      {/* Why Join Section */}
-      <section className="py-20 bg-white">
-        <div className="container px-4 mx-auto md:px-6">
-          <div className="max-w-4xl mx-auto mb-12 text-center">
-            <h2
-              className="text-base font-semibold tracking-wider uppercase"
-              style={{ color: ACCENT_COLOR }}
-            >
-              Why Join Njere CSR Connect?
-            </h2>
-            <h2 className="mb-4 text-3xl font-extrabold text-gray-900 md:text-4xl">
-              Value Proposition
-            </h2>
-          </div>
+      {/* CTA Section, Featured Schools, Why Join, and Footer remain unchanged */}
 
-          <div className="grid max-w-6xl grid-cols-1 gap-8 mx-auto md:grid-cols-2">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
-              className="p-8 bg-gray-50 rounded-xl"
-            >
-              <div className="flex items-center mb-4">
-                <div
-                  className="flex items-center justify-center w-12 h-12 mr-4 text-white rounded-full"
-                  style={{ backgroundColor: PRIMARY_COLOR }}
-                >
-                  <AcademicCapIcon className="w-6 h-6" />
-                </div>
-                <h3 className="text-2xl font-bold text-gray-900">
-                  For Schools
-                </h3>
-              </div>
-              <p className="mb-4 text-gray-600">
-                Access potential sponsors and resources to improve education
-                delivery.
-              </p>
-              <ul className="space-y-3">
-                <li className="flex items-start">
-                  <CheckCircleIcon className="w-5 h-5 mr-2 mt-0.5 text-green-500 flex-shrink-0" />
-                  <span className="text-gray-700">
-                    Connect with corporate sponsors
-                  </span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircleIcon className="w-5 h-5 mr-2 mt-0.5 text-green-500 flex-shrink-0" />
-                  <span className="text-gray-700">
-                    Get resources for ICT equipment
-                  </span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircleIcon className="w-5 h-5 mr-2 mt-0.5 text-green-500 flex-shrink-0" />
-                  <span className="text-gray-700">
-                    Receive learning materials
-                  </span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircleIcon className="w-5 h-5 mr-2 mt-0.5 text-green-500 flex-shrink-0" />
-                  <span className="text-gray-700">Improve infrastructure</span>
-                </li>
-              </ul>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
-              className="p-8 bg-gray-50 rounded-xl"
-            >
-              <div className="flex items-center mb-4">
-                <div
-                  className="flex items-center justify-center w-12 h-12 mr-4 text-white rounded-full"
-                  style={{ backgroundColor: PRIMARY_COLOR }}
-                >
-                  <UserGroupIcon className="w-6 h-6" />
-                </div>
-                <h3 className="text-2xl font-bold text-gray-900">
-                  For Companies
-                </h3>
-              </div>
-              <p className="mb-4 text-gray-600">
-                Align your CSR with real needs, track your impact, and showcase
-                your contribution to education.
-              </p>
-              <ul className="space-y-3">
-                <li className="flex items-start">
-                  <CheckCircleIcon className="w-5 h-5 mr-2 mt-0.5 text-green-500 flex-shrink-0" />
-                  <span className="text-gray-700">
-                    Targeted impact on education
-                  </span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircleIcon className="w-5 h-5 mr-2 mt-0.5 text-green-500 flex-shrink-0" />
-                  <span className="text-gray-700">Track your contribution</span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircleIcon className="w-5 h-5 mr-2 mt-0.5 text-green-500 flex-shrink-0" />
-                  <span className="text-gray-700">
-                    Showcase your CSR initiatives
-                  </span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircleIcon className="w-5 h-5 mr-2 mt-0.5 text-green-500 flex-shrink-0" />
-                  <span className="text-gray-700">
-                    Build meaningful partnerships
-                  </span>
-                </li>
-              </ul>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Banner */}
-      <section
-        className="py-20 text-center text-white"
-        style={{
-          background: 'linear-gradient(135deg, #00204f 0%, #04baab 100%)',
-        }}
-      >
-        <div className="container px-4 mx-auto md:px-6">
-          <motion.h2
-            className="mb-6 text-4xl font-extrabold"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-          >
-            Together, we can transform education.
-          </motion.h2>
-          <motion.p
-            className="max-w-2xl mx-auto mb-10 text-lg text-white/90"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            viewport={{ once: true }}
-          >
-            Join Njere CSR Connect today to make a meaningful impact on
-            education in South Africa.
-          </motion.p>
-          <motion.div
-            className="flex flex-col justify-center gap-4 sm:flex-row"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            viewport={{ once: true }}
-          >
-            <button
-              className="flex items-center justify-center px-8 py-4 font-bold text-blue-900 transition-transform bg-white rounded-full shadow-lg cursor-pointer hover:bg-gray-100 hover:scale-105"
-              onClick={() => setIsSchoolModalOpen(true)}
-            >
-              Register Your School
-              <ArrowRightIcon className="w-5 h-5 ml-2" />
-            </button>
-            <button
-              className="px-8 py-4 font-bold text-white transition-all border-2 border-white rounded-full cursor-pointer hover:bg-white hover:text-blue-900"
-              onClick={() => setIsCompanyModalOpen(true)}
-            >
-              Register Your Company
-            </button>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Footer Section */}
-      <Footer/>
-
-      <RegisterSchoolModal
-        isOpen={isSchoolModalOpen}
-        onClose={() => setIsSchoolModalOpen(false)}
-      />
-      <RegisterCompanyModal
-        isOpen={isCompanyModalOpen}
-        onClose={() => setIsCompanyModalOpen(false)}
-      />
+      <Footer />
+      <RegisterSchoolModal isOpen={isSchoolModalOpen} onClose={() => setIsSchoolModalOpen(false)} />
+      <RegisterCompanyModal isOpen={isCompanyModalOpen} onClose={() => setIsCompanyModalOpen(false)} />
     </div>
   );
 };

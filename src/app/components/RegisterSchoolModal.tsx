@@ -17,6 +17,7 @@ const RegisterSchoolModal: React.FC<RegisterSchoolModalProps> = ({ isOpen, onClo
     schoolName: '',
     location: '',
     province: '',
+    level: '',
     contactName: '',
     position: '',
     phone: '',
@@ -31,10 +32,10 @@ const RegisterSchoolModal: React.FC<RegisterSchoolModalProps> = ({ isOpen, onClo
     consent: false,
   });
 
+  const [loading, setLoading] = useState(false);
+
   const handleInputChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-    >,
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
   ) => {
     const target = e.target as HTMLInputElement;
     const { name, value, type } = target;
@@ -45,16 +46,54 @@ const RegisterSchoolModal: React.FC<RegisterSchoolModalProps> = ({ isOpen, onClo
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
     if (!formData.consent) {
-      alert('Please consent to sharing your school\'s information.');
+      alert("Please consent to sharing your school's information.");
       return;
     }
-    // Handle form submission
-    console.log('Form submitted:', formData);
-    // Reset form or show success message
-    onClose();
+
+    setLoading(true);
+
+    try {
+      const response = await fetch('/api/schools/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        alert('School registration successful! We will contact you soon.');
+        setFormData({
+          schoolName: '',
+          location: '',
+          province: '',
+          level: '',
+          contactName: '',
+          position: '',
+          phone: '',
+          email: '',
+          schoolFees: '',
+          internetConnectivity: '',
+          serviceProvider: '',
+          computerLab: '',
+          computerCount: '',
+          areasOfNeed: '',
+          motivation: '',
+          consent: false,
+        });
+        onClose();
+      } else {
+        const errorData = await response.json();
+        alert(`Registration failed: ${errorData.error}`);
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      alert('An error occurred. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -76,21 +115,17 @@ const RegisterSchoolModal: React.FC<RegisterSchoolModalProps> = ({ isOpen, onClo
           >
             <div className="flex items-center justify-between p-6 border-b border-gray-200">
               <h2 className="text-2xl font-bold text-gray-900">Register Your School</h2>
-              <button
-                onClick={onClose}
-                className="p-2 text-gray-400 hover:text-gray-600"
-              >
+              <button onClick={onClose} className="p-2 text-gray-400 hover:text-gray-600">
                 <XMarkIcon className="w-6 h-6" />
               </button>
             </div>
+
             <div className="p-6">
               <form onSubmit={handleSubmit} className="space-y-6">
+                {/* School Name */}
                 <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                   <div>
-                    <label
-                      htmlFor="schoolName"
-                      className="block mb-2 text-sm font-medium text-gray-900"
-                    >
+                    <label htmlFor="schoolName" className="block mb-2 text-sm font-medium text-gray-900">
                       School Name <span className="text-red-500">*</span>
                     </label>
                     <input
@@ -100,20 +135,12 @@ const RegisterSchoolModal: React.FC<RegisterSchoolModalProps> = ({ isOpen, onClo
                       value={formData.schoolName}
                       onChange={handleInputChange}
                       className="w-full px-4 py-3 text-gray-900 bg-white border border-gray-400 rounded-lg focus:ring-2 focus:outline-none focus:border-blue-500"
-                      style={{
-                        boxShadow:
-                          '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
-                        transition: 'all 0.2s ease-in-out',
-                      }}
                       placeholder="Enter your school name"
                       required
                     />
                   </div>
                   <div>
-                    <label
-                      htmlFor="location"
-                      className="block mb-2 text-sm font-medium text-gray-900"
-                    >
+                    <label htmlFor="location" className="block mb-2 text-sm font-medium text-gray-900">
                       Location (City/Town) <span className="text-red-500">*</span>
                     </label>
                     <input
@@ -123,80 +150,61 @@ const RegisterSchoolModal: React.FC<RegisterSchoolModalProps> = ({ isOpen, onClo
                       value={formData.location}
                       onChange={handleInputChange}
                       className="w-full px-4 py-3 text-gray-900 bg-white border border-gray-400 rounded-lg focus:ring-2 focus:outline-none focus:border-blue-500"
-                      style={{
-                        boxShadow:
-                          '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
-                        transition: 'all 0.2s ease-in-out',
-                      }}
                       placeholder="Enter city or town"
                       required
                     />
                   </div>
                 </div>
 
-                <div>
-                  <label
-                    htmlFor="province"
-                    className="block mb-2 text-sm font-medium text-gray-900"
-                  >
-                    Province <span className="text-red-500">*</span>
-                  </label>
-                  <select
-                    id="province"
-                    name="province"
-                    value={formData.province}
-                    onChange={handleInputChange}
-                    className="w-full px-4 py-3 pr-10 text-gray-900 bg-white border border-gray-400 rounded-lg appearance-none cursor-pointer focus:ring-2 focus:outline-none focus:border-blue-500"
-                    style={{
-                      boxShadow:
-                        '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
-                      transition: 'all 0.2s ease-in-out',
-                      backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
-                      backgroundPosition: 'right 0.75rem center',
-                      backgroundRepeat: 'no-repeat',
-                      backgroundSize: '1.5em 1.5em',
-                    }}
-                    required
-                  >
-                    <option value="" className="text-gray-900">
-                      Select Province
-                    </option>
-                    <option value="Eastern Cape" className="text-gray-900">
-                      Eastern Cape
-                    </option>
-                    <option value="Free State" className="text-gray-900">
-                      Free State
-                    </option>
-                    <option value="Gauteng" className="text-gray-900">
-                      Gauteng
-                    </option>
-                    <option value="KwaZulu-Natal" className="text-gray-900">
-                      KwaZulu-Natal
-                    </option>
-                    <option value="Limpopo" className="text-gray-900">
-                      Limpopo
-                    </option>
-                    <option value="Mpumalanga" className="text-gray-900">
-                      Mpumalanga
-                    </option>
-                    <option value="Northern Cape" className="text-gray-900">
-                      Northern Cape
-                    </option>
-                    <option value="North West" className="text-gray-900">
-                      North West
-                    </option>
-                    <option value="Western Cape" className="text-gray-900">
-                      Western Cape
-                    </option>
-                  </select>
-                </div>
-
+                {/* Province & Level */}
                 <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                   <div>
-                    <label
-                      htmlFor="contactName"
-                      className="block mb-2 text-sm font-medium text-gray-900"
+                    <label htmlFor="province" className="block mb-2 text-sm font-medium text-gray-900">
+                      Province <span className="text-red-500">*</span>
+                    </label>
+                    <select
+                      id="province"
+                      name="province"
+                      value={formData.province}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-3 pr-10 text-gray-900 bg-white border border-gray-400 rounded-lg appearance-none cursor-pointer focus:ring-2 focus:outline-none focus:border-blue-500"
+                      required
                     >
+                      <option value="">Select Province</option>
+                      <option value="Eastern Cape">Eastern Cape</option>
+                      <option value="Free State">Free State</option>
+                      <option value="Gauteng">Gauteng</option>
+                      <option value="KwaZulu-Natal">KwaZulu-Natal</option>
+                      <option value="Limpopo">Limpopo</option>
+                      <option value="Mpumalanga">Mpumalanga</option>
+                      <option value="Northern Cape">Northern Cape</option>
+                      <option value="North West">North West</option>
+                      <option value="Western Cape">Western Cape</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label htmlFor="level" className="block mb-2 text-sm font-medium text-gray-900">
+                      School Level <span className="text-red-500">*</span>
+                    </label>
+                    <select
+                      id="level"
+                      name="level"
+                      value={formData.level}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-3 pr-10 text-gray-900 bg-white border border-gray-400 rounded-lg appearance-none cursor-pointer focus:ring-2 focus:outline-none focus:border-blue-500"
+                      required
+                    >
+                      <option value="">Select Level</option>
+                      <option value="Primary">Primary</option>
+                      <option value="Secondary">Secondary</option>
+                    </select>
+                  </div>
+                </div>
+
+                {/* Contact Name & Position */}
+                <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+                  <div>
+                    <label htmlFor="contactName" className="block mb-2 text-sm font-medium text-gray-900">
                       Contact Person Name <span className="text-red-500">*</span>
                     </label>
                     <input
@@ -206,20 +214,12 @@ const RegisterSchoolModal: React.FC<RegisterSchoolModalProps> = ({ isOpen, onClo
                       value={formData.contactName}
                       onChange={handleInputChange}
                       className="w-full px-4 py-3 text-gray-900 bg-white border border-gray-400 rounded-lg focus:ring-2 focus:outline-none focus:border-blue-500"
-                      style={{
-                        boxShadow:
-                          '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
-                        transition: 'all 0.2s ease-in-out',
-                      }}
                       placeholder="Enter contact person name"
                       required
                     />
                   </div>
                   <div>
-                    <label
-                      htmlFor="position"
-                      className="block mb-2 text-sm font-medium text-gray-900"
-                    >
+                    <label htmlFor="position" className="block mb-2 text-sm font-medium text-gray-900">
                       Position <span className="text-red-500">*</span>
                     </label>
                     <input
@@ -229,23 +229,16 @@ const RegisterSchoolModal: React.FC<RegisterSchoolModalProps> = ({ isOpen, onClo
                       value={formData.position}
                       onChange={handleInputChange}
                       className="w-full px-4 py-3 text-gray-900 bg-white border border-gray-400 rounded-lg focus:ring-2 focus:outline-none focus:border-blue-500"
-                      style={{
-                        boxShadow:
-                          '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
-                        transition: 'all 0.2s ease-in-out',
-                      }}
                       placeholder="Enter position (e.g., Principal, Teacher)"
                       required
                     />
                   </div>
                 </div>
 
+                {/* Phone & Email */}
                 <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                   <div>
-                    <label
-                      htmlFor="phone"
-                      className="block mb-2 text-sm font-medium text-gray-900"
-                    >
+                    <label htmlFor="phone" className="block mb-2 text-sm font-medium text-gray-900">
                       Phone Number <span className="text-red-500">*</span>
                     </label>
                     <input
@@ -255,20 +248,12 @@ const RegisterSchoolModal: React.FC<RegisterSchoolModalProps> = ({ isOpen, onClo
                       value={formData.phone}
                       onChange={handleInputChange}
                       className="w-full px-4 py-3 text-gray-900 bg-white border border-gray-400 rounded-lg focus:ring-2 focus:outline-none focus:border-blue-500"
-                      style={{
-                        boxShadow:
-                          '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
-                        transition: 'all 0.2s ease-in-out',
-                      }}
                       placeholder="Enter phone number"
                       required
                     />
                   </div>
                   <div>
-                    <label
-                      htmlFor="email"
-                      className="block mb-2 text-sm font-medium text-gray-900"
-                    >
+                    <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900">
                       Email Address <span className="text-red-500">*</span>
                     </label>
                     <input
@@ -278,22 +263,15 @@ const RegisterSchoolModal: React.FC<RegisterSchoolModalProps> = ({ isOpen, onClo
                       value={formData.email}
                       onChange={handleInputChange}
                       className="w-full px-4 py-3 text-gray-900 bg-white border border-gray-400 rounded-lg focus:ring-2 focus:outline-none focus:border-blue-500"
-                      style={{
-                        boxShadow:
-                          '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
-                        transition: 'all 0.2s ease-in-out',
-                      }}
                       placeholder="Enter email address"
                       required
                     />
                   </div>
                 </div>
 
+                {/* School Fees */}
                 <div>
-                  <label
-                    htmlFor="schoolFees"
-                    className="block mb-2 text-sm font-medium text-gray-900"
-                  >
+                  <label htmlFor="schoolFees" className="block mb-2 text-sm font-medium text-gray-900">
                     Average School Fees (per term) <span className="text-red-500">*</span>
                   </label>
                   <input
@@ -303,16 +281,12 @@ const RegisterSchoolModal: React.FC<RegisterSchoolModalProps> = ({ isOpen, onClo
                     value={formData.schoolFees}
                     onChange={handleInputChange}
                     className="w-full px-4 py-3 text-gray-900 bg-white border border-gray-400 rounded-lg focus:ring-2 focus:outline-none focus:border-blue-500"
-                    style={{
-                      boxShadow:
-                        '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
-                      transition: 'all 0.2s ease-in-out',
-                    }}
                     placeholder="Enter average school fees per term"
                     required
                   />
                 </div>
 
+                {/* Internet Connectivity & Service Provider */}
                 <div>
                   <label className="block mb-2 text-sm font-medium text-gray-900">
                     Internet Connectivity
@@ -345,10 +319,7 @@ const RegisterSchoolModal: React.FC<RegisterSchoolModalProps> = ({ isOpen, onClo
                   </div>
                   {formData.internetConnectivity === 'yes' && (
                     <div className="mt-3">
-                      <label
-                        htmlFor="serviceProvider"
-                        className="block mb-2 text-sm font-medium text-gray-900"
-                      >
+                      <label htmlFor="serviceProvider" className="block mb-2 text-sm font-medium text-gray-900">
                         Which service provider do you use?
                       </label>
                       <input
@@ -358,21 +329,15 @@ const RegisterSchoolModal: React.FC<RegisterSchoolModalProps> = ({ isOpen, onClo
                         value={formData.serviceProvider}
                         onChange={handleInputChange}
                         className="w-full px-4 py-3 text-gray-900 bg-white border border-gray-400 rounded-lg focus:ring-2 focus:outline-none focus:border-blue-500"
-                        style={{
-                          boxShadow:
-                            '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
-                          transition: 'all 0.2s ease-in-out',
-                        }}
                         placeholder="Enter service provider name"
                       />
                     </div>
                   )}
                 </div>
 
+                {/* Computer Lab & Count */}
                 <div>
-                  <label className="block mb-2 text-sm font-medium text-gray-900">
-                    Computer Lab
-                  </label>
+                  <label className="block mb-2 text-sm font-medium text-gray-900">Computer Lab</label>
                   <div className="flex space-x-6">
                     <label className="flex items-center cursor-pointer">
                       <input
@@ -401,10 +366,7 @@ const RegisterSchoolModal: React.FC<RegisterSchoolModalProps> = ({ isOpen, onClo
                   </div>
                   {formData.computerLab === 'yes' && (
                     <div className="mt-3">
-                      <label
-                        htmlFor="computerCount"
-                        className="block mb-2 text-sm font-medium text-gray-900"
-                      >
+                      <label htmlFor="computerCount" className="block mb-2 text-sm font-medium text-gray-900">
                         How many computers does your school currently have?
                       </label>
                       <input
@@ -414,22 +376,15 @@ const RegisterSchoolModal: React.FC<RegisterSchoolModalProps> = ({ isOpen, onClo
                         value={formData.computerCount}
                         onChange={handleInputChange}
                         className="w-full px-4 py-3 text-gray-900 bg-white border border-gray-400 rounded-lg focus:ring-2 focus:outline-none focus:border-blue-500"
-                        style={{
-                          boxShadow:
-                            '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
-                          transition: 'all 0.2s ease-in-out',
-                        }}
                         placeholder="Enter number of computers"
                       />
                     </div>
                   )}
                 </div>
 
+                {/* Areas of Need */}
                 <div>
-                  <label
-                    htmlFor="areasOfNeed"
-                    className="block mb-2 text-sm font-medium text-gray-900"
-                  >
+                  <label htmlFor="areasOfNeed" className="block mb-2 text-sm font-medium text-gray-900">
                     Which of the following areas of digitization does your school need support in? <span className="text-red-500">*</span>
                   </label>
                   <select
@@ -438,56 +393,27 @@ const RegisterSchoolModal: React.FC<RegisterSchoolModalProps> = ({ isOpen, onClo
                     value={formData.areasOfNeed}
                     onChange={handleInputChange}
                     className="w-full px-4 py-3 pr-10 text-gray-900 bg-white border border-gray-400 rounded-lg appearance-none cursor-pointer focus:ring-2 focus:outline-none focus:border-blue-500"
-                    style={{
-                      boxShadow:
-                        '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
-                      transition: 'all 0.2s ease-in-out',
-                      backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
-                      backgroundPosition: 'right 0.75rem center',
-                      backgroundRepeat: 'no-repeat',
-                      backgroundSize: '1.5em 1.5em',
-                    }}
                     required
                   >
-                    <option value="" className="text-gray-900">
-                      Select Area of Need
-                    </option>
+                    <option value="">Select Area of Need</option>
                     <optgroup label="ICT Services">
-                      <option value="Smartbots" className="text-gray-900">
-                        Smartbots
-                      </option>
-                      <option value="AI Tutors" className="text-gray-900">
-                        AI Tutors
-                      </option>
-                      <option value="Digital Libraries" className="text-gray-900">
-                        Digital Libraries
-                      </option>
-                      <option value="E-Learning Platforms" className="text-gray-900">
-                        E-Learning Platforms
-                      </option>
+                      <option value="Smartbots">Smartbots</option>
+                      <option value="AI Tutors">AI Tutors</option>
+                      <option value="Digital Libraries">Digital Libraries</option>
+                      <option value="E-Learning Platforms">E-Learning Platforms</option>
                     </optgroup>
                     <optgroup label="Other">
-                      <option value="Stationery" className="text-gray-900">
-                        Stationery
-                      </option>
-                      <option value="Infrastructure" className="text-gray-900">
-                        Infrastructure
-                      </option>
-                      <option value="Fees Support" className="text-gray-900">
-                        Fees Support
-                      </option>
-                      <option value="Other" className="text-gray-900">
-                        Other
-                      </option>
+                      <option value="Stationery">Stationery</option>
+                      <option value="Infrastructure">Infrastructure</option>
+                      <option value="Fees Support">Fees Support</option>
+                      <option value="Other">Other</option>
                     </optgroup>
                   </select>
                 </div>
 
+                {/* Motivation */}
                 <div>
-                  <label
-                    htmlFor="motivation"
-                    className="block mb-2 text-sm font-medium text-gray-900"
-                  >
+                  <label htmlFor="motivation" className="block mb-2 text-sm font-medium text-gray-900">
                     Short Description / Motivation <span className="text-red-500">*</span>
                   </label>
                   <textarea
@@ -497,16 +423,12 @@ const RegisterSchoolModal: React.FC<RegisterSchoolModalProps> = ({ isOpen, onClo
                     onChange={handleInputChange}
                     rows={4}
                     className="w-full px-4 py-3 text-gray-900 bg-white border border-gray-400 rounded-lg resize-none focus:ring-2 focus:outline-none focus:border-blue-500"
-                    style={{
-                      boxShadow:
-                        '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
-                      transition: 'all 0.2s ease-in-out',
-                    }}
                     placeholder="Tell us briefly why your school should be considered for sponsorship"
                     required
-                  ></textarea>
+                  />
                 </div>
 
+                {/* Consent */}
                 <div className="flex items-center">
                   <input
                     type="checkbox"
@@ -523,13 +445,39 @@ const RegisterSchoolModal: React.FC<RegisterSchoolModalProps> = ({ isOpen, onClo
                   </label>
                 </div>
 
+                {/* Submit Button */}
                 <div className="pt-4">
                   <button
                     type="submit"
-                    className="w-full py-3 font-bold text-white transition-all rounded-lg cursor-pointer hover:opacity-90"
+                    disabled={loading}
+                    className={`w-full py-3 font-bold text-white transition-all rounded-lg cursor-pointer hover:opacity-90 flex justify-center items-center gap-2 ${
+                      loading ? 'opacity-70 cursor-not-allowed' : ''
+                    }`}
                     style={{ backgroundColor: ACCENT_COLOR }}
                   >
-                    Join CSR Connect
+                    {loading && (
+                      <svg
+                        className="w-5 h-5 text-white animate-spin"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                      >
+                        <circle
+                          className="opacity-25"
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          stroke="currentColor"
+                          strokeWidth="4"
+                        ></circle>
+                        <path
+                          className="opacity-75"
+                          fill="currentColor"
+                          d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                        ></path>
+                      </svg>
+                    )}
+                    {loading ? 'Submitting...' : 'Join CSR Connect'}
                   </button>
                 </div>
               </form>

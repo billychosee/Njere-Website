@@ -29,19 +29,19 @@ export const NAV_ITEMS = [
     href: '/contact-us',
     icon: FiMail,
     iconClass: 'text-current',
-    dropdown: {
-      items: [
-        {
-          label: 'Administrative',
-          href: '/',
-        },
-        { label: 'Finances', href: '/' },
-        {
-          label: 'Academics',
-          href: '/',
-        },
-      ],
-    },
+    // dropdown: {
+    //   items: [
+    //     {
+    //       label: 'Administrative',
+    //       href: '/',
+    //     },
+    //     { label: 'Finances', href: '/' },
+    //     {
+    //       label: 'Academics',
+    //       href: '/',
+    //     },
+    //   ],
+    // },
   },
   {
     label: 'INTEGRATIONS',
