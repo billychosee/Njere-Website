@@ -243,7 +243,7 @@ const ContactPage = () => {
                     {/* Submit Button */}
                     <button
                       type="submit"
-                      className={`w-full text-white font-bold py-4 px-6 rounded-lg hover:opacity-90 transition-opacity duration-300 text-lg shadow-md`}
+                      className={`w-full text-white font-bold py-4 px-6 rounded-full hover:opacity-90 transition-opacity duration-300 text-lg shadow-md`}
                       style={{ backgroundColor: ACCENT_COLOR }}
                     >
                       Send Message

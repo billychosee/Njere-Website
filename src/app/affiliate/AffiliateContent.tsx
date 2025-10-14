@@ -23,6 +23,43 @@ const ACCENT_COLOR = '#02ACC3'; // Teal/Cyan
 const AffiliateContent = () => {
   const [activeTab, setActiveTab] = useState('connect');
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
+  const [selectedPackage, setSelectedPackage] = useState('');
+  const [studentCount, setStudentCount] = useState('');
+  const [earnings, setEarnings] = useState(0);
+
+  const packages = {
+    basic: { price: 50, name: 'Basic Package' },
+    standard: { price: 100, name: 'Standard Package' },
+    premium: { price: 150, name: 'Premium Package' }
+  };
+
+  const calculateEarnings = (pkg: string, students: string) => {
+    if (!pkg || !students || parseInt(students) <= 0) {
+      setEarnings(0);
+      return;
+    }
+
+    const packagePrice = packages[pkg as keyof typeof packages].price;
+    const numStudents = parseInt(students);
+    const affiliateRate = 0.10; // 10%
+
+    const totalRevenue = packagePrice * numStudents;
+    const affiliateAmount = totalRevenue * affiliateRate;
+
+    setEarnings(affiliateAmount);
+  };
+
+  const handlePackageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const pkg = e.target.value;
+    setSelectedPackage(pkg);
+    calculateEarnings(pkg, studentCount);
+  };
+
+  const handleStudentChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const students = e.target.value;
+    setStudentCount(students);
+    calculateEarnings(selectedPackage, students);
+  };
 
   const faqs = [
     {
@@ -314,6 +351,84 @@ const AffiliateContent = () => {
         </div>
       </section>
 
+      {/* Affiliate Earnings Calculator */}
+      <section className="py-20 bg-gray-50">
+        <div className="container px-4 mx-auto md:px-6">
+          <div className="max-w-4xl mx-auto mb-16 text-center">
+            <h2
+              className="text-base font-semibold tracking-wider uppercase"
+              style={{ color: ACCENT_COLOR }}
+            >
+              Calculate Your Earnings
+            </h2>
+            <h2 className="mb-4 text-3xl font-extrabold text-gray-900 md:text-4xl">
+              Affiliate Earnings Calculator
+            </h2>
+            <p className="text-xl text-gray-600">
+              If you want to become an affiliate for Njere, please select your preferred package and enter the number of students. The system will automatically calculate your affiliate earnings based on your selection.
+            </p>
+          </div>
+
+          <div className="max-w-2xl mx-auto">
+            <div className="p-8 bg-white shadow-lg rounded-2xl">
+              <div className="space-y-6">
+                {/* Package Selection */}
+                <div>
+                  <label className="block mb-2 text-sm font-medium text-gray-900">
+                    Choose your package:
+                  </label>
+                  <select
+                    value={selectedPackage}
+                    onChange={handlePackageChange}
+                    className="w-full px-4 py-3 text-gray-900 bg-white border border-gray-400 rounded-lg focus:ring-2 focus:outline-none focus:border-blue-500"
+                  >
+                    <option value="">Select Package</option>
+                    <option value="basic">Basic Package - $50/student</option>
+                    <option value="standard">Standard Package - $100/student</option>
+                    <option value="premium">Premium Package - $150/student</option>
+                  </select>
+                </div>
+
+                {/* Number of Students */}
+                <div>
+                  <label className="block mb-2 text-sm font-medium text-gray-900">
+                    Enter number of students:
+                  </label>
+                  <input
+                    type="number"
+                    min="1"
+                    value={studentCount}
+                    onChange={handleStudentChange}
+                    className="w-full px-4 py-3 text-gray-900 bg-white border border-gray-400 rounded-lg focus:ring-2 focus:outline-none focus:border-blue-500"
+                    placeholder="Enter number of students"
+                  />
+                </div>
+
+                {/* Affiliate Rate Display */}
+                <div className="p-4 rounded-lg bg-blue-50">
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-medium text-gray-900">Affiliate rate:</span>
+                    <span className="text-lg font-bold text-blue-600">10%</span>
+                  </div>
+                </div>
+
+                {/* Affiliate Amount Display */}
+                <div className="p-4 rounded-lg bg-green-50">
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-medium text-gray-900">Affiliate amount:</span>
+                    <span className="text-2xl font-bold text-green-600">${earnings.toFixed(2)}</span>
+                  </div>
+                </div>
+
+                <div className="p-4 text-sm text-gray-600 rounded-lg bg-gray-50">
+                  <strong>Formula:</strong> Affiliate Amount = (Package Price × Number of Students) × Affiliate Rate
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Affiliate Account Types Section - Sleek Tabbed Layout with Image */}
       <section className="py-20 bg-gray-50">
         <div className="container px-4 mx-auto md:px-6">
@@ -421,7 +536,7 @@ const AffiliateContent = () => {
                       </ul>
                       <a
                         href="/sign-up"
-                        className="flex items-center justify-center w-full py-3 mt-4 font-bold text-white transition-all rounded-lg cursor-pointer hover:opacity-90"
+                        className="flex items-center justify-center w-full py-3 mt-4 font-bold text-white transition-all rounded-full cursor-pointer hover:opacity-90"
                         style={{ backgroundColor: ACCENT_COLOR }}
                       >
                         Start Connecting
@@ -471,7 +586,7 @@ const AffiliateContent = () => {
                       </ul>
                       <a
                         href="/sign-up"
-                        className="flex items-center justify-center w-full py-3 mt-4 font-bold text-white transition-all rounded-lg cursor-pointer hover:opacity-90"
+                        className="flex items-center justify-center w-full py-3 mt-4 font-bold text-white transition-all rounded-full cursor-pointer hover:opacity-90"
                         style={{ backgroundColor: ACCENT_COLOR }}
                       >
                         Start Earning
@@ -521,7 +636,7 @@ const AffiliateContent = () => {
                       </ul>
                       <a
                         href="/sign-up"
-                        className="flex items-center justify-center w-full py-3 mt-4 font-bold text-white transition-all rounded-lg cursor-pointer hover:opacity-90"
+                        className="flex items-center justify-center w-full py-3 mt-4 font-bold text-white transition-all rounded-full cursor-pointer hover:opacity-90"
                         style={{ backgroundColor: ACCENT_COLOR }}
                       >
                         Start Fusing

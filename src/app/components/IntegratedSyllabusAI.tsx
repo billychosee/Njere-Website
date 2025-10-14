@@ -77,7 +77,7 @@ const IntegratedSyllabusAI: React.FC = () => {
               ))}
             </ul>
             <div>
-              <button className="px-6 py-3 bg-[#0296AD] text-white font-bold rounded-lg shadow-lg hover:bg-gray-700 transition duration-300 ease-in-out transform hover:-translate-y-1 cursor-pointer">
+              <button className="px-6 py-3 bg-[#0296AD] text-white font-bold rounded-full shadow-lg hover:bg-gray-700 transition duration-300 ease-in-out transform hover:-translate-y-1 cursor-pointer">
                 Learn More
               </button>
             </div>

@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
+import axios from 'axios';
 import {
   MapPinIcon,
   AcademicCapIcon,
@@ -31,9 +32,12 @@ const CSRPage = () => {
   useEffect(() => {
     const fetchSchools = async () => {
       try {
-        const response = await fetch('/api/schools');
-        const data = await response.json();
-        setSchools(data.schools || []);
+        const response = await axios.get(
+          'https://csr-njere.smathub.com/api/schools',
+        );
+        const data = response.data.data;
+        console.log(data);
+        setSchools(data || []);
       } catch (error) {
         console.error('Error fetching schools:', error);
         // Fallback sample data
@@ -77,8 +81,12 @@ const CSRPage = () => {
   // Filter schools
   const filteredSchools = schools.filter((school) => {
     return (
-      (filterLocation === '' || school.location.toLowerCase().includes(filterLocation.toLowerCase())) &&
-      (filterNeed === '' || school.needs.some((need: string) => need.toLowerCase().includes(filterNeed.toLowerCase()))) &&
+      (filterLocation === '' ||
+        school.location.toLowerCase().includes(filterLocation.toLowerCase())) &&
+      (filterNeed === '' ||
+        (school.needs && school.needs.some((need: string) =>
+          need.toLowerCase().includes(filterNeed.toLowerCase()),
+        )) || (school.areasOfNeed && school.areasOfNeed.toLowerCase().includes(filterNeed.toLowerCase()))) &&
       (filterLevel === '' || school.level === filterLevel)
     );
   });
@@ -114,7 +122,8 @@ const CSRPage = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
             >
-              Njere CSR Connect links schools in need with companies and organizations ready to sponsor education initiatives.
+              Njere CSR Connect links schools in need with companies and
+              organizations ready to sponsor education initiatives.
             </motion.p>
             <motion.div
               className="flex flex-col justify-center gap-4 sm:flex-row"
@@ -144,12 +153,18 @@ const CSRPage = () => {
       <section id="browse-schools" className="py-20 bg-white">
         <div className="container px-4 mx-auto md:px-6">
           <div className="max-w-4xl mx-auto mb-12 text-center">
-            <h2 className="text-base font-semibold tracking-wider uppercase" style={{ color: ACCENT_COLOR }}>
+            <h2
+              className="text-base font-semibold tracking-wider uppercase"
+              style={{ color: ACCENT_COLOR }}
+            >
               For Companies
             </h2>
-            <h2 className="mb-4 text-3xl font-extrabold text-gray-900 md:text-4xl">Browse Schools</h2>
+            <h2 className="mb-4 text-3xl font-extrabold text-gray-900 md:text-4xl">
+              Browse Schools
+            </h2>
             <p className="text-lg text-gray-600">
-              Companies and organizations can explore registered schools and choose where to direct their support.
+              Companies and organizations can explore registered schools and
+              choose where to direct their support.
             </p>
           </div>
 
@@ -164,7 +179,12 @@ const CSRPage = () => {
             <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
               {/* Location */}
               <div>
-                <label htmlFor="filterLocation" className="block mb-2 text-sm font-medium text-gray-900">Location</label>
+                <label
+                  htmlFor="filterLocation"
+                  className="block mb-2 text-sm font-medium text-gray-900"
+                >
+                  Location
+                </label>
                 <input
                   type="text"
                   id="filterLocation"
@@ -176,7 +196,12 @@ const CSRPage = () => {
               </div>
               {/* Need */}
               <div>
-                <label htmlFor="filterNeed" className="block mb-2 text-sm font-medium text-gray-900">Area of Need</label>
+                <label
+                  htmlFor="filterNeed"
+                  className="block mb-2 text-sm font-medium text-gray-900"
+                >
+                  Area of Need
+                </label>
                 <select
                   id="filterNeed"
                   value={filterNeed}
@@ -194,7 +219,12 @@ const CSRPage = () => {
               </div>
               {/* Level */}
               <div>
-                <label htmlFor="filterLevel" className="block mb-2 text-sm font-medium text-gray-900">School Level</label>
+                <label
+                  htmlFor="filterLevel"
+                  className="block mb-2 text-sm font-medium text-gray-900"
+                >
+                  School Level
+                </label>
                 <select
                   id="filterLevel"
                   value={filterLevel}
@@ -228,33 +258,48 @@ const CSRPage = () => {
                   <div className="relative h-48">
                     <Image
                       src={school.image || '/black-girl.png'}
-                      alt={school.name}
+                      alt={school.schoolName}
                       fill
                       style={{ objectFit: 'cover' }}
                     />
                     {school.urgent && (
-                      <div className="absolute px-3 py-1 text-xs font-bold text-white rounded-full top-4 right-4" style={{ backgroundColor: ACCENT_COLOR }}>
+                      <div
+                        className="absolute px-3 py-1 text-xs font-bold text-white rounded-full top-4 right-4"
+                        style={{ backgroundColor: ACCENT_COLOR }}
+                      >
                         Urgent Need
                       </div>
                     )}
                   </div>
                   <div className="p-6">
-                    <h3 className="mb-2 text-xl font-bold text-gray-900">{school.name}</h3>
+                    <h3 className="mb-2 text-xl font-bold text-gray-900">
+                      {school.name || school.schoolName}
+                    </h3>
                     <div className="flex items-center mb-4 text-gray-600">
                       <MapPinIcon className="w-4 h-4 mr-1" />
                       <span className="text-sm">{school.location}</span>
                     </div>
                     <div className="mb-4">
-                      <p className="mb-2 text-sm font-medium text-gray-700">Needs:</p>
+                      <p className="mb-2 text-sm font-medium text-gray-700">
+                        Needs:
+                      </p>
                       <div className="flex flex-wrap gap-2">
-                        {school.needs.map((need: string, i: number) => (
-                          <span key={i} className="px-2 py-1 text-xs rounded-full" style={{ backgroundColor: '#f0f9ff', color: PRIMARY_COLOR }}>
-                            {need}
-                          </span>
-                        ))}
+                        <span
+                          className="px-2 py-1 text-xs rounded-full"
+                          style={{
+                            backgroundColor: '#f0f9ff',
+                            color: PRIMARY_COLOR,
+                          }}
+                        >
+                          {school.needs && school.needs.length > 0 ? school.needs[0] : school.areasOfNeed}
+                        </span>
                       </div>
                     </div>
-                    <Link href={`/csr/school/${school.id}`} className="flex items-center justify-center w-full py-2 font-medium text-white rounded-lg cursor-pointer" style={{ backgroundColor: PRIMARY_COLOR }}>
+                    <Link
+                      href={`/csr/school/${school.id}`}
+                      className="flex items-center justify-center w-full py-2 font-medium text-white transition-opacity rounded-full cursor-pointer hover:opacity-90"
+                      style={{ backgroundColor: PRIMARY_COLOR }}
+                    >
                       View Full Profile
                       <ArrowRightIcon className="w-4 h-4 ml-2" />
                     </Link>
@@ -269,10 +314,18 @@ const CSRPage = () => {
       {/* CTA Section, Featured Schools, Why Join, and Footer remain unchanged */}
 
       <Footer />
-      <RegisterSchoolModal isOpen={isSchoolModalOpen} onClose={() => setIsSchoolModalOpen(false)} />
-      <RegisterCompanyModal isOpen={isCompanyModalOpen} onClose={() => setIsCompanyModalOpen(false)} />
+      <RegisterSchoolModal
+        isOpen={isSchoolModalOpen}
+        onClose={() => setIsSchoolModalOpen(false)}
+      />
+      <RegisterCompanyModal
+        isOpen={isCompanyModalOpen}
+        onClose={() => setIsCompanyModalOpen(false)}
+      />
     </div>
   );
 };
 
 export default CSRPage;
+
+

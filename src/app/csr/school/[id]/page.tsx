@@ -35,12 +35,33 @@ const SchoolProfilePage = () => {
   useEffect(() => {
     const fetchSchool = async () => {
       try {
-        const response = await fetch('/api/schools');
-        const data = await response.json();
-        const foundSchool = data.schools.find((s: any) => s.id.toString() === schoolId);
-        setSchool(foundSchool);
+        // First try to get individual school by ID
+        const response = await fetch(`https://csr-njere.smathub.com/api/schools/${schoolId}`);
+        if (response.ok) {
+          const data = await response.json();
+          setSchool(data);
+        } else {
+          // If individual endpoint fails, fetch all schools and find by ID
+          const allSchoolsResponse = await fetch('https://csr-njere.smathub.com/api/schools');
+          if (allSchoolsResponse.ok) {
+            const allData = await allSchoolsResponse.json();
+            const foundSchool = allData.data?.find((s: any) => s.id.toString() === schoolId);
+            setSchool(foundSchool);
+          }
+        }
       } catch (error) {
         console.error('Error fetching school:', error);
+        // Try fallback to all schools endpoint
+        try {
+          const fallbackResponse = await fetch('https://csr-njere.smathub.com/api/schools');
+          if (fallbackResponse.ok) {
+            const fallbackData = await fallbackResponse.json();
+            const foundSchool = fallbackData.data?.find((s: any) => s.id.toString() === schoolId);
+            setSchool(foundSchool);
+          }
+        } catch (fallbackError) {
+          console.error('Fallback fetch also failed:', fallbackError);
+        }
       } finally {
         setLoading(false);
       }
@@ -159,30 +180,49 @@ const SchoolProfilePage = () => {
                 Areas of Need
               </h2>
               <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-                {school.needs.map((need: string, index: number) => (
-                  <div key={index} className="flex items-start p-4 rounded-lg bg-gray-50">
+                {school.needs && school.needs.length > 0 ? (
+                  school.needs.map((need: string, index: number) => (
+                    <div key={index} className="flex items-start p-4 rounded-lg bg-gray-50">
+                      <div
+                        className="flex items-center justify-center flex-shrink-0 w-10 h-10 mr-4 text-white rounded-full"
+                        style={{ backgroundColor: ACCENT_COLOR }}
+                      >
+                        {need.includes('ICT') || need.includes('Computer') ? (
+                          <ComputerDesktopIcon className="w-5 h-5" />
+                        ) : need.includes('Textbook') || need.includes('Stationery') ? (
+                          <BookOpenIcon className="w-5 h-5" />
+                        ) : need.includes('Infrastructure') ? (
+                          <BuildingOfficeIcon className="w-5 h-5" />
+                        ) : need.includes('Fees') ? (
+                          <CurrencyDollarIcon className="w-5 h-5" />
+                        ) : (
+                          <AcademicCapIcon className="w-5 h-5" />
+                        )}
+                      </div>
+                      <div>
+                        <h3 className="mb-1 font-semibold text-gray-900">{need}</h3>
+                        <p className="text-gray-600">Support needed for {need.toLowerCase()}</p>
+                      </div>
+                    </div>
+                  ))
+                ) : school.areasOfNeed ? (
+                  <div className="flex items-start p-4 rounded-lg bg-gray-50">
                     <div
                       className="flex items-center justify-center flex-shrink-0 w-10 h-10 mr-4 text-white rounded-full"
                       style={{ backgroundColor: ACCENT_COLOR }}
                     >
-                      {need.includes('ICT') || need.includes('Computer') ? (
-                        <ComputerDesktopIcon className="w-5 h-5" />
-                      ) : need.includes('Textbook') || need.includes('Stationery') ? (
-                        <BookOpenIcon className="w-5 h-5" />
-                      ) : need.includes('Infrastructure') ? (
-                        <BuildingOfficeIcon className="w-5 h-5" />
-                      ) : need.includes('Fees') ? (
-                        <CurrencyDollarIcon className="w-5 h-5" />
-                      ) : (
-                        <AcademicCapIcon className="w-5 h-5" />
-                      )}
+                      <AcademicCapIcon className="w-5 h-5" />
                     </div>
                     <div>
-                      <h3 className="mb-1 font-semibold text-gray-900">{need}</h3>
-                      <p className="text-gray-600">Support needed for {need.toLowerCase()}</p>
+                      <h3 className="mb-1 font-semibold text-gray-900">{school.areasOfNeed}</h3>
+                      <p className="text-gray-600">Support needed for {school.areasOfNeed.toLowerCase()}</p>
                     </div>
                   </div>
-                ))}
+                ) : (
+                  <div className="py-8 text-center text-gray-500">
+                    <p>No specific areas of need listed for this school.</p>
+                  </div>
+                )}
               </div>
             </motion.div>
           </div>
@@ -230,7 +270,7 @@ const SchoolProfilePage = () => {
                 </p>
                 <div className="flex justify-center">
                   <button
-                    className="flex items-center px-8 py-3 font-bold text-white transition-all rounded-lg cursor-pointer hover:opacity-90"
+                    className="flex items-center px-8 py-3 font-bold text-white transition-all rounded-full cursor-pointer hover:opacity-90"
                     style={{ backgroundColor: PRIMARY_COLOR }}
                     onClick={() => setShowDonationModal(true)}
                   >
@@ -352,7 +392,7 @@ const SchoolProfilePage = () => {
               </div>
               <button
                 type="submit"
-                className="w-full py-3 font-bold text-white rounded-lg cursor-pointer"
+                className="w-full py-3 font-bold text-white rounded-full cursor-pointer"
                 style={{ backgroundColor: PRIMARY_COLOR }}
               >
                 Proceed to Payment

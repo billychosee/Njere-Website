@@ -17,6 +17,7 @@
     "@react-google-maps/api": "^2.20.7",
     "@supabase/supabase-js": "^2.75.0",
     "@u-wave/react-vimeo": "^0.9.12",
+    "axios": "^1.12.2",
     "framer-motion": "^12.23.12",
     "js-cookie": "^3.0.5",
     "lucide-react": "^0.515.0",

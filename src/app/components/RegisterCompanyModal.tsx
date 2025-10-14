@@ -423,7 +423,7 @@ const RegisterCompanyModal: React.FC<RegisterCompanyModalProps> = ({ isOpen, onC
                 <div className="pt-4">
                   <button
                     type="submit"
-                    className="w-full py-3 font-bold text-white transition-all rounded-lg cursor-pointer hover:opacity-90"
+                    className="w-full py-3 font-bold text-white transition-all rounded-full cursor-pointer hover:opacity-90"
                     style={{ backgroundColor: ACCENT_COLOR }}
                   >
                     Join CSR Connect
