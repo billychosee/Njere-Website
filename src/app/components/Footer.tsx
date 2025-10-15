@@ -1,14 +1,13 @@
 "use client";
 
 import { useState } from 'react';
-import { FiPhone, FiMail, FiMapPin } from 'react-icons/fi';
 import { FaLinkedinIn, FaFacebookF, FaInstagram } from 'react-icons/fa';
 
 function Footer() {
   const [formData, setFormData] = useState({ email: '', message: '' });
   const [statusMessage, setStatusMessage] = useState('');
   const [isError, setIsError] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // State for mobile chat toggle
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -22,9 +21,7 @@ function Footer() {
     setIsError(false);
 
     try {
-      const headers = {
-        authtoken: '',
-      };
+      const headers = { authtoken: '' };
 
       const bodyFormData = new FormData();
       bodyFormData.append('source', 'smatechgroup_website');
@@ -53,35 +50,29 @@ function Footer() {
     }
   };
 
-  // Define colors
-  const FOOTER_BG = '#00204f'; 
+  // Colors
+  const FOOTER_BG = '#00204f';
   const FOOTER_TEXT = 'text-gray-400';
   const FOOTER_HEADING = 'text-white';
   const FOOTER_BORDER = 'border-gray-700';
-  // Define new button colors as requested
   const BUTTON_BG = '#0296AD';
-  const BUTTON_HOVER_BG = '#00204f';
-
 
   return (
     <div className={`relative w-full bg-[${FOOTER_BG}] ${FOOTER_TEXT}`}>
-      {/* Main content container */}
+      {/* Main container */}
       <div className="mx-auto w-full max-w-[1400px] px-5 py-16 md:px-24 md:py-20">
-        <div className="flex flex-col items-center text-center">
-          <div className="grid w-full max-w-6xl grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-5 lg:gap-8">
-            {/* Column 1: Logo and Introductory Text */}
-            <div className="flex flex-col items-center col-span-1 text-center lg:col-span-2">
+        <div className="grid grid-cols-1 gap-12 text-center sm:grid-cols-2 lg:grid-cols-5 lg:gap-8 md:text-left">
+          
+          {/* Column 1 */}
+          <div className="flex flex-col items-center col-span-1 md:items-start lg:col-span-2">
             <div className="mb-6">
               <a href="/">
-                {/* *** LOGO CHANGE APPLIED HERE ***
-                  Using an <img> tag for the 'njere-white-logo.svg'
-                */}
                 <img
                   src="/njere-white-logo.svg"
                   alt="NJERE School ERP Logo"
                   width={150}
                   height={30}
-                  className="h-auto"
+                  className="h-auto mx-auto md:mx-0"
                 />
               </a>
             </div>
@@ -90,19 +81,18 @@ function Footer() {
               Register today and/or schedule a live demo and discover how{' '}
               <strong>Njere</strong> can transform your educational institution.
             </p>
-            {/* Social Icons */}
-            <div className="flex items-center gap-3 mt-5">
+            <div className="flex items-center justify-center gap-3 mt-5 md:justify-start">
               {/* Facebook */}
               <a
                 href="https://www.facebook.com/profile.php?id=61553934834650"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Facebook"
-                className={`p-2 border border-gray-400 rounded-full hover:border-white transition-colors duration-300`}
+                className="p-2 transition-colors duration-300 border border-gray-400 rounded-full hover:border-white"
               >
                 <FaFacebookF
                   size={16}
-                  className={`text-gray-400 hover:text-white transition-colors duration-300`}
+                  className="text-gray-400 transition-colors duration-300 hover:text-white"
                 />
               </a>
               {/* Instagram */}
@@ -111,11 +101,11 @@ function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
-                className={`p-2 border border-gray-400 rounded-full hover:border-white transition-colors duration-300`}
+                className="p-2 transition-colors duration-300 border border-gray-400 rounded-full hover:border-white"
               >
                 <FaInstagram
                   size={16}
-                  className={`text-gray-400 hover:text-white transition-colors duration-300`}
+                  className="text-gray-400 transition-colors duration-300 hover:text-white"
                 />
               </a>
               {/* LinkedIn */}
@@ -124,35 +114,31 @@ function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
-                className={`p-2 border border-gray-400 rounded-full hover:border-white transition-colors duration-300`}
+                className="p-2 transition-colors duration-300 border border-gray-400 rounded-full hover:border-white"
               >
                 <FaLinkedinIn
                   size={16}
-                  className={`text-gray-400 hover:text-white transition-colors duration-300`}
+                  className="text-gray-400 transition-colors duration-300 hover:text-white"
                 />
               </a>
             </div>
-            </div>
           </div>
 
-          {/* Column 2: Quick Links */}
-          <div className="flex flex-col items-center col-span-1 text-center lg:col-span-1">
+          {/* Column 2 */}
+          <div className="flex flex-col items-center col-span-1 md:items-start lg:col-span-1">
             <h2 className={`mb-6 text-base font-bold ${FOOTER_HEADING}`}>
               Quick Links
             </h2>
             <ul className="space-y-4 text-sm">
               <li>
-                <a
-                  href="/about-us"
-                  className={`hover:${FOOTER_HEADING} transition-colors duration-300`}
-                >
+                <a href="/about-us" className="transition-colors duration-300 hover:text-white">
                   About us
                 </a>
               </li>
               <li>
                 <a
                   href="https://erp.smatechgroup.com/recruitment/recruitment_portal"
-                  className={`hover:${FOOTER_HEADING} transition-colors duration-300`}
+                  className="transition-colors duration-300 hover:text-white"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -160,70 +146,52 @@ function Footer() {
                 </a>
               </li>
               <li>
-                <a
-                  href="/news"
-                  className={`hover:${FOOTER_HEADING} transition-colors duration-300`}
-                >
+                <a href="/news" className="transition-colors duration-300 hover:text-white">
                   News & Articles
                 </a>
               </li>
               <li>
-                <a
-                  href="/services"
-                  className={`hover:${FOOTER_HEADING} transition-colors duration-300`}
-                >
+                <a href="/services" className="transition-colors duration-300 hover:text-white">
                   Services
                 </a>
               </li>
             </ul>
           </div>
 
-          {/* Column 3: Useful Links */}
-          <div className="flex flex-col items-center col-span-1 text-center lg:col-span-1">
+          {/* Column 3 */}
+          <div className="flex flex-col items-center col-span-1 md:items-start lg:col-span-1">
             <h2 className={`mb-6 text-base font-bold ${FOOTER_HEADING}`}>
               Useful Links
             </h2>
             <ul className="space-y-4 text-sm">
               <li>
-                <a
-                  href="/contact-us"
-                  className={`hover:${FOOTER_HEADING} transition-colors duration-300`}
-                >
+                <a href="/contact-us" className="transition-colors duration-300 hover:text-white">
                   Contact Us
                 </a>
               </li>
               <li>
-                <a
-                  href="/faq"
-                  className={`hover:${FOOTER_HEADING} transition-colors duration-300`}
-                >
+                <a href="/faq" className="transition-colors duration-300 hover:text-white">
                   FAQ
                 </a>
               </li>
             </ul>
           </div>
 
-          {/* Column 4: Call to Action (Adjusted with correct hover style) */}
-          <div className="flex flex-col items-center col-span-1 text-center lg:col-span-1">
+          {/* Column 4 */}
+          <div className="flex flex-col items-center col-span-1 md:items-start lg:col-span-1">
             <h2 className={`mb-6 text-sm ${FOOTER_HEADING}`}>
-              Is your school ready for the future ?
+              Is your school ready for the future?
             </h2>
             <a
               href="#"
-              // Default styling
-              style={{
-                backgroundColor: BUTTON_BG,
-                borderColor: BUTTON_BG,
-              }}
-              className={`w-full text-center text-white px-8 py-3 rounded-full font-bold text-sm transition-all duration-300 border-2`}
-              // Hover styling (white border, transparent background, white text/border)
+              style={{ backgroundColor: BUTTON_BG, borderColor: BUTTON_BG }}
+              className="w-full text-center text-white px-8 py-3 rounded-full font-bold text-sm transition-all duration-300 border-2 max-w-[220px]"
               onMouseOver={(e) => {
                 e.currentTarget.style.backgroundColor = 'transparent';
                 e.currentTarget.style.borderColor = 'white';
                 e.currentTarget.style.color = 'white';
               }}
               onMouseOut={(e) => {
-                // Restore default styling
                 e.currentTarget.style.backgroundColor = BUTTON_BG;
                 e.currentTarget.style.borderColor = BUTTON_BG;
                 e.currentTarget.style.color = 'white';
@@ -234,45 +202,30 @@ function Footer() {
           </div>
         </div>
 
-        {/* Footer Bottom (Copyright and Policy Links) */}
-        <div
-          className={`mt-16 pt-6 text-xs ${FOOTER_TEXT} border-t ${FOOTER_BORDER} flex flex-col items-center text-center`}
-        >
-          {/* Copyright */}
-          <p className="mb-4">
-            Copyright © {new Date().getFullYear()} Smatech Group. All rights
-            reserved.
+        {/* Footer bottom */}
+        <div className={`mt-16 pt-6 text-xs ${FOOTER_TEXT} border-t ${FOOTER_BORDER} flex flex-col md:flex-row justify-center md:justify-between items-center gap-4`}>
+          <p className="text-center">
+            Copyright © {new Date().getFullYear()} Smatech Group. All rights reserved.
           </p>
-          {/* Policy Links */}
           <div className="flex flex-wrap justify-center gap-6">
-            <a
-              href="/privacy-policy"
-              className={`hover:${FOOTER_HEADING} transition-colors duration-300 uppercase`}
-            >
+            <a href="/privacy-policy" className="uppercase transition-colors duration-300 hover:text-white">
               Privacy Policy
             </a>
-            <a
-              href="/support"
-              className={`hover:${FOOTER_HEADING} transition-colors duration-300 uppercase`}
-            >
+            <a href="/support" className="uppercase transition-colors duration-300 hover:text-white">
               Support
             </a>
-            <a
-              href="/terms-and-conditions"
-              className={`hover:${FOOTER_HEADING} transition-colors duration-300 uppercase`}
-            >
+            <a href="/terms-and-conditions" className="uppercase transition-colors duration-300 hover:text-white">
               Terms & Conditions
             </a>
           </div>
         </div>
       </div>
 
-      {/* Floating WhatsApp Chat Button */}
+      {/* Floating WhatsApp Button */}
       <div
         className="fixed z-50 flex items-center cursor-pointer bottom-6 right-6 group"
         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
       >
-        {/* Chat Text Bubble: Hidden by default on PC, shown on hover/mobile click */}
         <div
           className={`px-5 py-3 text-sm font-medium text-black bg-white rounded-full shadow-lg whitespace-nowrap transition-opacity duration-300 absolute right-12 top-1/2 transform -translate-y-1/2
             ${isMobileMenuOpen ? 'block opacity-100' : 'hidden opacity-0'}
@@ -282,18 +235,13 @@ function Footer() {
           Need Help? Chat with us
         </div>
 
-        {/* WhatsApp Icon/Button */}
         <a
           href="https://wa.me/+263789566428"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Chat on WhatsApp"
-          className={`rounded-full p-3 shadow-lg transition-all duration-300 w-14 h-14 flex items-center justify-center 
-            bg-[#25D366] 
-            group-hover:bg-transparent group-hover:border-2 group-hover:border-white
-          `}
+          className="rounded-full p-3 shadow-lg transition-all duration-300 w-14 h-14 flex items-center justify-center bg-[#25D366] group-hover:bg-transparent group-hover:border-2 group-hover:border-white"
         >
-          {/* Icon SVG - remains white */}
           <svg
             width="32"
             height="32"
