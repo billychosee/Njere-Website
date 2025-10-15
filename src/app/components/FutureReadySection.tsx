@@ -10,11 +10,11 @@ const HeroCTASection = () => {
       </div>
 
       <div className="relative mx-auto max-w-7xl">
-        <div className="grid items-center gap-12 lg:grid-cols-2">
-          {/* Left Content */}
-          <div className="text-white">
+        <div className="flex flex-col items-center text-center">
+          {/* Content */}
+          <div className="max-w-4xl text-white">
             {/* Decorative Wave */}
-            <div className="mb-6">
+            <div className="flex justify-center mb-6">
               <svg width="80" height="25" viewBox="0 0 80 25" className="">
                 <path
                   d="M 0 12 Q 6 0, 12 12 T 24 12 T 36 12 T 48 12 T 60 12 T 72 12 T 84 12"
@@ -27,14 +27,14 @@ const HeroCTASection = () => {
             </div>
 
             {/* Heading */}
-            <h1 className="mb-6 text-4xl font-bold leading-tight md:text-5xl lg:text-4xl">
+            <h1 className="mb-6 text-4xl font-bold leading-tight md:text-5xl lg:text-6xl">
               Is your school ready
               <br />
               for the future?
             </h1>
 
             {/* Subheading */}
-            <p className="mb-8 text-lg text-gray-300 md:text-lg">
+            <p className="mb-8 text-lg text-gray-300 md:text-xl">
               Register for a free demo of our innovative school ERP.
             </p>
 
@@ -45,8 +45,8 @@ const HeroCTASection = () => {
             </button>
           </div>
 
-          {/* Right Image Grid */}
-          <div className="relative">
+          {/* Image Grid */}
+          <div className="relative mt-12">
             {/* Main Circle Container */}
             <div className="relative w-full max-w-lg mx-auto aspect-square">
               {/* Center Circle Connector */}

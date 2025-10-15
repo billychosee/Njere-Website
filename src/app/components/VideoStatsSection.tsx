@@ -1,12 +1,60 @@
-import React from 'react';
-import { Play } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Play, X } from 'lucide-react';
 
 const VideoStatsSection = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [animatedStats, setAnimatedStats] = useState([0, 0, 0]);
+  const statsRef = useRef<HTMLDivElement>(null);
+  const [hasAnimated, setHasAnimated] = useState(false);
+
   const stats = [
-    { number: '5K+', label: 'Active Students' },
-    { number: '25+', label: 'Schools' },
-    { number: '20+', label: 'Modules' },
+    { number: 5000, label: 'Active Students' },
+    { number: 25, label: 'Schools' },
+    { number: 20, label: 'Modules' },
   ];
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !hasAnimated) {
+          setHasAnimated(true);
+          stats.forEach((stat, index) => {
+            let start = 0;
+            const end = stat.number;
+            const duration = 2000; // 2 seconds
+            const increment = end / (duration / 16); // 60fps
+
+            const timer = setInterval(() => {
+              start += increment;
+              if (start >= end) {
+                start = end;
+                clearInterval(timer);
+              }
+              setAnimatedStats(prev => {
+                const newStats = [...prev];
+                newStats[index] = Math.floor(start);
+                return newStats;
+              });
+            }, 16);
+          });
+        }
+      },
+      { threshold: 0.5 }
+    );
+
+    if (statsRef.current) {
+      observer.observe(statsRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [hasAnimated]);
+
+  const formatNumber = (num: number) => {
+    if (num >= 1000) {
+      return (num / 1000).toFixed(0) + 'K+';
+    }
+    return num + '+';
+  };
 
   return (
     <section className="relative overflow-hidden bg-gradient-to-br from-[#0a2540] via-[#0d2d4f] to-[#1a3a5c] py-16 px-4">
@@ -22,16 +70,19 @@ const VideoStatsSection = () => {
           {/* Video Card */}
           <div className="relative group">
             <div className="relative overflow-hidden bg-gray-200 shadow-2xl rounded-3xl aspect-video">
-              {/* Placeholder for video/image */}
+              {/* Video Thumbnail */}
               <img
-                src="/api/placeholder/600/400"
+                src="https://vumbnail.com/1125449864.jpg"
                 alt="Video thumbnail"
                 className="object-cover w-full h-full"
               />
 
               {/* Play Button Overlay */}
               <div className="absolute inset-0 flex items-center justify-center">
-                <button className="flex items-center justify-center w-24 h-24 transition-all duration-300 rounded-full shadow-2xl bg-cyan-500 hover:bg-cyan-600 hover:scale-110 group">
+                <button
+                  onClick={() => setIsModalOpen(true)}
+                  className="flex items-center justify-center w-24 h-24 transition-all duration-300 rounded-full shadow-2xl bg-cyan-500 hover:bg-cyan-600 hover:scale-110 group"
+                >
                   <Play className="w-10 h-10 ml-1 text-white fill-white" />
                 </button>
               </div>
@@ -74,7 +125,7 @@ const VideoStatsSection = () => {
         </div>
 
         {/* Bottom Section - Statistics Floating Along Wave */}
-        <div className="relative mt-12">
+        <div ref={statsRef} className="relative mt-12">
           {/* Wave Line */}
           <svg
             className="absolute top-0 left-0 w-full h-16"
@@ -89,16 +140,16 @@ const VideoStatsSection = () => {
           </svg>
 
           {/* Floating Stats Cards */}
-          <div className="relative z-10 flex justify-between max-w-5xl mx-auto -mt-8">
+          <div className="relative z-10 flex flex-wrap justify-center max-w-5xl gap-4 mx-auto -mt-8 md:flex-nowrap md:justify-between">
             {stats.map((stat, index) => (
               <div
                 key={index}
-                className="relative w-40 p-8 text-center transition-transform duration-300 transform shadow-lg bg-white/20 backdrop-blur-md rounded-2xl hover:-translate-y-3"
+                className="relative w-32 p-6 text-center transition-transform duration-300 transform shadow-lg bg-white/20 backdrop-blur-md rounded-2xl hover:-translate-y-3 md:w-40 md:p-8"
               >
-                <div className="text-4xl font-bold text-white md:text-5xl lg:text-6xl">
-                  {stat.number}
+                <div className="text-3xl font-bold text-white md:text-4xl lg:text-5xl xl:text-6xl">
+                  {formatNumber(animatedStats[index])}
                 </div>
-                <div className="text-lg font-medium text-cyan-400 md:text-xl">
+                <div className="text-sm font-medium text-cyan-400 md:text-lg xl:text-xl">
                   {stat.label}
                 </div>
               </div>
@@ -106,8 +157,36 @@ const VideoStatsSection = () => {
           </div>
         </div>
       </div>
+
+      {/* Video Modal */}
+      {isModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75" onClick={() => setIsModalOpen(false)}>
+          <div className="relative w-full max-w-6xl mx-4 bg-white rounded-lg shadow-2xl" onClick={(e) => e.stopPropagation()}>
+            <button
+              onClick={() => setIsModalOpen(false)}
+              className="absolute z-10 p-2 text-white transition-all bg-black bg-opacity-50 rounded-full top-4 right-4 hover:bg-opacity-75"
+            >
+              <X className="w-6 h-6" />
+            </button>
+            <div className="relative w-full aspect-video">
+              <iframe
+                title="vimeo-player"
+                src="https://player.vimeo.com/video/1125449864?h=a8e8cd83f7"
+                width="100%"
+                height="100%"
+                frameBorder="0"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+                allowFullScreen
+                className="rounded-lg"
+              ></iframe>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };
 
 export default VideoStatsSection;
+

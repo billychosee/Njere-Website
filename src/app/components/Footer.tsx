@@ -67,9 +67,10 @@ function Footer() {
     <div className={`relative w-full bg-[${FOOTER_BG}] ${FOOTER_TEXT}`}>
       {/* Main content container */}
       <div className="mx-auto w-full max-w-[1400px] px-5 py-16 md:px-24 md:py-20">
-        <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-5 lg:gap-8">
-          {/* Column 1: Logo and Introductory Text */}
-          <div className="flex flex-col items-start col-span-1 lg:col-span-2">
+        <div className="flex flex-col items-center text-center">
+          <div className="grid w-full max-w-6xl grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-5 lg:gap-8">
+            {/* Column 1: Logo and Introductory Text */}
+            <div className="flex flex-col items-center col-span-1 text-center lg:col-span-2">
             <div className="mb-6">
               <a href="/">
                 {/* *** LOGO CHANGE APPLIED HERE ***
@@ -131,10 +132,11 @@ function Footer() {
                 />
               </a>
             </div>
+            </div>
           </div>
 
           {/* Column 2: Quick Links */}
-          <div className="flex flex-col items-start col-span-1 lg:col-span-1">
+          <div className="flex flex-col items-center col-span-1 text-center lg:col-span-1">
             <h2 className={`mb-6 text-base font-bold ${FOOTER_HEADING}`}>
               Quick Links
             </h2>
@@ -177,7 +179,7 @@ function Footer() {
           </div>
 
           {/* Column 3: Useful Links */}
-          <div className="flex flex-col items-start col-span-1 lg:col-span-1">
+          <div className="flex flex-col items-center col-span-1 text-center lg:col-span-1">
             <h2 className={`mb-6 text-base font-bold ${FOOTER_HEADING}`}>
               Useful Links
             </h2>
@@ -202,7 +204,7 @@ function Footer() {
           </div>
 
           {/* Column 4: Call to Action (Adjusted with correct hover style) */}
-          <div className="flex flex-col items-start col-span-1 lg:col-span-1">
+          <div className="flex flex-col items-center col-span-1 text-center lg:col-span-1">
             <h2 className={`mb-6 text-sm ${FOOTER_HEADING}`}>
               Is your school ready for the future ?
             </h2>
@@ -234,15 +236,15 @@ function Footer() {
 
         {/* Footer Bottom (Copyright and Policy Links) */}
         <div
-          className={`mt-16 pt-6 text-xs ${FOOTER_TEXT} border-t ${FOOTER_BORDER} md:flex md:justify-between md:items-center`}
+          className={`mt-16 pt-6 text-xs ${FOOTER_TEXT} border-t ${FOOTER_BORDER} flex flex-col items-center text-center`}
         >
           {/* Copyright */}
-          <p className="mb-4 text-center md:mb-0 md:text-left">
+          <p className="mb-4">
             Copyright © {new Date().getFullYear()} Smatech Group. All rights
             reserved.
           </p>
           {/* Policy Links */}
-          <div className="flex flex-wrap justify-center gap-6 md:justify-end">
+          <div className="flex flex-wrap justify-center gap-6">
             <a
               href="/privacy-policy"
               className={`hover:${FOOTER_HEADING} transition-colors duration-300 uppercase`}

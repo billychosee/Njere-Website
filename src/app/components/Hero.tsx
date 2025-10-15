@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
+import { motion, useInView, useAnimation } from 'framer-motion';
 import { FaLinkedin, FaInstagram, FaTwitter } from 'react-icons/fa';
 
 // Scenario images for floating cards
@@ -43,6 +44,38 @@ const socialIcons = [
 ];
 
 const HeroNjereCSRConnect: React.FC = () => {
+  const controls = useAnimation();
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+
+  useEffect(() => {
+    if (isInView) {
+      controls.start('visible');
+    }
+  }, [controls, isInView]);
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.3,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+      },
+    },
+  };
+
   const staggeredCardLayout = [
     {
       top: '10%',
@@ -103,48 +136,60 @@ const HeroNjereCSRConnect: React.FC = () => {
   ];
 
   return (
-    <section className="relative flex flex-col justify-start min-h-screen pt-20 pb-12 overflow-hidden text-gray-900 md:pt-24 lg:pt-32">
+    <motion.section
+      ref={ref}
+      className="relative flex flex-col justify-start min-h-screen pt-20 pb-12 overflow-hidden text-gray-900 md:pt-24 lg:pt-32"
+      variants={containerVariants}
+      initial="hidden"
+      animate={controls}
+    >
       {/* Background Gradient */}
       <div className="absolute inset-0 z-0 bg-gradient-to-br from-white via-white to-gray-50 opacity-90"></div>
 
       {/* Main Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center flex-grow w-full max-w-4xl px-4 mx-auto text-center">
+      <motion.div
+        className="relative z-10 flex flex-col items-center justify-center flex-grow w-full max-w-4xl px-4 mx-auto text-center"
+        variants={itemVariants}
+      >
         {/* Logo */}
-        <div className="mb-8 w-20 h-20 flex items-center justify-center bg-[#0296ad2c] text-white rounded-2xl shadow-xl transform transition-transform duration-300 hover:scale-110 p-2 opacity-0 animate-fade-in-up">
+        <motion.div
+          className="mb-8 w-20 h-20 flex items-center justify-center bg-[#0296ad2c] text-white rounded-2xl shadow-xl transform transition-transform duration-300 hover:scale-110 p-2"
+          variants={itemVariants}
+        >
           <img
             src="/njere-n-logo.png"
             alt="Njere N Logo"
             className="object-contain w-full h-full"
           />
-        </div>
+        </motion.div>
 
         {/* Headline - UPDATED for "School Management" in black and "Software" in gradient */}
-        <h1
-          className="mb-4 text-4xl font-extrabold leading-tight text-gray-900 opacity-0 sm:text-5xl md:text-6xl lg:text-4xl animate-fade-in-up"
-          style={{ animationDelay: '0.2s' }}
+        <motion.h1
+          className="mb-4 text-4xl font-extrabold leading-tight text-gray-900 sm:text-5xl md:text-6xl lg:text-4xl"
+          variants={itemVariants}
         >
           School Management
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0296AD] to-blue-600">
             {' '}
             Software
           </span>
-        </h1>
+        </motion.h1>
 
         {/* Subheading (Kept from previous update) */}
-        <p
-          className="mb-8 text-lg leading-relaxed text-gray-600 opacity-0 sm:text-xl md:text-xl animate-fade-in-up"
-          style={{ animationDelay: '0.4s' }}
+        <motion.p
+          className="mb-8 text-lg leading-relaxed text-gray-600 sm:text-xl md:text-xl"
+          variants={itemVariants}
         >
           Our school management software provides end-to-end monitoring
           capabilities, granting parents, administrators, and teachers a
-          comprehensive view of students’ academic and social activities at
+          comprehensive view of students' academic and social activities at
           school.
-        </p>
+        </motion.p>
 
         {/* Call to Action Button - Single CTA "Register Today" (Kept) */}
-        <div
-          className="flex flex-col items-center justify-center gap-4 mb-8 opacity-0 sm:flex-row animate-fade-in-up"
-          style={{ animationDelay: '0.6s' }}
+        <motion.div
+          className="flex flex-col items-center justify-center gap-4 mb-8 sm:flex-row"
+          variants={itemVariants}
         >
           <a
             href="/register-today"
@@ -152,12 +197,12 @@ const HeroNjereCSRConnect: React.FC = () => {
           >
             Register Today
           </a>
-        </div>
+        </motion.div>
 
         {/* Trusted Users (KEPT) */}
-        <div
-          className="flex items-center justify-center mb-6 opacity-0 animate-fade-in-up"
-          style={{ animationDelay: '0.8s' }}
+        <motion.div
+          className="flex items-center justify-center mb-6"
+          variants={itemVariants}
         >
           <div className="flex mr-3 -space-x-2 overflow-hidden">
             <img
@@ -177,12 +222,12 @@ const HeroNjereCSRConnect: React.FC = () => {
             />
           </div>
           <span className="font-medium text-gray-700">4M+ trusted users</span>
-        </div>
+        </motion.div>
 
         {/* Social Media (KEPT) */}
-        <div
-          className="flex items-center justify-center mt-12 space-x-6 opacity-0 animate-fade-in-up"
-          style={{ animationDelay: '1s' }}
+        <motion.div
+          className="flex items-center justify-center mt-12 space-x-6"
+          variants={itemVariants}
         >
           {socialIcons.map((social) => (
             <a
@@ -195,21 +240,27 @@ const HeroNjereCSRConnect: React.FC = () => {
               <social.icon className="w-8 h-8" />
             </a>
           ))}
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
       {/* Floating Cards (KEPT) */}
       {staggeredCardLayout.map((card, index) => (
-        <div
+        <motion.div
           key={index}
-          className={`absolute z-0 ${card.size} shadow-2xl rounded-2xl overflow-hidden transition-all duration-500 hover:scale-105 opacity-90 hidden lg:block animate-fade-in-up animate-${card.animation}`}
+          className={`absolute z-0 ${card.size} shadow-2xl rounded-2xl overflow-hidden transition-all duration-500 hover:scale-105 opacity-90 hidden lg:block`}
           style={{
             top: card.top,
             bottom: card.bottom,
             left: card.left,
             right: card.right,
             transform: `rotate(${card.rotation}deg)`,
-            animationDelay: `${1.5 + index * 0.2}s`,
+          }}
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{
+            duration: 0.6,
+            delay: 1.5 + index * 0.2,
+            ease: 'easeOut',
           }}
         >
           <img
@@ -217,14 +268,34 @@ const HeroNjereCSRConnect: React.FC = () => {
             alt={`Scenario Screenshot ${index + 1}: a demonstration of the Njere system`}
             className="object-cover w-full h-full"
           />
-        </div>
+        </motion.div>
       ))}
 
       {/* Decorative Elements (KEPT) */}
-      <div className="absolute hidden w-16 h-16 bg-blue-100 rounded-full top-12 left-1/4 opacity-70 animate-pulse lg:block"></div>
-      <div className="absolute hidden w-12 h-12 bg-purple-100 top-16 right-1/4 opacity-70 animate-pulse lg:block"></div>
-      <div className="absolute hidden bg-teal-100 rounded-full w-14 h-14 bottom-20 left-1/3 opacity-60 animate-pulse lg:block"></div>
-      <div className="absolute hidden w-10 h-10 bg-pink-100 rounded-full bottom-1/4 right-1/3 opacity-65 animate-pulse lg:block"></div>
+      <motion.div
+        className="absolute hidden w-16 h-16 bg-blue-100 rounded-full top-12 left-1/4 opacity-70 lg:block"
+        initial={{ opacity: 0, scale: 0 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.8, delay: 2.5 }}
+      ></motion.div>
+      <motion.div
+        className="absolute hidden w-12 h-12 bg-purple-100 top-16 right-1/4 opacity-70 lg:block"
+        initial={{ opacity: 0, scale: 0 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.8, delay: 2.7 }}
+      ></motion.div>
+      <motion.div
+        className="absolute hidden bg-teal-100 rounded-full w-14 h-14 bottom-20 left-1/3 opacity-60 lg:block"
+        initial={{ opacity: 0, scale: 0 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.8, delay: 2.9 }}
+      ></motion.div>
+      <motion.div
+        className="absolute hidden w-10 h-10 bg-pink-100 rounded-full bottom-1/4 right-1/3 opacity-65 lg:block"
+        initial={{ opacity: 0, scale: 0 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.8, delay: 3.1 }}
+      ></motion.div>
 
       <style jsx>{`
         @keyframes fade-in-up {
@@ -289,8 +360,9 @@ const HeroNjereCSRConnect: React.FC = () => {
           animation: float-card-four 5.5s ease-in-out infinite;
         }
       `}</style>
-    </section>
+    </motion.section>
   );
 };
 
 export default HeroNjereCSRConnect;
+

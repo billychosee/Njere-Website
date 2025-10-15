@@ -4,9 +4,9 @@ const IntegratedSyllabusAI: React.FC = () => {
   return (
     <section className="py-16 bg-white md:py-24">
       <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-        <div className="flex flex-col items-stretch gap-16 md:flex-row">
-          {/* Left Column: Image with Floating Elements */}
-          <div className="relative flex items-center justify-center w-full md:w-1/2">
+        <div className="flex flex-col items-center text-center">
+          {/* Image with Floating Elements */}
+          <div className="relative flex items-center justify-center w-full max-w-md mb-12">
             <img
               src="/black-girl.png"
               alt="Njere Integrated Syllabus Management and AI Generator"
@@ -22,10 +22,9 @@ const IntegratedSyllabusAI: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Column: Text Content */}
-          {/* Right Column: Text Content */}
-          <div className="flex flex-col justify-center w-full space-y-4 text-left md:w-1/2 md:pl-8 md:pr-4">
-            <p className="flex items-center mb-2 text-sm font-semibold tracking-widest text-[#0296AD] uppercase">
+          {/* Text Content */}
+          <div className="flex flex-col items-center w-full max-w-4xl space-y-4 text-center">
+            <p className="flex items-center justify-center mb-2 text-sm font-semibold tracking-widest text-[#0296AD] uppercase">
               <span className="inline-block w-2 h-2 mr-2 bg-[#0296AD] rounded-full"></span>
               Smart Syllabus Tools
             </p>
@@ -35,7 +34,7 @@ const IntegratedSyllabusAI: React.FC = () => {
                 AI Generator
               </span>
             </h2>
-            <p className="max-w-full text-base text-gray-600">
+            <p className="max-w-3xl text-base text-gray-600">
               Njere integrates with educational boards to provide a{' '}
               <strong className="text-gray-800">
                 fast and efficient syllabus management module
@@ -43,12 +42,12 @@ const IntegratedSyllabusAI: React.FC = () => {
               . Use AI to quickly generate lesson plans, scheme books, and
               assessments.
             </p>
-            <p className="max-w-full text-base text-gray-600">
+            <p className="max-w-3xl text-base text-gray-600">
               Teachers can save time on repetitive tasks, focus more on
               interactive learning, and leverage automated analytics to track
               student progress.
             </p>
-            <ul className="max-w-full space-y-2 text-left">
+            <ul className="max-w-3xl space-y-2 text-center">
               {[
                 'Syllabus Learning Activities',
                 'Lesson Plan & Scheme Book Generation',
@@ -57,10 +56,10 @@ const IntegratedSyllabusAI: React.FC = () => {
               ].map((item, index) => (
                 <li
                   key={index}
-                  className="flex items-start text-base text-gray-700"
+                  className="flex items-center justify-center text-base text-gray-700"
                 >
                   <svg
-                    className="flex-shrink-0 w-5 h-5 mt-1 mr-2 text-green-500"
+                    className="flex-shrink-0 w-5 h-5 mr-2 text-green-500"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"

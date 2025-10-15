@@ -40,36 +40,8 @@ const CSRPage = () => {
         setSchools(data || []);
       } catch (error) {
         console.error('Error fetching schools:', error);
-        // Fallback sample data
-        setSchools([
-          {
-            id: 1,
-            name: 'Sunrise Primary School',
-            location: 'Johannesburg, Gauteng',
-            level: 'Primary',
-            needs: ['ICT Equipment', 'Textbooks'],
-            image: '/black-girl.png',
-            urgent: true,
-          },
-          {
-            id: 2,
-            name: 'Mthatha High School',
-            location: 'Mthatha, Eastern Cape',
-            level: 'Secondary',
-            needs: ['Infrastructure', 'Stationery'],
-            image: '/black-girl.png',
-            urgent: false,
-          },
-          {
-            id: 3,
-            name: 'Rural Hope Academy',
-            location: 'Polokwane, Limpopo',
-            level: 'Primary',
-            needs: ['Fees Support', 'Computer Lab'],
-            image: '/black-girl.png',
-            urgent: true,
-          },
-        ]);
+        // No fallback data - show empty state
+        setSchools([]);
       } finally {
         setLoading(false);
       }
