@@ -47,7 +47,7 @@ const downloadFeatures = [
 ];
 
 const downloadStats = [
-  { number: '500K+', label: 'Downloads Worldwide' },
+  { number: '50K+', label: 'Downloads Worldwide' },
   { number: '4.8', label: 'App Store Rating' },
   { number: '99.9%', label: 'Uptime Guarantee' },
   { number: '24/7', label: 'Download Support' }
@@ -97,7 +97,7 @@ const DownloadPage = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              Access our comprehensive suite of educational tools across all platforms with secure, fast downloads.
+              A centralized hub where students can access and download educational content uploaded by teachers and administrators. School heads can manage and remove irrelevant materials to maintain quality and relevance.
             </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 20 }}

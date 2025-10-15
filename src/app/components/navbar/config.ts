@@ -82,6 +82,12 @@ export const NAV_ITEMS = [
     iconClass: 'text-current',
   },
   {
+    label: 'DIARY',
+    href: '/diary',
+    icon: FiMail,
+    iconClass: 'text-current',
+  },
+  {
     label: 'CONTACT',
     href: '/contact-us',
     icon: FiMail,

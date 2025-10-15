@@ -6,19 +6,19 @@ const DownloadAppSection: React.FC = () => {
   return (
     <section className="py-16 bg-white md:py-24">
       <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-        <div className="flex flex-col items-center justify-center gap-12">
+        <div className="flex flex-col items-center justify-center gap-12 lg:flex-row lg:justify-between lg:gap-16">
           {/* Mobile App Mockup */}
-          <div className="flex items-center justify-center w-full">
+          <div className="flex items-center justify-center w-full lg:w-1/2">
             {/* Assuming '/mobile-app-screenshot.png' is the path to your mobile screenshot image */}
             <img
               src="/mobile-app-mockup.png"
               alt="Njere Mobile App Mockup"
-              className="w-full max-w-md h-auto object-cover rounded-lg transition-transform duration-500 ease-in-out hover:scale-[1.02]"
+              className="w-full max-w-md h-auto object-cover rounded-lg transition-transform duration-500 ease-in-out hover:scale-[1.02] mx-auto lg:mx-0"
             />
           </div>
 
           {/* Download App Text and Buttons */}
-          <div className="w-full text-center">
+          <div className="w-full text-center lg:w-1/2 lg:text-left">
             <h2 className="mb-4 text-3xl font-extrabold leading-tight text-gray-900 md:text-4xl lg:text-5xl">
               Download Our App
             </h2>
@@ -28,7 +28,7 @@ const DownloadAppSection: React.FC = () => {
             </p>
 
             {/* App Store Buttons */}
-            <div className="flex flex-col items-center space-y-3">
+            <div className="flex flex-col items-center space-y-3 lg:items-start lg:space-y-4">
               {/* Google Play Store Button */}
               <a
                 href="https://play.google.com/store/search?q=njere+app&c=apps&hl=en"
@@ -59,7 +59,7 @@ const DownloadAppSection: React.FC = () => {
 
               {/* Huawei AppGallery Button */}
               <a
-                href="https://appgallery.huawei.com"
+                href="https://appgallery.huawei.com/search/njere?1760524775750"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-block w-full max-w-[180px] sm:max-w-[200px] transition-transform duration-300 ease-in-out hover:scale-105"
@@ -79,4 +79,5 @@ const DownloadAppSection: React.FC = () => {
 };
 
 export default DownloadAppSection;
+
 

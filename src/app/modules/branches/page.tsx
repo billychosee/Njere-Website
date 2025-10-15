@@ -28,12 +28,6 @@ const branchesFeatures = [
     benefits: ['Unified Dashboard', 'Branch Analytics', 'Resource Allocation']
   },
   {
-    title: 'Location Tracking',
-    description: 'GPS-based location management with route optimization and attendance tracking.',
-    icon: MapPinIcon,
-    benefits: ['GPS Integration', 'Route Planning', 'Location Analytics']
-  },
-  {
     title: 'Inter-Branch Communication',
     description: 'Seamless communication and data sharing between different branch locations.',
     icon: UserGroupIcon,
@@ -98,7 +92,7 @@ const BranchesPage = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              Comprehensive management system for schools with multiple branches, enabling seamless coordination, resource sharing, and unified administration.
+              Manage multiple school branches within the system. For example, if you have a group of schools, you can easily switch between and view data for Njere Bulawayo or Njere Harare branches.
             </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 20 }}

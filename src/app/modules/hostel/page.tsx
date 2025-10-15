@@ -283,53 +283,6 @@ const HostelPage = () => {
         </div>
       </section>
 
-      {/* Amenities Showcase */}
-      <section className="py-20 bg-white">
-        <div className="container px-4 mx-auto md:px-6">
-          <div className="max-w-6xl mx-auto">
-            <motion.div
-              className="mb-16 text-center"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
-            >
-              <h2
-                className="mb-4 text-3xl font-bold text-gray-900"
-                style={{ color: PRIMARY_COLOR }}
-              >
-                Hostel Amenities
-              </h2>
-              <p className="text-lg text-gray-600">
-                Modern facilities designed for student comfort and safety
-              </p>
-            </motion.div>
-
-            <div className="grid grid-cols-2 gap-6 md:grid-cols-6">
-              {[
-                { amenity: 'WiFi', emoji: '📶' },
-                { amenity: 'Security', emoji: '🔒' },
-                { amenity: 'Laundry', emoji: '👕' },
-                { amenity: 'Kitchen', emoji: '🍳' },
-                { amenity: 'Study Area', emoji: '📚' },
-                { amenity: 'Recreation', emoji: '⚽' }
-              ].map((item, index) => (
-                <motion.div
-                  key={item.amenity}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  className="flex flex-col items-center p-4 transition-all duration-300 border border-gray-100 rounded-lg bg-gradient-to-br from-blue-50 to-teal-50 hover:shadow-lg"
-                >
-                  <div className="mb-2 text-3xl">{item.emoji}</div>
-                  <h3 className="text-sm font-bold text-center text-gray-900">{item.amenity}</h3>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* CTA Section */}
       <section

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { NAV_ITEMS, ICONS } from './config';
 import type { NavItem, DropdownItem } from './types';
@@ -63,6 +63,11 @@ export default function DesktopNav() {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const pathname = usePathname() || '';
 
+  // Close dropdown when pathname changes (page navigation)
+  useEffect(() => {
+    setActiveDropdown(null);
+  }, [pathname]);
+
   const getIsActive = (item: NavItem) => {
     if (!hasDropdown(item)) {
       return pathname === item.href;
@@ -94,10 +99,7 @@ export default function DesktopNav() {
       <div
         className={`fixed left-0 right-0 top-20 ${activeDropdown === item.href ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 -translate-y-4 pointer-events-none'} group-hover:opacity-100 group-hover:scale-100 group-hover:translate-y-0 group-hover:pointer-events-auto bg-gradient-to-br from-white/95 via-white/98 to-gray-50/95 backdrop-blur-3xl shadow-2xl rounded-b-3xl text-black font-normal z-50 p-10 transition-all duration-500 ease-out border-b-2 border-l-0 border-r-0 border-t-0 border-white/60 mt-3`}
         onMouseEnter={() => setActiveDropdown(item.href)}
-        onMouseLeave={() => {
-          // Delay hiding to allow moving mouse to dropdown items
-          setTimeout(() => setActiveDropdown(null), 300);
-        }}
+        onMouseLeave={() => setActiveDropdown(null)}
       >
         <div className="relative">
           <div className="grid grid-cols-6 gap-6">
@@ -105,6 +107,7 @@ export default function DesktopNav() {
               <Link
                 key={subItem.href}
                 href={subItem.href}
+                onClick={() => setActiveDropdown(null)}
                 className="group relative overflow-hidden px-6 py-5 text-sm font-bold text-gray-800 transition-all duration-500 hover:text-white hover:bg-gradient-to-br hover:from-[#04baab] hover:via-[#03a8a0] hover:to-[#00204f] rounded-2xl text-center transform hover:scale-105 hover:shadow-2xl hover:-translate-y-3 border-2 border-transparent hover:border-white/30 backdrop-blur-sm"
                 style={{
                   animationDelay: `${index * 25}ms`,

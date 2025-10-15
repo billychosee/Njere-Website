@@ -214,8 +214,8 @@ const AttendancePage = () => {
               >
                 <div className="relative h-96">
                   <Image
-                    src="/black-girl.png"
-                    alt="Student using biometric attendance system"
+                    src="/biometric-banner.jpg"
+                    alt="Njere biometric attendance devices and systems"
                     fill
                     style={{ objectFit: 'cover' }}
                     className="rounded-2xl"
@@ -224,6 +224,12 @@ const AttendancePage = () => {
                     className="absolute inset-0 rounded-2xl"
                     style={{ backgroundColor: `${ACCENT_COLOR}20` }}
                   ></div>
+                  <div className="absolute bottom-4 left-4 right-4">
+                    <h3 className="mb-2 text-lg font-bold text-white">Our Devices</h3>
+                    <p className="text-sm text-white/90">
+                      Advanced biometric scanners, RFID readers, and mobile check-in systems for comprehensive attendance tracking.
+                    </p>
+                  </div>
                 </div>
               </motion.div>
             </div>

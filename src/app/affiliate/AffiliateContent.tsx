@@ -28,9 +28,10 @@ const AffiliateContent = () => {
   const [earnings, setEarnings] = useState(0);
 
   const packages = {
-    basic: { price: 50, name: 'Basic Package' },
-    standard: { price: 100, name: 'Standard Package' },
-    premium: { price: 150, name: 'Premium Package' }
+    basic: { price: 2, name: 'Basic Package' },
+    standard: { price: 5, name: 'Standard Package' },
+    premium: { price: 10, name: 'Premium Package' },
+    enterprise: { price: 15, name: 'Enterprise Package' }
   };
 
   const calculateEarnings = (pkg: string, students: string) => {
@@ -383,9 +384,10 @@ const AffiliateContent = () => {
                     className="w-full px-4 py-3 text-gray-900 bg-white border border-gray-400 rounded-lg focus:ring-2 focus:outline-none focus:border-blue-500"
                   >
                     <option value="">Select Package</option>
-                    <option value="basic">Basic Package - $50/student</option>
-                    <option value="standard">Standard Package - $100/student</option>
-                    <option value="premium">Premium Package - $150/student</option>
+                    <option value="basic">Basic Package - $2 / student / term</option>
+                    <option value="standard">Standard Package - $5 / student / term</option>
+                    <option value="premium">Premium Package - $10 / student / term</option>
+                    <option value="enterprise">Enterprise Package - $15 / student / term</option>
                   </select>
                 </div>
 

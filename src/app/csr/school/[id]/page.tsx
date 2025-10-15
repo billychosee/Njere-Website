@@ -353,7 +353,7 @@ const SchoolProfilePage = () => {
                 <XMarkIcon className="w-6 h-6" />
               </button>
             </div>
-            <form onSubmit={(e) => { e.preventDefault(); alert('Donation feature coming soon!'); }}>
+            <form onSubmit={(e) => { e.preventDefault(); alert('Thank you for your donation request! We will verify your donation and communicate with both you and the school. You will receive an email notification once the process is approved.'); }}>
               <div className="mb-4">
                 <label className="block mb-2 text-sm font-medium text-gray-900">Donation Amount (ZAR)</label>
                 <input
@@ -395,7 +395,7 @@ const SchoolProfilePage = () => {
                 className="w-full py-3 font-bold text-white rounded-full cursor-pointer"
                 style={{ backgroundColor: PRIMARY_COLOR }}
               >
-                Proceed to Payment
+                Book a Donation
               </button>
             </form>
           </div>

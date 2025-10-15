@@ -98,7 +98,7 @@ const CommunicationPage = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              Seamless communication between schools, teachers, students, and parents with multi-channel messaging and automated notifications.
+              Seamless communication between schools, teachers, students, and parents with multi-channel messaging and automated notifications. Chat with anyone on the platform for instant collaboration and support.
             </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 20 }}

@@ -221,7 +221,7 @@ const HeroNjereCSRConnect: React.FC = () => {
               alt="User Avatar 3"
             />
           </div>
-          <span className="font-medium text-gray-700">4M+ trusted users</span>
+          <span className="font-medium text-gray-700">100,000+ trusted users</span>
         </motion.div>
 
         {/* Social Media (KEPT) */}

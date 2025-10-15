@@ -4,9 +4,9 @@ const IntegratedSyllabusAI: React.FC = () => {
   return (
     <section className="py-16 bg-white md:py-24">
       <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-        <div className="flex flex-col items-center text-center">
+        <div className="flex flex-col items-center gap-12 md:flex-row">
           {/* Image with Floating Elements */}
-          <div className="relative flex items-center justify-center w-full max-w-md mb-12">
+          <div className="relative flex items-center justify-center w-full max-w-md md:w-1/2">
             <img
               src="/black-girl.png"
               alt="Njere Integrated Syllabus Management and AI Generator"
@@ -23,7 +23,7 @@ const IntegratedSyllabusAI: React.FC = () => {
           </div>
 
           {/* Text Content */}
-          <div className="flex flex-col items-center w-full max-w-4xl space-y-4 text-center">
+          <div className="flex flex-col items-center w-full max-w-4xl space-y-4 text-center md:w-1/2 md:text-left md:items-start">
             <p className="flex items-center justify-center mb-2 text-sm font-semibold tracking-widest text-[#0296AD] uppercase">
               <span className="inline-block w-2 h-2 mr-2 bg-[#0296AD] rounded-full"></span>
               Smart Syllabus Tools
@@ -47,7 +47,7 @@ const IntegratedSyllabusAI: React.FC = () => {
               interactive learning, and leverage automated analytics to track
               student progress.
             </p>
-            <ul className="max-w-3xl space-y-2 text-center">
+            <ul className="max-w-3xl space-y-2 text-center md:text-left">
               {[
                 'Syllabus Learning Activities',
                 'Lesson Plan & Scheme Book Generation',
@@ -56,7 +56,7 @@ const IntegratedSyllabusAI: React.FC = () => {
               ].map((item, index) => (
                 <li
                   key={index}
-                  className="flex items-center justify-center text-base text-gray-700"
+                  className="flex items-center justify-center text-base text-gray-700 md:justify-start"
                 >
                   <svg
                     className="flex-shrink-0 w-5 h-5 mr-2 text-green-500"
@@ -75,7 +75,7 @@ const IntegratedSyllabusAI: React.FC = () => {
                 </li>
               ))}
             </ul>
-            <div>
+            <div className="flex justify-center md:justify-start">
               <button className="px-6 py-3 bg-[#0296AD] text-white font-bold rounded-full shadow-lg hover:bg-gray-700 transition duration-300 ease-in-out transform hover:-translate-y-1 cursor-pointer">
                 Learn More
               </button>

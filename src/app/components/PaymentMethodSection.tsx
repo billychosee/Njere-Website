@@ -26,7 +26,9 @@ const PaymentMethodSection = () => {
           <h2 className="text-4xl font-extrabold tracking-tight md:text-4xl">
   Effortless Payments, Anywhere, Anytime
 </h2>
-
+          <p className="mt-4 text-lg text-gray-200">
+            Our integrated payment gateway ensures secure, seamless transactions for school fees, fines, and other financial operations. With support for multiple payment methods including mobile money, cards, and bank transfers, Njere makes it easy for parents and administrators to handle payments from anywhere in the world.
+          </p>
         </div>
 
         {/* *** IMAGE INSIDE A WHITE CARD *** */}
