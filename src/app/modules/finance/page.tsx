@@ -214,7 +214,7 @@ const FinancePage = () => {
               >
                 <div className="relative h-96">
                   <Image
-                    src="/black-girl.png"
+                    src="/finance-module.png"
                     alt="Financial management and payment processing"
                     fill
                     style={{ objectFit: 'cover' }}

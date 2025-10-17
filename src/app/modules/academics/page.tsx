@@ -214,7 +214,7 @@ const AcademicsPage = () => {
               >
                 <div className="relative h-96">
                   <Image
-                    src="/black-girl.png"
+                    src="/academics-module.png"
                     alt="Student learning with digital tools"
                     fill
                     style={{ objectFit: 'cover' }}

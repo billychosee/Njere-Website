@@ -305,7 +305,7 @@ const LibraryPage = () => {
               >
                 <div className="relative h-96">
                   <Image
-                    src="/black-girl.png"
+                    src="/library-module.png"
                     alt="Student using digital library resources"
                     fill
                     style={{ objectFit: 'cover' }}

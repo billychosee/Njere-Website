@@ -303,7 +303,7 @@ const CertificatePage = () => {
               >
                 <div className="relative h-96">
                   <Image
-                    src="/black-girl.png"
+                    src="/certificate-module.png"
                     alt="Certificate management and verification"
                     fill
                     style={{ objectFit: 'cover' }}

@@ -304,7 +304,7 @@ const CommunicationPage = () => {
               >
                 <div className="relative h-96">
                   <Image
-                    src="/black-girl.png"
+                    src="/communication-module.png"
                     alt="School communication and parent engagement"
                     fill
                     style={{ objectFit: 'cover' }}

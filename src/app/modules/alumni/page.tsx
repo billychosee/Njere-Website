@@ -319,7 +319,7 @@ const AlumniPage = () => {
               >
                 <div className="relative h-96">
                   <Image
-                    src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&h=400&fit=crop"
+                    src="/alumni-module.png"
                     alt="Alumni community and networking"
                     fill
                     style={{ objectFit: 'cover' }}
