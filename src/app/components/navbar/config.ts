@@ -52,7 +52,7 @@ export const NAV_ITEMS = [
         { label: 'Assessment', href: '/modules/assessment' },
         { label: 'Reports', href: '/modules/reports' },
         { label: 'Students', href: '/modules/students' },
-        { label: 'Syllabus', href: '/modules/syllabus' },
+        { label: 'AI Syllabus', href: '/modules/syllabus' },
         { label: 'Transport', href: '/modules/transport' },
       ],
     },

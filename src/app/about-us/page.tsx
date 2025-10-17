@@ -84,9 +84,9 @@ const ServicesPage = () => {
           {/* Font size md:text-3xl consistent with About page */}
           <div className="container relative z-10 px-6 mx-auto text-center pt-36">
             <h1 className="mb-4 text-2xl font-bold leading-tight md:text-3xl">
-              Our Services
+              About Us
             </h1>
-            <p className="text-lg font-medium opacity-90">IT Solutions & Expert Consulting for Education</p>
+            <p className="text-lg font-medium opacity-90">Empowering Education Through Innovation</p>
           </div>
         </section>
 
@@ -113,33 +113,33 @@ const ServicesPage = () => {
             </div>
             {/* Font size sm:text-base consistent with About page */}
             <p className="max-w-4xl mx-auto mb-10 text-sm md:text-base text-center text-[#00204f] leading-relaxed">
-              Njere offers a complete suite of technology services designed to support and accelerate digital transformation in schools. From strategic **IT consulting** and the **supply of cutting-edge hardware** to bespoke software integration and **unwavering technical support**, we provide a holistic approach to ensure your institution is equipped to thrive in the modern educational landscape. Our mission is to simplify complex operations and empower educators through reliable technology.
+              Njere is a leading educational technology company dedicated to transforming schools through innovative digital solutions. We specialize in comprehensive school management systems that streamline operations, enhance learning experiences, and empower educators and administrators alike.
             </p>
 
             {/* Stats Grid - Consistent with About page */}
             <div className="grid grid-cols-1 gap-8 py-10 border-t border-b border-gray-200 md:grid-cols-3">
               <div className="p-4 text-center">
                 <p className="mb-2 text-2xl font-bold md:text-2xl" style={{ color: PRIMARY_COLOR }}>
-                  10+
+                  <span className="count-up" data-target="500">0</span>
                 </p>
                 <p className="text-xs md:text-sm" style={{ color: ACCENT_COLOR }}>
-                  Years in Ed-Tech
+                  Schools Served
                 </p>
               </div>
               <div className="p-4 text-center border-l border-r border-gray-200">
                 <p className="mb-2 text-2xl font-bold md:text-2xl" style={{ color: PRIMARY_COLOR }}>
-                  100%
+                  <span className="count-up" data-target="10000">0</span>
                 </p>
                 <p className="text-xs md:text-sm" style={{ color: ACCENT_COLOR }}>
-                  Success Rate
+                  Students Impacted
                 </p>
               </div>
               <div className="p-4 text-center">
                 <p className="mb-2 text-2xl font-bold md:text-2xl" style={{ color: PRIMARY_COLOR }}>
-                  24/7
+                  <span className="count-up" data-target="99">0</span>%
                 </p>
                 <p className="text-xs md:text-sm" style={{ color: ACCENT_COLOR }}>
-                  Expert Support
+                  Satisfaction Rate
                 </p>
               </div>
             </div>
@@ -154,8 +154,8 @@ const ServicesPage = () => {
                 <div className="relative w-full overflow-visible shadow-2xl rounded-2xl">
                   {/* Image/Video Placeholder */}
                   <img
-                    src="/service-consulting-session.jpg" // Different image
-                    alt="An IT consultant presenting to school administrators"
+                    src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=400&fit=crop"
+                    alt="African students in modern classroom"
                     className="object-cover w-full h-96 rounded-2xl"
                   />
                   <div className="absolute bottom-4 left-4 md:bottom-8 md:left-[-80px] z-20">
@@ -238,22 +238,22 @@ const ServicesPage = () => {
               <div className="relative w-full aspect-[4/3] max-w-xl mx-auto lg:mx-0 mt-10 lg:mt-0 order-first lg:order-last">
                 <div className="absolute top-0 left-0 w-[85%] h-[85%] rounded-3xl overflow-hidden shadow-2xl z-10 border-4 border-white">
                   <img
-                    src="/IT-setup-1.jpg" // Image 1
-                    alt="IT professional setting up server equipment"
+                    src="https://images.unsplash.com/photo-1531384441138-2736e62e0919?w=600&h=400&fit=crop"
+                    alt="African students learning with technology"
                     className="object-cover w-full h-full"
                   />
                 </div>
                 <div className="absolute top-[45%] left-[35%] w-[55%] h-[55%] rounded-3xl overflow-hidden shadow-2xl z-20 border-4 border-white">
                   <img
-                    src="/IT-setup-2.jpg" // Image 2
-                    alt="Network diagram on a tablet"
+                    src="https://images.unsplash.com/photo-1588072432836-e10032774350?w=600&h=400&fit=crop"
+                    alt="Black students using digital learning tools"
                     className="object-cover w-full h-full"
                   />
                 </div>
                 <div className="absolute top-[20%] left-[73%] w-[35%] h-[45%] rounded-3xl overflow-hidden shadow-2xl z-30 border-4 border-white">
                   <img
-                    src="/IT-setup-3.jpg" // Image 3
-                    alt="Biometric device in use at a school entrance"
+                    src="https://images.unsplash.com/photo-1588072432836-e10032774350?w=600&h=400&fit=crop"
+                    alt="African educator using digital tools"
                     className="object-cover w-full h-full"
                   />
                 </div>
@@ -346,7 +346,7 @@ const ServicesPage = () => {
         </section>
       </main>
 
-      {/* Tailwind animation keyframes for floating effect */}
+      {/* Tailwind animation keyframes for floating effect and counting */}
       <style jsx>{`
         @keyframes float {
           0%,
@@ -359,9 +359,81 @@ const ServicesPage = () => {
         }
       `}</style>
 
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `
+            document.addEventListener('DOMContentLoaded', function() {
+              const countUpElements = document.querySelectorAll('.count-up');
+
+              const observerOptions = {
+                threshold: 0.5,
+                rootMargin: '0px 0px -50px 0px'
+              };
+
+              const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                  if (entry.isIntersecting) {
+                    const element = entry.target;
+                    const target = parseInt(element.getAttribute('data-target'));
+                    const duration = 2000; // 2 seconds
+                    const step = target / (duration / 16); // 60fps
+                    let current = 0;
+
+                    const timer = setInterval(() => {
+                      current += step;
+                      if (current >= target) {
+                        element.textContent = target.toLocaleString();
+                        clearInterval(timer);
+                      } else {
+                        element.textContent = Math.floor(current).toLocaleString();
+                      }
+                    }, 16);
+
+                    observer.unobserve(element);
+                  }
+                });
+              }, observerOptions);
+
+              countUpElements.forEach(element => {
+                observer.observe(element);
+              });
+            });
+          `,
+        }}
+      />
+
+      {/* CTA Section */}
+      <section className="py-20 bg-gradient-to-br from-blue-50 to-teal-50">
+        <div className="container max-w-4xl px-6 mx-auto text-center">
+          <h2 className="mb-6 text-3xl font-bold md:text-4xl" style={{ color: PRIMARY_COLOR }}>
+            Ready to Transform Your School?
+          </h2>
+          <p className="mb-8 text-lg text-gray-600">
+            Join hundreds of schools already using Njere to streamline operations and enhance learning experiences.
+          </p>
+          <div className="flex flex-col justify-center gap-4 sm:flex-row">
+            <a
+              href="/contact-us"
+              className="px-8 py-4 font-bold text-white transition-all transform rounded-full shadow-lg hover:scale-105"
+              style={{ backgroundColor: ACCENT_COLOR }}
+            >
+              Get Started Today
+            </a>
+            <a
+              href="/csr"
+              className="px-8 py-4 font-bold transition-all border-2 rounded-full hover:bg-gray-50"
+              style={{ color: PRIMARY_COLOR, borderColor: PRIMARY_COLOR }}
+            >
+              Explore CSR Opportunities
+            </a>
+          </div>
+        </div>
+      </section>
+
       <Footer />
     </>
   );
 };
 
 export default ServicesPage;
+

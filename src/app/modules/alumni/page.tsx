@@ -191,9 +191,21 @@ const AlumniPage = () => {
                   <div className="absolute inset-0 transition-opacity duration-300 opacity-0 bg-gradient-to-br group-hover:opacity-5"
                        style={{ background: `linear-gradient(135deg, ${feature.color.split(' ')[0].replace('from-', '')}, ${feature.color.split(' ')[1].replace('to-', '')})` }}></div>
 
-                  <div className="flex items-center mb-4">
-                    <div className={`flex items-center justify-center flex-shrink-0 w-14 h-14 mr-4 text-white rounded-2xl bg-gradient-to-r ${feature.color} shadow-lg`}>
-                      <feature.icon className="w-7 h-7" />
+                  <div className="mb-4">
+                    <div className="w-full h-32 mb-4 overflow-hidden rounded-lg">
+                      <img
+                        src={
+                          feature.title === 'Alumni Directory'
+                            ? 'https://images.unsplash.com/photo-1588072432836-e10032774350?w=400&h=200&fit=crop'
+                            : feature.title === 'Event Management'
+                            ? 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=400&h=200&fit=crop'
+                            : feature.title === 'Donation Tracking'
+                            ? 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&h=200&fit=crop'
+                            : 'https://images.unsplash.com/photo-1577563908411-5077b6dc7624?w=400&h=200&fit=crop'
+                        }
+                        alt={`${feature.title} feature`}
+                        className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
+                      />
                     </div>
                     <h3 className="text-xl font-bold text-gray-900">{feature.title}</h3>
                   </div>
@@ -307,7 +319,7 @@ const AlumniPage = () => {
               >
                 <div className="relative h-96">
                   <Image
-                    src="/black-girl.png"
+                    src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&h=400&fit=crop"
                     alt="Alumni community and networking"
                     fill
                     style={{ objectFit: 'cover' }}

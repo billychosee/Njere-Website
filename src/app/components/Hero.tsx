@@ -163,27 +163,24 @@ const HeroNjereCSRConnect: React.FC = () => {
           />
         </motion.div>
 
-        {/* Headline - UPDATED for "School Management" in black and "Software" in gradient */}
+        {/* Headline - UPDATED for "Educational Technology" in black and "Platform" in gradient */}
         <motion.h1
           className="mb-4 text-4xl font-extrabold leading-tight text-gray-900 sm:text-5xl md:text-6xl lg:text-4xl"
           variants={itemVariants}
         >
-          School Management
+          Educational Technology
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0296AD] to-blue-600">
             {' '}
-            Software
+            Platform
           </span>
         </motion.h1>
 
-        {/* Subheading (Kept from previous update) */}
+        {/* Subheading (Updated for broader educational scope) */}
         <motion.p
           className="mb-8 text-lg leading-relaxed text-gray-600 sm:text-xl md:text-xl"
           variants={itemVariants}
         >
-          Our school management software provides end-to-end monitoring
-          capabilities, granting parents, administrators, and teachers a
-          comprehensive view of students' academic and social activities at
-          school.
+          Our comprehensive educational technology platform serves schools, colleges, universities, and online learning institutions across Africa, providing end-to-end monitoring capabilities for administrators, teachers, students, and parents.
         </motion.p>
 
         {/* Call to Action Button - Single CTA "Register Today" (Kept) */}
@@ -247,7 +244,7 @@ const HeroNjereCSRConnect: React.FC = () => {
       {staggeredCardLayout.map((card, index) => (
         <motion.div
           key={index}
-          className={`absolute z-0 ${card.size} shadow-2xl rounded-2xl overflow-hidden transition-all duration-500 hover:scale-105 opacity-90 hidden lg:block`}
+          className={`absolute z-0 ${card.size} shadow-2xl rounded-2xl overflow-hidden transition-all duration-500 hover:scale-105 opacity-90 hidden lg:block animate-gentle-float`}
           style={{
             top: card.top,
             bottom: card.bottom,
@@ -358,6 +355,25 @@ const HeroNjereCSRConnect: React.FC = () => {
         }
         .animate-float-card-four {
           animation: float-card-four 5.5s ease-in-out infinite;
+        }
+
+        @keyframes gentle-float {
+          0%, 100% {
+            transform: translateY(0px) rotate(0deg);
+          }
+          25% {
+            transform: translateY(-8px) rotate(1deg);
+          }
+          50% {
+            transform: translateY(-4px) rotate(-0.5deg);
+          }
+          75% {
+            transform: translateY(-12px) rotate(0.8deg);
+          }
+        }
+
+        .animate-gentle-float {
+          animation: gentle-float 8s ease-in-out infinite;
         }
       `}</style>
     </motion.section>

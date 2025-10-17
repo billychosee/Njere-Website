@@ -125,10 +125,70 @@ const SyllabusPage = () => {
         </div>
       </section>
 
-      {/* Stats Section */}
+      {/* Supported Syllabuses Section */}
       <section className="py-16 bg-gradient-to-r from-blue-50 to-teal-50">
         <div className="container px-4 mx-auto md:px-6">
-          <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
+          <motion.div
+            className="mb-12 text-center"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+          >
+            <h2
+              className="mb-4 text-3xl font-bold text-gray-900"
+              style={{ color: PRIMARY_COLOR }}
+            >
+              Supported Syllabuses
+            </h2>
+            <p className="text-lg text-gray-600">
+              We support internationally recognized curricula accepted in Zimbabwe and across Africa
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+            {[
+              {
+                name: 'ZIMSEC',
+                description: 'Zimbabwe School Examinations Council curriculum',
+                logo: 'https://images.unsplash.com/photo-1588072432836-e10032774350?w=200&h=100&fit=crop',
+                color: '#1e40af'
+              },
+              {
+                name: 'Cambridge',
+                description: 'Cambridge International curriculum',
+                logo: 'https://images.unsplash.com/photo-1588072432836-e10032774350?w=200&h=100&fit=crop',
+                color: '#dc2626'
+              },
+              {
+                name: 'CAPS',
+                description: 'Curriculum Assessment Policy Statements',
+                logo: 'https://images.unsplash.com/photo-1588072432836-e10032774350?w=200&h=100&fit=crop',
+                color: '#059669'
+              }
+            ].map((syllabus, index) => (
+              <motion.div
+                key={syllabus.name}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="flex flex-col items-center p-8 text-center bg-white rounded-lg shadow-lg"
+              >
+                <div
+                  className="flex items-center justify-center w-16 h-16 mb-4 rounded-lg"
+                  style={{ backgroundColor: syllabus.color + '20' }}
+                >
+                  <BookOpenIcon className="w-8 h-8" style={{ color: syllabus.color }} />
+                </div>
+                <h3 className="mb-2 text-xl font-bold text-gray-900">{syllabus.name}</h3>
+                <p className="text-sm text-gray-600">{syllabus.description}</p>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Stats Section */}
+          <div className="grid grid-cols-2 gap-8 mt-16 md:grid-cols-4">
             {syllabusStats.map((stat, index) => (
               <motion.div
                 key={stat.label}

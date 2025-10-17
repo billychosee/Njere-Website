@@ -114,7 +114,7 @@ const CSRPage = () => {
                 className="px-8 py-4 font-bold text-white transition-all border-2 border-white rounded-full cursor-pointer hover:bg-white hover:text-blue-900"
                 onClick={() => setIsCompanyModalOpen(true)}
               >
-                Register Your Company
+                Book a Donation
               </button>
             </motion.div>
           </div>
@@ -272,7 +272,7 @@ const CSRPage = () => {
                       className="flex items-center justify-center w-full py-2 font-medium text-white transition-opacity rounded-full cursor-pointer hover:opacity-90"
                       style={{ backgroundColor: PRIMARY_COLOR }}
                     >
-                      View Full Profile
+                      View School Profile
                       <ArrowRightIcon className="w-4 h-4 ml-2" />
                     </Link>
                   </div>
@@ -299,5 +299,7 @@ const CSRPage = () => {
 };
 
 export default CSRPage;
+
+
 
 

@@ -13,9 +13,9 @@ const IntegratedSyllabusAI: React.FC = () => {
               className="w-full h-full object-cover rounded-full transition-transform duration-500 ease-in-out hover:scale-[1.02]"
             />
 
-            <div className="absolute w-12 h-12 bg-orange-500 rounded-full top-10 left-10 opacity-60 animate-float-one"></div>
-            <div className="absolute w-16 h-16 border-4 rounded-full bottom-10 right-10 border-cyan-500 opacity-60 animate-float-two"></div>
-            <div className="absolute w-8 h-8 bg-red-400 rounded-full top-1/3 right-5 opacity-60 animate-float-three"></div>
+            <div className="absolute w-12 h-12 bg-orange-500 rounded-full top-10 left-10 opacity-60 animate-bounce"></div>
+            <div className="absolute w-16 h-16 border-4 rounded-full bottom-10 right-10 border-cyan-500 opacity-60 animate-pulse"></div>
+            <div className="absolute w-8 h-8 bg-red-400 rounded-full top-1/3 right-5 opacity-60 animate-ping"></div>
 
             <div className="absolute bottom-[-20px] left-1/2 -translate-x-1/2 transform transition-transform duration-500 ease-in-out hover:scale-110 z-20">
               <img src="/ai_chip_icon.png" alt="AI Chip" className="w-full" />
@@ -35,7 +35,7 @@ const IntegratedSyllabusAI: React.FC = () => {
               </span>
             </h2>
             <p className="max-w-3xl text-base text-gray-600">
-              Njere integrates with educational boards to provide a{' '}
+              Our syllabuses include ZIMSEC, Cambridge, and other internationally recognized curricula accepted in Zimbabwe. Njere integrates with educational boards to provide a{' '}
               <strong className="text-gray-800">
                 fast and efficient syllabus management module
               </strong>
@@ -76,9 +76,9 @@ const IntegratedSyllabusAI: React.FC = () => {
               ))}
             </ul>
             <div className="flex justify-center md:justify-start">
-              <button className="px-6 py-3 bg-[#0296AD] text-white font-bold rounded-full shadow-lg hover:bg-gray-700 transition duration-300 ease-in-out transform hover:-translate-y-1 cursor-pointer">
+              <a href="/modules/syllabus" className="px-6 py-3 bg-[#0296AD] text-white font-bold rounded-full shadow-lg hover:bg-gray-700 transition duration-300 ease-in-out transform hover:-translate-y-1 cursor-pointer">
                 Learn More
-              </button>
+              </a>
             </div>
           </div>
         </div>

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import axios from 'axios';
 import { motion, AnimatePresence } from 'framer-motion';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 
@@ -42,16 +43,46 @@ const RegisterCompanyModal: React.FC<RegisterCompanyModalProps> = ({ isOpen, onC
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.consent) {
       alert('Please consent to sharing your company\'s information.');
       return;
     }
-    // Handle form submission
-    console.log('Form submitted:', formData);
-    // Reset form or show success message
-    onClose();
+
+    try {
+      const response = await axios.post(
+        'https://csr-njere.smathub.com/api/companies',
+        formData,
+        {
+          headers: { 'Content-Type': 'application/json' },
+        },
+      );
+
+      if (response.status >= 200 && response.status < 300) {
+        alert('Company registration successful! We will contact you soon.');
+        setFormData({
+          companyName: '',
+          industry: '',
+          location: '',
+          province: '',
+          contactName: '',
+          position: '',
+          phone: '',
+          email: '',
+          areasOfInterest: '',
+          budget: '',
+          motivation: '',
+          consent: false,
+        });
+        onClose();
+      } else {
+        alert(`Registration failed: Please provide all required information.`);
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      alert('An error occurred. Please try again.');
+    }
   };
 
   return (
@@ -182,33 +213,36 @@ const RegisterCompanyModal: React.FC<RegisterCompanyModalProps> = ({ isOpen, onC
                       <option value="" className="text-gray-900">
                         Select Province
                       </option>
-                      <option value="Eastern Cape" className="text-gray-900">
-                        Eastern Cape
-                      </option>
-                      <option value="Free State" className="text-gray-900">
-                        Free State
-                      </option>
-                      <option value="Gauteng" className="text-gray-900">
-                        Gauteng
-                      </option>
-                      <option value="KwaZulu-Natal" className="text-gray-900">
-                        KwaZulu-Natal
-                      </option>
-                      <option value="Limpopo" className="text-gray-900">
-                        Limpopo
-                      </option>
-                      <option value="Mpumalanga" className="text-gray-900">
-                        Mpumalanga
-                      </option>
-                      <option value="Northern Cape" className="text-gray-900">
-                        Northern Cape
-                      </option>
-                      <option value="North West" className="text-gray-900">
-                        North West
-                      </option>
-                      <option value="Western Cape" className="text-gray-900">
-                        Western Cape
-                      </option>
+                      <option value="Bulawayo" className="text-gray-900">
+                          Bulawayo
+                        </option>
+                        <option value="Harare" className="text-gray-900">
+                          Harare
+                        </option>
+                        <option value="Manicaland" className="text-gray-900">
+                          Manicaland
+                        </option>
+                        <option value="Mashonaland Central" className="text-gray-900">
+                          Mashonaland Central
+                        </option>
+                        <option value="Mashonaland East" className="text-gray-900">
+                          Mashonaland East
+                        </option>
+                        <option value="Mashonaland West" className="text-gray-900">
+                          Mashonaland West
+                        </option>
+                        <option value="Masvingo" className="text-gray-900">
+                          Masvingo
+                        </option>
+                        <option value="Matabeleland North" className="text-gray-900">
+                          Matabeleland North
+                        </option>
+                        <option value="Matabeleland South" className="text-gray-900">
+                          Matabeleland South
+                        </option>
+                        <option value="Midlands" className="text-gray-900">
+                          Midlands
+                        </option>
                     </select>
                   </div>
                 </div>
@@ -361,10 +395,10 @@ const RegisterCompanyModal: React.FC<RegisterCompanyModalProps> = ({ isOpen, onC
                     htmlFor="budget"
                     className="block mb-2 text-sm font-medium text-gray-900"
                   >
-                    Estimated Annual CSR Budget <span className="text-red-500">*</span>
+                    Estimated Annual CSR Budget (USD) <span className="text-red-500">*</span>
                   </label>
                   <input
-                    type="text"
+                    type="number"
                     id="budget"
                     name="budget"
                     value={formData.budget}
@@ -375,7 +409,7 @@ const RegisterCompanyModal: React.FC<RegisterCompanyModalProps> = ({ isOpen, onC
                         '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
                       transition: 'all 0.2s ease-in-out',
                     }}
-                    placeholder="Enter estimated budget"
+                    placeholder="Enter estimated budget in USD"
                     required
                   />
                 </div>
@@ -426,7 +460,7 @@ const RegisterCompanyModal: React.FC<RegisterCompanyModalProps> = ({ isOpen, onC
                     className="w-full py-3 font-bold text-white transition-all rounded-full cursor-pointer hover:opacity-90"
                     style={{ backgroundColor: ACCENT_COLOR }}
                   >
-                    Join CSR Connect
+                    Register Company
                   </button>
                 </div>
               </form>

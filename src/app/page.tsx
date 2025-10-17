@@ -25,25 +25,25 @@ interface Feature {
 }
 
 const EdTechFeatures: Feature[] = [
-  {
-    icon: <FaSchool className="w-6 h-6 text-white" />,
-    title: 'School Management Solutions',
-    description:
-      'We specialize in providing comprehensive school management solutions that facilitate the digitization of educational institutions.',
-  },
-  {
-    icon: <FaCogs className="w-6 h-6 text-white" />,
-    title: 'Customizable ERP Solution',
-    description:
-      'Our aim is to comprehensively transform your school into a digital-led institution through our highly customizable school ERP solution.',
-  },
-  {
-    icon: <FaChalkboardTeacher className="w-6 h-6 text-white" />,
-    title: 'E-Learning & Virtual Classrooms',
-    description:
-      'We provide e-Learning and online virtual classrooms as part of our solution, enhancing the learning experience for students.',
-  },
-];
+   {
+     icon: <FaSchool className="w-6 h-6 text-white" />,
+     title: 'Comprehensive Learning Platform',
+     description:
+       'A unified platform serving schools, colleges, universities, and online learning institutions across Africa with integrated management solutions.',
+   },
+   {
+     icon: <FaCogs className="w-6 h-6 text-white" />,
+     title: 'Multi-User Access System',
+     description:
+       'Empowering administrators, teachers, students, and parents with role-based access to monitor progress, assignments, and academic performance.',
+   },
+   {
+     icon: <FaChalkboardTeacher className="w-6 h-6 text-white" />,
+     title: 'Pan-African Education Network',
+     description:
+       'Connecting educational institutions across Africa with standardized curricula, collaborative tools, and shared resources for enhanced learning.',
+   },
+ ];
 
 // --- New Component for Word-Level Animation ---
 interface AnimatedHeadlineProps {
@@ -183,20 +183,16 @@ const Page = () => {
 
                   {/* HEADLINE REPLACED WITH ANIMATED COMPONENT */}
                   <AnimatedHeadline
-                    text="We Are Digitizing Zimbabwean Schools"
+                    text="Pan-African Learning Management System"
                     className="text-4xl font-extrabold leading-tight text-gray-900 md:text-4xl"
                     delay={0} // Staggered delay handled internally. Starting after the parent slide-in (0.4s)
                     animateNow={isInView} // Pass the state down to control animation
                   />
 
                   <p className="max-w-lg mx-auto mt-2 text-base text-gray-600 md:mx-0">
-                    <strong className="text-[#0296AD]">Njere</strong> is an
-                    educational technology product developed by Smatech Group.
+                    <strong className="text-[#0296AD]">Njere</strong> is a comprehensive educational technology platform developed by Smatech Group.
                     Our mission is to{' '}
-                    <strong>comprehensively transform your school</strong> into
-                    a digital-led institution by providing robust school
-                    management solutions and facilitating the digitization of
-                    educational institutions.
+                    <strong>transform education across Africa</strong> by providing robust learning management solutions for schools, colleges, universities, and online learning institutions. Empowering educators and students with innovative tools for teaching, learning, and administration.
                   </p>
                 </div>
 

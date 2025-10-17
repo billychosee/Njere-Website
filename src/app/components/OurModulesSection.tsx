@@ -79,12 +79,19 @@ const ModulesSection = () => {
 
                 {/* Card Content */}
                 <div className="relative flex flex-col items-center justify-center p-8 transition-all duration-500 bg-white rounded-2xl h-72 group-hover:shadow-2xl group-hover:transform group-hover:-translate-y-2">
-                  <div
-                    className={`icon-wrapper w-28 h-28 ${module.color} rounded-full flex items-center justify-center mb-6 transition-all duration-500 group-hover:bg-gradient-to-br group-hover:from-gray-50 group-hover:to-emerald-100 group-hover:shadow-lg`}
-                  >
-                    <Icon
-                      className={`w-12 h-12 ${module.iconColor} transition-all duration-500 group-hover:text-cyan-500 group-hover:scale-110`}
-                      strokeWidth={1.5}
+                  <div className="w-full h-32 mb-4 overflow-hidden rounded-lg">
+                    <img
+                      src={
+                        module.title === 'Administrative'
+                          ? 'https://images.unsplash.com/photo-1588072432836-e10032774350?w=300&h=200&fit=crop'
+                          : module.title === 'Academics'
+                          ? 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=300&h=200&fit=crop'
+                          : module.title === 'Finance'
+                          ? 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=300&h=200&fit=crop'
+                          : 'https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?w=300&h=200&fit=crop'
+                      }
+                      alt={`${module.title} module`}
+                      className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110"
                     />
                   </div>
                   <h3 className="mb-2 text-xl font-bold text-center text-gray-900 transition-colors duration-300 group-hover:text-cyan-500">

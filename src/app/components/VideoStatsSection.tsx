@@ -8,9 +8,9 @@ const VideoStatsSection = () => {
   const [hasAnimated, setHasAnimated] = useState(false);
 
   const stats = [
-    { number: 5000, label: 'Active Students' },
-    { number: 25, label: 'Schools' },
-    { number: 20, label: 'Modules' },
+    { number: 10000, label: 'Active Students' },
+    { number: 500, label: 'Schools' },
+    { number: 25, label: 'Modules' },
   ];
 
   useEffect(() => {
