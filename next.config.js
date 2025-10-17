@@ -13,6 +13,12 @@ const nextConfig = {
   // Keeping this as you had it
   reactStrictMode: true,
 
+  babel: {
+    presets: [
+      ['next/babel', { 'preset-env': { 'useBuiltIns': 'entry' } }],
+    ],
+  },
+
   // NOTE: If you are not using rewrites, you can remove the commented block below.
   // async rewrites() {
   //   return [
