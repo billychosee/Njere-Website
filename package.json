@@ -38,6 +38,7 @@
   },
   "devDependencies": {
     "@babel/preset-env": "^7.28.3",
+    "@types/js-cookie": "^3.0.6",
     "@types/node": "^20",
     "@types/nodemailer": "^6.4.14",
     "@types/react": "^18",
