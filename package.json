@@ -29,6 +29,7 @@
     "next-sanity": "^11.5.1",
     "nodemailer": "^7.0.9",
     "react": "^18",
+    "react-countup": "^6.5.3",
     "react-dom": "^18",
     "react-icons": "^5.0.1",
     "sanity": "^4.10.3",
