@@ -6,52 +6,35 @@ import { NAV_ITEMS, ICONS } from './config';
 import type { NavItem, DropdownItem } from './types';
 import { usePathname } from 'next/navigation';
 
-// Add custom animations to global CSS
-// const style = document.createElement('style');
-const a = `
+// The CSS keyframes are defined in the provided code as a string 'a'.
+// In a real Next.js/Tailwind setup, these would be in your global CSS file.
+// For this component replica, we'll keep the variable for reference but
+// assume the CSS is globally available for the animations to work.
+const cssKeyframes = `
   @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
   @keyframes pulse-glow {
-    0%, 100% {
-      box-shadow: 0 0 5px rgba(4, 186, 171, 0.3);
-    }
-    50% {
-      box-shadow: 0 0 20px rgba(4, 186, 171, 0.6), 0 0 30px rgba(4, 186, 171, 0.4);
-    }
+    0%, 100% { box-shadow: 0 0 5px rgba(4, 186, 171, 0.3); }
+    50% { box-shadow: 0 0 20px rgba(4, 186, 171, 0.6), 0 0 30px rgba(4, 186, 171, 0.4); }
   }
 
   @keyframes float {
-    0%, 100% {
-      transform: translateY(0px);
-    }
-    50% {
-      transform: translateY(-5px);
-    }
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-5px); }
   }
 
   @keyframes shimmer {
-    0% {
-      transform: translateX(-100%);
-    }
-    100% {
-      transform: translateX(100%);
-    }
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
   }
 
   .animate-shimmer {
     animation: shimmer 2s infinite;
   }
 `;
-// document.head.appendChild(style);
 
 function hasDropdown(
   item: NavItem,
@@ -73,7 +56,8 @@ export default function DesktopNav() {
       return pathname === item.href;
     }
 
-    // Custom logic to handle active state for parent links like INDUSTRIES
+    // Custom logic to handle active state for parent links like INDUSTRIES (if it existed)
+    // and general path matching for other dropdowns.
     if (item.label === 'INDUSTRIES' && pathname.startsWith('/industries')) {
       return true;
     }
@@ -88,13 +72,6 @@ export default function DesktopNav() {
   const renderDropdown = (
     item: NavItem & { dropdown: { items: readonly DropdownItem[] } },
   ) => {
-    // Group items into rows of 6
-    const itemsPerRow = 6;
-    const rows = [];
-    for (let i = 0; i < item.dropdown.items.length; i += itemsPerRow) {
-      rows.push(item.dropdown.items.slice(i, i + itemsPerRow));
-    }
-
     return (
       <div
         className={`fixed left-0 right-0 top-20 ${activeDropdown === item.href ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 -translate-y-4 pointer-events-none'} group-hover:opacity-100 group-hover:scale-100 group-hover:translate-y-0 group-hover:pointer-events-auto bg-gradient-to-br from-white/95 via-white/98 to-gray-50/95 backdrop-blur-3xl shadow-2xl rounded-b-3xl text-black font-normal z-50 p-10 transition-all duration-500 ease-out border-b-2 border-l-0 border-r-0 border-t-0 border-white/60 mt-3`}
@@ -142,7 +119,7 @@ export default function DesktopNav() {
     const isDropdownItem = hasDropdown(item);
     const isDropdownOnly =
       isDropdownItem &&
-      (item.label === 'INDUSTRIES' || item.label === 'PRODUCTS');
+      (item.label === 'INDUSTRIES' || item.label === 'PRODUCTS'); // Note: 'INDUSTRIES' and 'PRODUCTS' are examples not present in your config.ts
     const ChevronIcon = ICONS.chevronDown;
 
     const itemClassName = `relative px-1 py-1 text-sm font-medium transition-colors ${
@@ -157,8 +134,7 @@ export default function DesktopNav() {
         className={`relative ${isDropdownItem ? 'group' : ''}`}
         onMouseEnter={() => isDropdownItem && setActiveDropdown(item.href)}
         onMouseLeave={() => {
-          // Keep dropdown visible when hovering over it
-          // Only hide when mouse leaves both nav item and dropdown
+          // Keep dropdown visible when hovering over it (handled by the dropdown's onMouseLeave)
         }}
       >
         {isDropdownOnly ? (
@@ -210,6 +186,7 @@ export default function DesktopNav() {
         href="/"
         className="absolute hidden transform -translate-x-1/2 left-1/2 lg:block"
       >
+        {/* Changed Image to img tag to match your provided code */}
         <img src="/njere-logo.svg" alt="Logo" className="w-auto h-8" />
       </Link>
 

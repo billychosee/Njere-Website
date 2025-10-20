@@ -131,7 +131,7 @@ const GPSTransportationSection = () => {
             <div className="relative rounded-2xl overflow-hidden shadow-2xl transform transition-all duration-500 hover:scale-[1.02] w-full h-[440px]">
               <div className="absolute inset-0 z-10 bg-gradient-to-r from-blue-600/20 to-cyan-500/20"></div>
               <Image
-                src="/black-girl.png"
+                src="/school_bus_gps_tracking_black_people.png"
                 alt="GPS Transportation Management System Map View"
                 layout="fill"
                 objectFit="cover"
@@ -476,7 +476,7 @@ const OnlinePaymentSection = () => {
             <div className="relative rounded-2xl overflow-hidden shadow-2xl transform transition-all duration-500 hover:scale-[1.02] w-full h-[440px]">
               <div className="absolute inset-0 z-10 bg-gradient-to-r from-blue-600/20 to-cyan-500/20"></div>
               <Image
-                src="/payment-gateway.png"
+                src="/secure_online_fee_payment_black_people.png"
                 alt="Online Fee Payment Gateway"
                 layout="fill"
                 objectFit="cover"
@@ -642,7 +642,7 @@ const BulkSMSSection = () => {
             <div className="relative rounded-2xl overflow-hidden shadow-2xl transform transition-all duration-500 hover:scale-[1.02] w-full h-[440px]">
               <div className="absolute inset-0 z-10 bg-gradient-to-r from-blue-600/20 to-cyan-500/20"></div>
               <Image
-                src="/bulk-sms.png"
+                src="/school_bulk_sms_communication_black_people.png"
                 alt="Bulk SMS Gateway Integration"
                 layout="fill"
                 objectFit="cover"
@@ -886,3 +886,4 @@ export {
   BulkSMSSection,
   UnifiedCTASection,
 };
+

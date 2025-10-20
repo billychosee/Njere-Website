@@ -6,7 +6,38 @@ import Link from 'next/link';
 import Image from 'next/image';
 import DesktopNav from './DesktopNav';
 import MobileNav from './MobileNav';
-import useScrollHide from './hooks/useScrollHide';
+
+// NOTE: I've mocked useScrollHide here since the code for it wasn't provided.
+// In your actual app, this file should exist and be imported correctly.
+function useScrollHide(isMenuOpen: boolean) {
+  const [visible, setVisible] = useState(true);
+
+  useEffect(() => {
+    if (isMenuOpen) {
+      setVisible(true); // Always show navbar when mobile menu is open
+      return;
+    }
+
+    let lastScrollY = window.pageYOffset;
+    const updateScroll = () => {
+      const currentScrollY = window.pageYOffset;
+      if (currentScrollY < 100) {
+        // Always show at the top
+        setVisible(true);
+      } else if (currentScrollY < lastScrollY) {
+        setVisible(true); // Scrolling up
+      } else {
+        setVisible(false); // Scrolling down
+      }
+      lastScrollY = currentScrollY;
+    };
+
+    window.addEventListener('scroll', updateScroll);
+    return () => window.removeEventListener('scroll', updateScroll);
+  }, [isMenuOpen]);
+
+  return visible;
+}
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -14,6 +45,7 @@ export default function Navbar() {
   const navbarVisible = useScrollHide(mobileMenuOpen);
 
   useEffect(() => {
+    // Close mobile menu on route change
     setMobileMenuOpen(false);
   }, [pathname]);
 

@@ -180,7 +180,7 @@ const IntegrationsContent = () => {
                 </button>
               </div>
 
-              <div className="relative flex items-center justify-center w-full lg:w-1/2 min-h-[450px]">
+              <div className="relative flex items-center justify-center w-full lg:w-1/2 min-h-[450px] overflow-hidden">
                 <div className="absolute w-[450px] h-[450px] bg-gray-100 rounded-full"></div>
                 <div className="relative z-20 w-[300px] h-[400px] animate-float">
                   <Image
@@ -247,7 +247,7 @@ const IntegrationsContent = () => {
             background: `linear-gradient(135deg, ${PRIMARY_COLOR} 0%, ${ACCENT_COLOR} 100%)`,
           }}
         >
-          <div className="container relative z-10 px-4 mx-auto md:px-6">
+          <div className="container relative z-10 px-4 mx-auto overflow-hidden md:px-6">
             <h2 className="mb-12 text-3xl font-extrabold text-center text-white md:text-4xl">
               Key Advantages of Automated Biometric Attendance
             </h2>
@@ -261,7 +261,7 @@ const IntegrationsContent = () => {
                 unoptimized
               />
             </div>
-            <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+            <div className="grid grid-cols-1 gap-8 px-4 md:grid-cols-3 md:px-0">
               <GlassyFeatureCard
                 icon={FingerPrintIcon}
                 title="Automate the Attendance Data Collection"
@@ -286,7 +286,7 @@ const IntegrationsContent = () => {
         <section className="py-20 bg-gray-50 animate-on-scroll">
           <div className="container flex flex-col items-center justify-between gap-12 px-6 mx-auto lg:flex-row">
             {/* LEFT COLUMN */}
-            <div className="flex flex-col items-start w-full lg:w-1/2">
+            <div className="flex flex-col items-center w-full lg:w-1/2 lg:items-start">
               {/* Animated Tabs - LEFT ALIGNED */}
               <div
                 className="relative flex p-1 mb-10 rounded-full bg-white/90 border border-[#02ACC3] w-fit"
@@ -385,7 +385,7 @@ const IntegrationsContent = () => {
             </div>
 
             {/* RIGHT IMAGE - FULL WIDTH AND HEIGHT */}
-            <div className="relative w-full lg:w-1/2 h-[400px] lg:h-[600px]">
+            <div className="relative w-full lg:w-1/2 h-[400px] lg:h-[600px] order-first lg:order-last">
               <Image
                 src="/features-benefits.png"
                 alt="Njere Features and Benefits"
@@ -412,3 +412,5 @@ const IntegrationsContent = () => {
 };
 
 export default IntegrationsContent;
+
+

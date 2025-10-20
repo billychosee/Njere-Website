@@ -55,13 +55,13 @@ export default function MobileNav({
       animate={{ height: 'auto', opacity: 1 }}
       exit={{ height: 0, opacity: 0 }}
       transition={{ duration: 0.3, ease: 'easeInOut' }}
-      className="ml-4 mt-1 flex flex-col gap-1 border-l-2 border-[#02ACC3] pl-4 overflow-hidden"
+      className="ml-6 mt-1 flex flex-col gap-1 border-l-2 border-[#02ACC3] pl-4 overflow-hidden"
     >
       {items.map((subItem) => (
         <li key={subItem.href}>
           <Link
             href={subItem.href}
-            className="block px-3 py-2 text-sm text-gray-700 rounded hover:bg-gray-50"
+            className="block py-2.5 px-4 hover:bg-gray-50 rounded hover:text-[#02ACC3] text-sm"
             onClick={onToggle}
           >
             {subItem.label}
@@ -76,12 +76,10 @@ export default function MobileNav({
       {/* Toggle button */}
       <button
         onClick={onToggle}
-        className="relative flex flex-col items-center justify-center w-8 h-8 p-1 text-gray-700 transition-all rounded-md lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="p-2 text-gray-700 md:hidden"
         aria-label="Toggle menu"
       >
-        <span className={`block h-0.5 w-6 bg-current transform transition-all duration-300 origin-center ${isOpen ? 'rotate-45' : '-translate-y-1.5'}`}></span>
-        <span className={`block h-0.5 w-6 bg-current transform transition-all duration-300 origin-center ${isOpen ? 'opacity-0 scale-0' : 'opacity-100'}`}></span>
-        <span className={`block h-0.5 w-6 bg-current transform transition-all duration-300 origin-center ${isOpen ? '-rotate-45' : 'translate-y-1.5'}`}></span>
+        {isOpen ? <ICONS.times size={24} /> : <ICONS.bars size={24} />}
       </button>
 
       <AnimatePresence>
@@ -90,8 +88,8 @@ export default function MobileNav({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 bg-gradient-to-br from-black/70 via-black/60 to-black/50 backdrop-blur-lg lg:hidden"
+            transition={{ duration: 0.25 }}
+            className="fixed inset-0 z-40 bg-white/30 backdrop-blur-md md:hidden"
           >
             <motion.div
               ref={menuRef}
@@ -99,10 +97,10 @@ export default function MobileNav({
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ duration: 0.35, ease: 'easeInOut' }}
-              className="fixed top-0 bottom-0 right-0 z-50 flex flex-col w-4/5 max-w-sm p-6 border-l shadow-2xl bg-white/95 backdrop-blur-xl border-white/20"
+              className="fixed right-0 z-50 flex flex-col w-full max-h-screen px-4 pt-4 pb-10 overflow-y-auto bg-white border-b border-l border-gray-200 shadow-lg scrollbar-thin scrollbar-thumb-gray-300"
             >
               {/* Header */}
-              <div className="flex items-center justify-between pb-4 mb-6 border-b border-gray-200">
+              <div className="flex items-center justify-between pb-4 mb-4 border-b">
                 <Link href="/" onClick={onToggle}>
                   <Image
                     src="/njere-logo.svg"
@@ -121,10 +119,14 @@ export default function MobileNav({
               </div>
 
               {/* Nav Items */}
-              <ul className="flex flex-col flex-1 gap-2 overflow-y-auto font-medium text-gray-800">
+              <ul className="flex flex-col flex-1 gap-1 font-semibold text-black">
                 {NAV_ITEMS.map((item) => {
+                  const Icon = item.icon;
                   const isDropdownItem = hasDropdown(item);
                   const isModulesDropdown = item.label === 'MODULES';
+
+                  // Skip commented out items
+                  if (item.label.startsWith('//')) return null;
 
                   return (
                     <li
@@ -134,10 +136,8 @@ export default function MobileNav({
                       {isModulesDropdown ? (
                         <>
                           <button
-                            className={`flex items-center justify-between w-full py-3 px-4 hover:bg-blue-50 rounded-lg text-sm transition-all duration-200 ${
-                              openDropdown === item.href
-                                ? 'text-[#02ACC3] font-semibold bg-blue-50 shadow-sm'
-                                : 'text-gray-700'
+                            className={`flex items-center justify-between w-full py-3 px-4 hover:bg-gray-50 rounded ${
+                              openDropdown === item.href ? 'text-[#02ACC3]' : ''
                             }`}
                             onClick={() =>
                               setOpenDropdown(
@@ -154,21 +154,21 @@ export default function MobileNav({
                           </button>
 
                           <AnimatePresence>
-                            {openDropdown === item.href && item.dropdown &&
+                            {openDropdown === item.href &&
+                              item.dropdown &&
                               renderDropdownItems(item.dropdown.items)}
                           </AnimatePresence>
                         </>
                       ) : (
                         <Link
                           href={item.href}
-                          className="flex items-center justify-between px-4 py-3 text-sm transition-all duration-200 rounded-lg hover:bg-blue-50"
+                          className="flex items-center py-3 px-4 hover:bg-gray-50 rounded hover:text-[#02ACC3]"
                           onClick={onToggle}
                           target={
                             item.href.startsWith('http') ? '_blank' : undefined
                           }
                         >
                           <span>{item.label}</span>
-                          {isDropdownItem && <ICONS.chevronDown size={16} />}
                         </Link>
                       )}
                     </li>
@@ -196,4 +196,3 @@ export default function MobileNav({
     </>
   );
 }
-

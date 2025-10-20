@@ -9,6 +9,7 @@ import {
   FiX,
   FiChevronDown,
   FiChevronUp,
+  FiTwitter,
 } from 'react-icons/fi';
 
 export const NAV_ITEMS = [
@@ -63,12 +64,12 @@ export const NAV_ITEMS = [
     icon: FiGrid,
     iconClass: 'text-current',
   },
-  {
-    label: 'CAREERS',
-    href: '/',
-    icon: FiUsers,
-    iconClass: 'text-current',
-  },
+  // {
+  //   label: 'CAREERS',
+  //   href: '/',
+  //   icon: FiUsers,
+  //   iconClass: 'text-current',
+  // },
   {
     label: 'CSR',
     href: '/csr',
@@ -101,4 +102,5 @@ export const ICONS = {
   times: FiX,
   chevronDown: FiChevronDown,
   chevronUp: FiChevronUp,
+  twitter: FiTwitter,
 };

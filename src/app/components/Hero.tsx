@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { motion, useInView, useAnimation } from 'framer-motion';
-import { FaLinkedin, FaInstagram, FaTwitter } from 'react-icons/fa';
+import { FaLinkedin, FaInstagram } from 'react-icons/fa';
+import { FiTwitter } from 'react-icons/fi';
 
 // Scenario images for floating cards
 const TEACHER_USING_SOFTWARE = '/teacher-using-software.jpg';
@@ -40,7 +41,7 @@ const socialIcons = [
     icon: FaInstagram,
     link: 'https://www.instagram.com/your-njere-page',
   },
-  { name: 'X', icon: FaTwitter, link: 'https://twitter.com/your-njere-page' },
+  { name: 'X', icon: FiTwitter, link: 'https://twitter.com/your-njere-page' },
 ];
 
 const HeroNjereCSRConnect: React.FC = () => {
