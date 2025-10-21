@@ -39,10 +39,13 @@ const HeroCTASection = () => {
             </p>
 
             {/* CTA Button */}
-            <button className="relative px-10 py-4 overflow-hidden font-semibold tracking-wide text-white uppercase transition-all duration-300 rounded-full group bg-cyan-500 hover:bg-cyan-600 hover:shadow-2xl hover:shadow-cyan-500/50 hover:scale-105">
+            <a
+              href="/contact" // Set the destination URL here
+              className="relative inline-block px-10 py-4 overflow-hidden font-semibold tracking-wide text-white uppercase transition-all duration-300 rounded-full group bg-cyan-500 hover:bg-cyan-600 hover:shadow-2xl hover:shadow-cyan-500/50 hover:scale-105"
+            >
               <span className="relative z-10">Join Us Now</span>
               <div className="absolute inset-0 transition-opacity duration-300 opacity-0 bg-gradient-to-r from-cyan-400 to-teal-500 group-hover:opacity-100"></div>
-            </button>
+            </a>
           </div>
 
           {/* Right Image Grid */}

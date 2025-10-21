@@ -29,9 +29,9 @@ const IntegratedSyllabusAI: React.FC = () => {
               Smart Syllabus Tools
             </p>
             <h2 className="mb-4 text-3xl font-extrabold leading-snug text-gray-900 md:text-4xl">
-              Syllabus <br className="hidden sm:inline" />
+              Syllabus 
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0296AD] to-blue-600">
-                AI
+                 AI
               </span>
             </h2>
             <p className="max-w-3xl text-base text-gray-600">
