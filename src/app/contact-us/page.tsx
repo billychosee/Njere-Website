@@ -3,6 +3,7 @@
 import type { Metadata } from 'next';
 import Script from 'next/script';
 import Footer from '../components/Footer';
+import ContactForm from '../components/ContactForm';
 
 // --- Import the new Map Component
 import ContactMap from '../components/ContactMap';
@@ -47,7 +48,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: pageTitle,
     description: pageDescription,
-    url: `${siteUrl}/contact`,
+    url: `${siteUrl}/contact-us`,
     type: 'website',
   },
 
@@ -60,7 +61,7 @@ export const metadata: Metadata = {
 
   // Canonical Link
   alternates: {
-    canonical: `${siteUrl}/contact`,
+    canonical: `${siteUrl}/contact-us`,
   },
 };
 
@@ -194,61 +195,7 @@ const ContactPage = () => {
 
                 {/* Right Column: Contact Form */}
                 <div className="w-full p-8 bg-white lg:w-3/5 md:p-12">
-                  <form className="space-y-6">
-                    {/* Name and Email */}
-                    <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-                      <div>
-                        <input
-                          type="text"
-                          placeholder="Your Name..."
-                          className="w-full p-4 text-gray-800 transition-all duration-300 border-b-2 border-gray-300 rounded-none focus:border-b-2 focus:border-gray-500 focus:outline-none focus:ring-0 bg-gray-50"
-                        />
-                      </div>
-                      <div>
-                        <input
-                          type="email"
-                          placeholder="Your Email..."
-                          className="w-full p-4 text-gray-800 transition-all duration-300 border-b-2 border-gray-300 rounded-none focus:border-b-2 focus:border-gray-500 focus:outline-none focus:ring-0 bg-gray-50"
-                        />
-                      </div>
-                    </div>
-
-                    {/* Phone and Subject */}
-                    <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-                      <div>
-                        <input
-                          type="tel"
-                          placeholder="Phone Number..."
-                          className="w-full p-4 text-gray-800 transition-all duration-300 border-b-2 border-gray-300 rounded-none focus:border-b-2 focus:border-gray-500 focus:outline-none focus:ring-0 bg-gray-50"
-                        />
-                      </div>
-                      <div>
-                        <input
-                          type="text"
-                          placeholder="Your Subject..."
-                          className="w-full p-4 text-gray-800 transition-all duration-300 border-b-2 border-gray-300 rounded-none focus:border-b-2 focus:border-gray-500 focus:outline-none focus:ring-0 bg-gray-50"
-                        />
-                      </div>
-                    </div>
-
-                    {/* Message */}
-                    <div>
-                      <textarea
-                        placeholder="Write here your message..."
-                        rows={6}
-                        className="w-full p-4 text-gray-800 transition-all duration-300 border border-gray-300 rounded-md resize-y focus:border-b-2 focus:border-gray-500 focus:outline-none focus:ring-0 bg-gray-50"
-                      ></textarea>
-                    </div>
-
-                    {/* Submit Button */}
-                    <button
-                      type="submit"
-                      className={`w-full text-white font-bold py-4 px-6 rounded-full hover:opacity-90 transition-opacity duration-300 text-lg shadow-md`}
-                      style={{ backgroundColor: ACCENT_COLOR }}
-                    >
-                      Send Message
-                    </button>
-                  </form>
+                  <ContactForm />
                 </div>
               </div>
 

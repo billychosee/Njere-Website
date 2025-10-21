@@ -12,16 +12,16 @@ interface ContactMapProps {
 }
 
 // 13 Brentwood Avenue, Mt Harare, Zimbabwe
-// Approx Coordinates for 13 Brentwood Avenue (Use your exact coordinates)
+// Approx Coordinates for 13 Brentwood Avenue
 const DEFAULT_CENTER = {
-  lat: -17.7818, // Example Latitude
-  lng: 31.0264, // Example Longitude
+  lat: -17.7818, // Latitude
+  lng: 31.0264, // Longitude
 };
 
 const containerStyle = {
   width: '100%',
-  height: '400px', // Set a fixed height for the map container
-  borderRadius: '0 0 1rem 1rem', // Match the bottom border radius of the parent container
+  height: '400px',
+  borderRadius: '0 0 1rem 1rem',
 };
 
 // Define the libraries array for the Google Maps API
@@ -30,7 +30,7 @@ const libraries: ('places' | 'drawing' | 'geometry')[] = ['places'];
 const ContactMap: React.FC<ContactMapProps> = ({ lat, lng }) => {
   const center = { lat, lng };
 
-  // Use the NEXT_PUBLIC prefix for client-side environment variables
+  // NEXT_PUBLIC prefix for client-side environment variables
   const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
 
   if (!apiKey) {
