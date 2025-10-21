@@ -2,27 +2,32 @@ import nodemailer from "nodemailer";
 
 export async function POST(req: Request) {
   try {
-    const {
+    console.log('Contact form submission received');
+
+    const { name, email, phone, subject, message } = await req.json();
+
+    console.log('Form data:', {
       name,
       email,
       phone,
       subject,
-      message,
-    } = await req.json();
+      message: message?.substring(0, 50) + '...',
+    });
 
     // SMTP configuration - Use environment variables for production
     const SMTP_CONFIG = {
-      HOST: process.env.SMTP_HOST || 'mail.smatpay.africa',
-      PORT: parseInt(process.env.SMTP_PORT || '465'),
-      USER: process.env.SMTP_USER || 'noreply@smatpay.africa',
-      PASS: process.env.SMTP_PASS || '?jPvp_cS3cObf0pG',
+      HOST: 'mail.smatpay.africa',
+      PORT: 465, // Use 465 for 'secure: true'
+      USER: 'noreply@smatpay.africa',
+      PASS: '?jPvp_cS3cObf0pG',
     };
 
     // Configure transporter
     const transporter = nodemailer.createTransport({
       host: SMTP_CONFIG.HOST,
+      // You must remove Number() when the port is already a number
       port: SMTP_CONFIG.PORT,
-      secure: SMTP_CONFIG.PORT === 465, // true for 465, false for other ports
+      secure: true,
       auth: {
         user: SMTP_CONFIG.USER,
         pass: SMTP_CONFIG.PASS,
@@ -32,27 +37,28 @@ export async function POST(req: Request) {
       greetingTimeout: 30000,
       socketTimeout: 60000,
       debug: process.env.NODE_ENV === 'development',
+      logger: process.env.NODE_ENV === 'development',
     });
 
     // Define email options
     const mailOptions = {
       from: `"Njere Contact Form" <${SMTP_CONFIG.USER}>`,
-      to: "billy@smatechgroup.com",
+      to: 'billy@smatechgroup.com',
       subject: `Contact Form: ${subject || 'New Message'}`,
       text: `
         Name: ${name}
         Email: ${email}
-        Phone: ${phone || "N/A"}
-        Subject: ${subject || "N/A"}
-        Message: ${message || "N/A"}
+        Phone: ${phone || 'N/A'}
+        Subject: ${subject || 'N/A'}
+        Message: ${message || 'N/A'}
       `,
       html: `
         <h3>New Contact Form Submission</h3>
         <p><strong>Name:</strong> ${name}</p>
         <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Phone:</strong> ${phone || "N/A"}</p>
-        <p><strong>Subject:</strong> ${subject || "N/A"}</p>
-        <p><strong>Message:</strong><br/>${message || "N/A"}</p>
+        <p><strong>Phone:</strong> ${phone || 'N/A'}</p>
+        <p><strong>Subject:</strong> ${subject || 'N/A'}</p>
+        <p><strong>Message:</strong><br/>${message || 'N/A'}</p>
       `,
     };
 
@@ -60,28 +66,21 @@ export async function POST(req: Request) {
     await transporter.sendMail(mailOptions);
 
     return new Response(
-      JSON.stringify({ success: true, message: "✅ Your message was sent successfully!" }),
-      { status: 200 }
+      JSON.stringify({
+        success: true,
+        message: '✅ Your message was sent successfully!',
+      }),
+      { status: 200 },
     );
   } catch (error) {
-    // Log detailed error for debugging
-    console.error("❌ Email sending error:", error);
-
-    // Return more specific error message
-    let errorMessage = "❌ There was a problem sending your message.";
-    if (error instanceof Error) {
-      if (error.message.includes('ECONNREFUSED')) {
-        errorMessage = "❌ Email server connection failed. Please try again later.";
-      } else if (error.message.includes('Authentication failed')) {
-        errorMessage = "❌ Email authentication failed. Please contact support.";
-      } else if (error.message.includes('timeout')) {
-        errorMessage = "❌ Email server timeout. Please try again later.";
-      }
-    }
-
+    // You should use this section to check the exact error message in your live logs!
+    console.error('❌ Error connecting to the server.', error);
     return new Response(
-      JSON.stringify({ success: false, error: errorMessage }),
-      { status: 500 }
+      JSON.stringify({
+        success: false,
+        error: '❌ There was a problem sending your message.',
+      }),
+      { status: 500 },
     );
   }
 }

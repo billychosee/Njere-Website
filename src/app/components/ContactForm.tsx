@@ -28,6 +28,8 @@ const ContactForm = () => {
     setSubmitMessage('');
     setIsError(false);
 
+    console.log('Submitting form data:', formData);
+
     try {
       const response = await fetch('/api/contact', {
         method: 'POST',
@@ -37,7 +39,9 @@ const ContactForm = () => {
         body: JSON.stringify(formData),
       });
 
+      console.log('Response status:', response.status);
       const data = await response.json();
+      console.log('Response data:', data);
 
       if (response.ok && data.success) {
         setSubmitMessage('Thank you! Your message has been sent successfully.');
@@ -53,6 +57,7 @@ const ContactForm = () => {
         setSubmitMessage(data.error || 'There was a problem sending your message.');
       }
     } catch (error) {
+      console.error('Form submission error:', error);
       setIsError(true);
       setSubmitMessage('There was a problem sending your message. Please try again.');
     } finally {
