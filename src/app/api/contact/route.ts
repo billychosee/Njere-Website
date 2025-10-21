@@ -1,5 +1,8 @@
 import nodemailer from "nodemailer";
 
+// Force static generation for API routes when using output: export
+export const dynamic = 'force-static';
+
 export async function POST(req: Request) {
   try {
     console.log('Contact form submission received');

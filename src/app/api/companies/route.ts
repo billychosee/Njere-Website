@@ -1,5 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+// Force static generation for API routes when using output: export
+export const dynamic = 'force-static';
+
 // In-memory storage for demo purposes - replace with actual database
 let companies: any[] = [];
 

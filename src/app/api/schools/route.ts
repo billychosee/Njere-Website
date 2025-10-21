@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { supabase } from  '@/app/lib/supabase'
 
+// Force static generation for API routes when using output: export
+export const dynamic = 'force-static';
+
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
