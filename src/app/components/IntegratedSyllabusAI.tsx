@@ -29,13 +29,13 @@ const IntegratedSyllabusAI: React.FC = () => {
               Smart Syllabus Tools
             </p>
             <h2 className="mb-4 text-3xl font-extrabold leading-snug text-gray-900 md:text-4xl">
-              Integrated Syllabus <br className="hidden sm:inline" />
+              Syllabus <br className="hidden sm:inline" />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0296AD] to-blue-600">
-                AI Generator
+                AI
               </span>
             </h2>
             <p className="max-w-3xl text-base text-gray-600">
-              Our syllabuses include ZIMSEC, Cambridge, and other internationally recognized curricula accepted in Zimbabwe. Njere integrates with educational boards to provide a{' '}
+              Our syllabuses include ZIMSEC, Cambridge, and other internationally recognized curricula accepted across Africa. Njere integrates with educational boards to provide a{' '}
               <strong className="text-gray-800">
                 fast and efficient syllabus management module
               </strong>
@@ -88,3 +88,4 @@ const IntegratedSyllabusAI: React.FC = () => {
 };
 
 export default IntegratedSyllabusAI;
+

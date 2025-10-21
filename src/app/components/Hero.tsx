@@ -169,12 +169,12 @@ const HeroNjereCSRConnect: React.FC = () => {
           />
         </motion.div>
 
-        {/* Headline - UPDATED for "Educational Technology" in black and "Platform" in gradient */}
+        {/* Headline - UPDATED for "Education Management System" in black and "Platform" in gradient */}
         <motion.h1
           className="mb-4 text-4xl font-extrabold leading-tight text-gray-900 sm:text-5xl md:text-6xl lg:text-4xl"
           variants={itemVariants}
         >
-          Educational Technology
+          Education Management System
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0296AD] to-blue-600">
             {' '}
             Platform

@@ -108,9 +108,12 @@ const ModulesSection = () => {
 
         {/* Read More Button */}
         <div className="text-center">
-          <button className="bg-cyan-500 hover:bg-[#0d2854] text-white font-semibold px-8 py-3 rounded-full transition-all duration-300 hover:shadow-lg hover:scale-105 cursor-pointer">
+          <a
+            href="/modules"
+            className="inline-block bg-cyan-500 hover:bg-[#0d2854] text-white font-semibold px-8 py-3 rounded-full transition-all duration-300 hover:shadow-lg hover:scale-105 cursor-pointer"
+          >
             Read More
-          </button>
+          </a>
         </div>
       </div>
     </section>
@@ -118,3 +121,4 @@ const ModulesSection = () => {
 };
 
 export default ModulesSection;
+

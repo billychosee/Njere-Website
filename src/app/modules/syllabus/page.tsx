@@ -142,7 +142,7 @@ const SyllabusPage = () => {
               Supported Syllabuses
             </h2>
             <p className="text-lg text-gray-600">
-              We support internationally recognized curricula accepted in Zimbabwe and across Africa
+              We support internationally recognized curricula accepted across Africa
             </p>
           </motion.div>
 

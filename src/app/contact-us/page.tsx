@@ -255,7 +255,7 @@ const ContactPage = () => {
               {/* --- 2. Bottom Section: Google Map --- */}
               <div className="w-full">
                 {/* Google Map */}
-                <div className="mx-5 my-6 overflow-hidden rounded-lg md:mx-24 h-60 md:my-14">
+                <div className="mx-5 my-6 overflow-hidden rounded-lg md:mx-0 h-96 md:my-0">
                   <iframe
                     width="100%"
                     height="100%"

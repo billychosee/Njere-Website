@@ -117,9 +117,12 @@ const VideoStatsSection = () => {
               </p>
 
               {/* CTA Button */}
-              <button className="px-8 py-4 font-semibold tracking-wide text-white uppercase transition-all duration-300 rounded-full bg-cyan-500 hover:bg-cyan-600 hover:shadow-lg hover:shadow-cyan-500/50 hover:scale-105">
+              <a
+                href="/contact-us"
+                className="inline-block px-8 py-4 font-semibold tracking-wide text-white uppercase transition-all duration-300 rounded-full bg-cyan-500 hover:bg-cyan-600 hover:shadow-lg hover:shadow-cyan-500/50 hover:scale-105"
+              >
                 Join Us Now
-              </button>
+              </a>
             </div>
           </div>
         </div>

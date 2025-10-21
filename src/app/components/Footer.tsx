@@ -183,7 +183,7 @@ function Footer() {
               Is your school ready for the future?
             </h2>
             <a
-              href="#"
+              href="/contact-us"
               style={{ backgroundColor: BUTTON_BG, borderColor: BUTTON_BG }}
               className="w-full text-center text-white px-8 py-3 rounded-full font-bold text-sm transition-all duration-300 border-2 max-w-[220px]"
               onMouseOver={(e) => {
@@ -266,3 +266,4 @@ function Footer() {
 }
 
 export default Footer;
+
