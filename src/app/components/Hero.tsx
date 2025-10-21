@@ -195,7 +195,7 @@ const HeroNjereCSRConnect: React.FC = () => {
           variants={itemVariants}
         >
           <a
-            href="/register-today"
+            href="/contact-us"
             className="px-8 py-3 bg-gradient-to-r from-[#0296AD] to-blue-600 text-white text-lg font-bold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:-translate-y-1"
           >
             Register Today
@@ -250,13 +250,14 @@ const HeroNjereCSRConnect: React.FC = () => {
       {staggeredCardLayout.map((card, index) => (
         <motion.div
           key={index}
-          className={`absolute z-0 ${card.size} shadow-2xl rounded-2xl overflow-hidden transition-all duration-500 hover:scale-105 opacity-90 hidden lg:block animate-water-float`}
+          className={`absolute z-0 ${card.size} shadow-2xl rounded-2xl overflow-hidden transition-all duration-500 hover:scale-105 opacity-90 hidden lg:block`}
           style={{
             top: card.top,
             bottom: card.bottom,
             left: card.left,
             right: card.right,
             transform: `rotate(${card.rotation}deg)`,
+            animation: 'water-float 6s ease-in-out infinite',
           }}
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -395,10 +396,6 @@ const HeroNjereCSRConnect: React.FC = () => {
           75% {
             transform: translateY(-12px) rotate(0.8deg) scale(1.01);
           }
-        }
-
-        .animate-water-float {
-          animation: water-float 6s ease-in-out infinite;
         }
       `}</style>
     </motion.section>
