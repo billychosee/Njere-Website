@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { motion, useInView, useAnimation } from 'framer-motion';
-import { FaLinkedin, FaInstagram } from 'react-icons/fa';
-import { FiTwitter } from 'react-icons/fi';
+import { FaLinkedin, FaInstagram, FaFacebookF } from 'react-icons/fa';
+import { FaXTwitter } from 'react-icons/fa6';
 
 // Scenario images for floating cards
 const TEACHER_USING_SOFTWARE = '/teacher-using-software.jpg';
@@ -32,16 +32,21 @@ const PROFILE_IMAGE_3 = '/founder-profile3.jpg';
 
 const socialIcons = [
   {
-    name: 'LinkedIn',
-    icon: FaLinkedin,
-    link: 'https://www.linkedin.com/company/your-njere-page',
+    name: 'Facebook',
+    icon: FaFacebookF,
+    link: 'https://www.facebook.com/profile.php?id=61553934834650',
   },
   {
     name: 'Instagram',
     icon: FaInstagram,
-    link: 'https://www.instagram.com/your-njere-page',
+    link: 'https://www.instagram.com/njere_erp/?hl=en',
   },
-  { name: 'X', icon: FiTwitter, link: 'https://twitter.com/your-njere-page' },
+  {
+    name: 'LinkedIn',
+    icon: FaLinkedin,
+    link: 'https://www.linkedin.com/showcase/njere-erp/?originalSubdomain=zw',
+  },
+  { name: 'X', icon: FaXTwitter, link: 'https://twitter.com/your-njere-page' },
 ];
 
 const HeroNjereCSRConnect: React.FC = () => {
