@@ -5,6 +5,36 @@ import { motion } from 'framer-motion';
 import { useParams } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
+
+// Force static generation for dynamic routes when using output: export
+export const dynamic = 'force-static';
+
+// Generate static params for all school IDs
+export async function generateStaticParams() {
+  try {
+    // Fetch all schools to generate static paths
+    const response = await fetch('https://csr-njere.smathub.com/api/schools', {
+      next: { revalidate: 3600 } // Revalidate every hour
+    });
+
+    if (!response.ok) {
+      console.warn('Failed to fetch schools for static generation, using fallback');
+      return [];
+    }
+
+    const data = await response.json();
+    const schools = data.data || data.schools || [];
+
+    // Generate params for each school
+    return schools.map((school: any) => ({
+      id: school.id?.toString() || school.school_id?.toString() || '1'
+    }));
+  } catch (error) {
+    console.error('Error generating static params:', error);
+    // Return empty array as fallback - pages will be generated on-demand
+    return [];
+  }
+}
 import {
   MapPinIcon,
   ComputerDesktopIcon,
