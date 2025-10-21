@@ -250,7 +250,7 @@ const HeroNjereCSRConnect: React.FC = () => {
       {staggeredCardLayout.map((card, index) => (
         <motion.div
           key={index}
-          className={`absolute z-0 ${card.size} shadow-2xl rounded-2xl overflow-hidden transition-all duration-500 hover:scale-105 opacity-90 hidden lg:block animate-gentle-float`}
+          className={`absolute z-0 ${card.size} shadow-2xl rounded-2xl overflow-hidden transition-all duration-500 hover:scale-105 opacity-90 hidden lg:block animate-water-float`}
           style={{
             top: card.top,
             bottom: card.bottom,
@@ -380,6 +380,25 @@ const HeroNjereCSRConnect: React.FC = () => {
 
         .animate-gentle-float {
           animation: gentle-float 8s ease-in-out infinite;
+        }
+
+        @keyframes water-float {
+          0%, 100% {
+            transform: translateY(0px) rotate(0deg) scale(1);
+          }
+          25% {
+            transform: translateY(-8px) rotate(1deg) scale(1.02);
+          }
+          50% {
+            transform: translateY(-4px) rotate(-0.5deg) scale(0.98);
+          }
+          75% {
+            transform: translateY(-12px) rotate(0.8deg) scale(1.01);
+          }
+        }
+
+        .animate-water-float {
+          animation: water-float 6s ease-in-out infinite;
         }
       `}</style>
     </motion.section>
