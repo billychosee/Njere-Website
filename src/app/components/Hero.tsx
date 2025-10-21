@@ -186,7 +186,7 @@ const HeroNjereCSRConnect: React.FC = () => {
           className="mb-8 text-lg leading-relaxed text-gray-600 sm:text-xl md:text-xl"
           variants={itemVariants}
         >
-          Our comprehensive educational technology platform serves schools, colleges, universities, and online learning institutions across Africa, providing end-to-end monitoring capabilities for administrators, teachers, students, and parents.
+          Comprehensive educational technology platform serving schools, colleges, universities, and online learning institutions across Africa with end-to-end monitoring for administrators, teachers, students, and parents.
         </motion.p>
 
         {/* Call to Action Button - Single CTA "Register Today" (Kept) */}
