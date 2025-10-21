@@ -254,7 +254,18 @@ const ContactPage = () => {
 
               {/* --- 2. Bottom Section: Google Map --- */}
               <div className="w-full">
-                <ContactMap lat={MAP_CENTER.lat} lng={MAP_CENTER.lng} />
+                {/* Google Map */}
+                <div className="mx-5 my-6 overflow-hidden rounded-lg md:mx-24 h-60 md:my-14">
+                  <iframe
+                    width="100%"
+                    height="100%"
+                    frameBorder="0"
+                    scrolling="no"
+                    marginHeight={0}
+                    marginWidth={0}
+                    src="https://maps.google.com/maps?q=13+Brentwood+Ave,+Groombridge,+Harare,+Zimbabwe&output=embed"
+                  ></iframe>
+                </div>
               </div>
             </div>
           </div>
