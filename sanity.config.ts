@@ -14,8 +14,9 @@ export default defineConfig({
   projectId: process.env.VITE_SANITY_PROJECT_ID || 'u09fo6dn',
   dataset: process.env.VITE_SANITY_DATASET || 'production',
 
-  // THE FIX: Pass the entire 'schema' object, not just 'schema.types'
-  schema: schema,
+  schema: {
+    types: schema.types,
+  },
 
   plugins: [
     structureTool({ structure }),
