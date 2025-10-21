@@ -1,5 +1,3 @@
-'use client';
-
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useParams } from 'next/navigation';
@@ -35,20 +33,6 @@ export async function generateStaticParams() {
     return [];
   }
 }
-import {
-  MapPinIcon,
-  ComputerDesktopIcon,
-  BookOpenIcon,
-  BuildingOfficeIcon,
-  AcademicCapIcon,
-  ArrowRightIcon,
-  CheckCircleIcon,
-  UserGroupIcon,
-  CurrencyDollarIcon,
-  EnvelopeIcon,
-  PhoneIcon,
-  XMarkIcon
-} from '@heroicons/react/24/outline';
 
 // Define the primary and accent colors for a sleek, professional look
 const PRIMARY_COLOR = '#00204f'; // Njere Blue
