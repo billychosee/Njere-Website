@@ -1,6 +1,10 @@
+"use client";
+
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useParams } from 'next/navigation';
+import { MapPinIcon, ComputerDesktopIcon, BookOpenIcon, BuildingOfficeIcon, CurrencyDollarIcon, AcademicCapIcon, ArrowRightIcon, CheckCircleIcon, XMarkIcon } from '@heroicons/react/24/outline';
+
 import Image from 'next/image';
 import Link from 'next/link';
 
