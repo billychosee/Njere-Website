@@ -143,16 +143,16 @@ const VideoStatsSection = () => {
           </svg>
 
           {/* Floating Stats Cards */}
-          <div className="relative z-10 flex flex-wrap justify-center max-w-5xl gap-4 mx-auto -mt-8 md:flex-nowrap md:justify-between">
+          <div className="relative z-10 flex flex-wrap justify-center max-w-5xl mx-auto -mt-8 gap-60 md:flex-nowrap md:justify-between">
             {stats.map((stat, index) => (
               <div
                 key={index}
-                className="relative w-32 p-6 text-center transition-transform duration-300 transform shadow-lg bg-white/20 backdrop-blur-md rounded-2xl hover:-translate-y-3 md:w-40 md:p-8"
+                className="relative flex-1 min-w-0 p-8 text-center transition-transform duration-300 transform shadow-lg bg-white/20 backdrop-blur-md rounded-2xl hover:-translate-y-3 md:p-10"
               >
-                <div className="text-3xl font-bold text-white md:text-4xl lg:text-5xl xl:text-6xl">
+                <div className="text-4xl font-bold text-white md:text-5xl lg:text-4xl xl:text-5xl">
                   {formatNumber(animatedStats[index])}
                 </div>
-                <div className="text-sm font-medium text-cyan-400 md:text-lg xl:text-xl">
+                <div className="text-base font-medium text-cyan-400 md:text-xl xl:text-xl">
                   {stat.label}
                 </div>
               </div>
@@ -163,8 +163,14 @@ const VideoStatsSection = () => {
 
       {/* Video Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75" onClick={() => setIsModalOpen(false)}>
-          <div className="relative w-full max-w-6xl mx-4 bg-white rounded-lg shadow-2xl" onClick={(e) => e.stopPropagation()}>
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75"
+          onClick={() => setIsModalOpen(false)}
+        >
+          <div
+            className="relative w-full max-w-6xl mx-4 bg-white rounded-lg shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
             <button
               onClick={() => setIsModalOpen(false)}
               className="absolute z-10 p-2 text-white transition-all bg-black bg-opacity-50 rounded-full top-4 right-4 hover:bg-opacity-75"
