@@ -1,9 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import axios from 'axios';
 import { motion, AnimatePresence } from 'framer-motion';
 import { XMarkIcon } from '@heroicons/react/24/outline';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 const PRIMARY_COLOR = '#00204f'; // Njere Blue
 const ACCENT_COLOR = '#04baab'; // Njere Teal
@@ -37,6 +38,8 @@ const RegisterSchoolModal: React.FC<RegisterSchoolModalProps> = ({
   });
 
   const [loading, setLoading] = useState(false);
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
 
   const handleInputChange = (
     e: React.ChangeEvent<
@@ -60,12 +63,17 @@ const RegisterSchoolModal: React.FC<RegisterSchoolModalProps> = ({
       return;
     }
 
+    if (!captchaToken) {
+      alert('Please complete the reCAPTCHA verification.');
+      return;
+    }
+
     setLoading(true);
 
     try {
       const response = await axios.post(
         'https://csr-njere.smathub.com/api/schools',
-        formData,
+        { ...formData, captchaToken },
         {
           headers: { 'Content-Type': 'application/json' },
         },
@@ -91,6 +99,8 @@ const RegisterSchoolModal: React.FC<RegisterSchoolModalProps> = ({
           motivation: '',
           consent: false,
         });
+        setCaptchaToken(null);
+        recaptchaRef.current?.reset();
         onClose();
       } else {
         alert(`Registration failed: Please provide all required information.`);
@@ -507,6 +517,15 @@ const RegisterSchoolModal: React.FC<RegisterSchoolModalProps> = ({
                     I consent to having my school's information shared with
                     potential sponsors.
                   </label>
+                </div>
+
+                <div className="flex justify-center">
+                  <ReCAPTCHA
+                    ref={recaptchaRef}
+                    sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ''}
+                    onChange={(token) => setCaptchaToken(token)}
+                    onExpired={() => setCaptchaToken(null)}
+                  />
                 </div>
 
                 {/* Submit Button */}

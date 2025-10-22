@@ -1,9 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import axios from 'axios';
 import { motion, AnimatePresence } from 'framer-motion';
 import { XMarkIcon } from '@heroicons/react/24/outline';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 const PRIMARY_COLOR = '#00204f'; // Njere Blue
 const ACCENT_COLOR = '#04baab'; // Njere Teal
@@ -29,6 +30,9 @@ const RegisterCompanyModal: React.FC<RegisterCompanyModalProps> = ({ isOpen, onC
     consent: false,
   });
 
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
+
   const handleInputChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
@@ -50,10 +54,15 @@ const RegisterCompanyModal: React.FC<RegisterCompanyModalProps> = ({ isOpen, onC
       return;
     }
 
+    if (!captchaToken) {
+      alert('Please complete the reCAPTCHA verification.');
+      return;
+    }
+
     try {
       const response = await axios.post(
         'https://csr-njere.smathub.com/api/companies',
-        formData,
+        { ...formData, captchaToken },
         {
           headers: { 'Content-Type': 'application/json' },
         },
@@ -75,6 +84,8 @@ const RegisterCompanyModal: React.FC<RegisterCompanyModalProps> = ({ isOpen, onC
           motivation: '',
           consent: false,
         });
+        setCaptchaToken(null);
+        recaptchaRef.current?.reset();
         onClose();
       } else {
         alert(`Registration failed: Please provide all required information.`);
@@ -452,6 +463,15 @@ const RegisterCompanyModal: React.FC<RegisterCompanyModalProps> = ({ isOpen, onC
                   <label htmlFor="consent" className="text-sm text-gray-900">
                     I consent to having my company's information shared with schools.
                   </label>
+                </div>
+
+                <div className="flex justify-center">
+                  <ReCAPTCHA
+                    ref={recaptchaRef}
+                    sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ''}
+                    onChange={(token) => setCaptchaToken(token)}
+                    onExpired={() => setCaptchaToken(null)}
+                  />
                 </div>
 
                 <div className="pt-4">

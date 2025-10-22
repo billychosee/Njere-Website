@@ -23,7 +23,8 @@ export async function POST(request: NextRequest) {
       'areasOfInterest',
       'budget',
       'motivation',
-      'consent'
+      'consent',
+      'captchaToken'
     ];
 
     for (const field of requiredFields) {
@@ -39,6 +40,23 @@ export async function POST(request: NextRequest) {
     if (!body.consent) {
       return NextResponse.json(
         { error: 'Consent is required' },
+        { status: 400 }
+      );
+    }
+
+    // Verify reCAPTCHA token
+    const recaptchaResponse = await fetch(
+      `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${body.captchaToken}`,
+      {
+        method: 'POST',
+      }
+    );
+
+    const recaptchaData = await recaptchaResponse.json();
+
+    if (!recaptchaData.success) {
+      return NextResponse.json(
+        { error: 'reCAPTCHA verification failed' },
         { status: 400 }
       );
     }

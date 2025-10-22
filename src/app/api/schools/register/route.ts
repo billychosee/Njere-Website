@@ -24,6 +24,7 @@ export async function POST(request: NextRequest) {
       'schoolFees',
       'areasOfNeed',
       'motivation',
+      'captchaToken',
     ];
 
     for (const field of requiredFields) {
@@ -34,6 +35,24 @@ export async function POST(request: NextRequest) {
           { status: 400 },
         );
       }
+    }
+
+    // Verify reCAPTCHA token
+    const recaptchaResponse = await fetch(
+      `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${body.captchaToken}`,
+      {
+        method: 'POST',
+      }
+    );
+
+    const recaptchaData = await recaptchaResponse.json();
+
+    if (!recaptchaData.success) {
+      console.error('reCAPTCHA verification failed');
+      return NextResponse.json(
+        { error: 'reCAPTCHA verification failed' },
+        { status: 400 },
+      );
     }
 
     // Prepare data exactly like the test
