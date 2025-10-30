@@ -89,7 +89,33 @@ const DiaryPost = async ({ params }: PageProps) => {
 
       <main className="container py-16 mx-auto prose prose-lg max-w-none">
         <div className="max-w-4xl mx-auto">
-          <PortableText value={entry.body} />
+          {entry.body ? (
+            <PortableText
+              value={entry.body}
+              components={{
+                types: {
+                  image: ({ value }) => {
+                    if (!value?.asset) return null;
+                    return (
+                      <div className="my-8">
+                        <Image
+                          src={urlFor(value).width(800).height(400).url()}
+                          alt={value.alt || 'Blog image'}
+                          width={800}
+                          height={400}
+                          className="rounded-lg shadow-lg"
+                        />
+                      </div>
+                    );
+                  },
+                },
+              }}
+            />
+          ) : (
+            <div className="py-12 text-center">
+              <p className="text-lg text-gray-500">No content available for this post.</p>
+            </div>
+          )}
         </div>
       </main>
 
