@@ -83,22 +83,33 @@ const RegisterSchoolModal: React.FC<RegisterSchoolModalProps> = ({
     setLoading(true);
 
     try {
-      // For testing: Send as JSON first to check if API works
-      const submitData = {
-        ...formData,
-        captchaToken: captchaToken || '',
-        // Don't include file objects in JSON
-        schoolLogo: undefined,
-        schoolImage: undefined,
-      };
+      // Create FormData for file uploads
+      const submitData = new FormData();
 
-      console.log('Submitting data:', submitData); // Debug log
+      // Add all form fields
+      Object.entries(formData).forEach(([key, value]) => {
+        if (value !== null && value !== undefined) {
+          if (value instanceof File) {
+            submitData.append(key, value);
+          } else {
+            submitData.append(key, String(value));
+          }
+        }
+      });
+
+      submitData.append('captchaToken', captchaToken || '');
+
+      console.log('Submitting school data with files:', {
+        ...Object.fromEntries(submitData.entries()),
+        schoolLogo: formData.schoolLogo?.name,
+        schoolImage: formData.schoolImage?.name,
+      }); // Debug log
 
       const response = await axios.post(
         'https://csr-njere.smathub.com/api/schools',
         submitData,
         {
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 'Content-Type': 'multipart/form-data' },
         },
       );
 
@@ -512,7 +523,7 @@ const RegisterSchoolModal: React.FC<RegisterSchoolModalProps> = ({
                     htmlFor="schoolLogo"
                     className="block mb-2 text-sm font-medium text-gray-900"
                   >
-                    School Logo (Optional)
+                    School Logo <span className="text-red-500">*</span>
                   </label>
                   <input
                     type="file"
@@ -521,9 +532,10 @@ const RegisterSchoolModal: React.FC<RegisterSchoolModalProps> = ({
                     accept="image/*"
                     onChange={handleFileChange}
                     className="w-full px-4 py-3 text-gray-900 bg-white border border-gray-400 rounded-lg focus:ring-2 focus:outline-none focus:border-blue-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+                    required
                   />
                   <p className="mt-1 text-xs text-gray-500">
-                    Upload your school logo (PNG, JPG, max 5MB) - Optional for now
+                    Upload your school logo (PNG, JPG, max 5MB)
                   </p>
                 </div>
 
@@ -533,7 +545,7 @@ const RegisterSchoolModal: React.FC<RegisterSchoolModalProps> = ({
                     htmlFor="schoolImage"
                     className="block mb-2 text-sm font-medium text-gray-900"
                   >
-                    School Overview Image (Optional)
+                    School Overview Image <span className="text-red-500">*</span>
                   </label>
                   <input
                     type="file"
@@ -542,9 +554,10 @@ const RegisterSchoolModal: React.FC<RegisterSchoolModalProps> = ({
                     accept="image/*"
                     onChange={handleFileChange}
                     className="w-full px-4 py-3 text-gray-900 bg-white border border-gray-400 rounded-lg focus:ring-2 focus:outline-none focus:border-blue-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-green-50 file:text-green-700 hover:file:bg-green-100"
+                    required
                   />
                   <p className="mt-1 text-xs text-gray-500">
-                    Upload a photo/overview of your school (PNG, JPG, max 10MB) - Optional for now, will be displayed as background when viewing school profile
+                    Upload a photo/overview of your school (PNG, JPG, max 10MB) - This will be displayed as the background when viewing your school profile
                   </p>
                 </div>
 
