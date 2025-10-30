@@ -516,7 +516,7 @@ const RegisterSchoolModal: React.FC<RegisterSchoolModalProps> = ({
                     htmlFor="schoolLogo"
                     className="block mb-2 text-sm font-medium text-gray-900"
                   >
-                    School Logo <span className="text-red-500">*</span>
+                    School Logo (Optional)
                   </label>
                   <input
                     type="file"
@@ -525,10 +525,9 @@ const RegisterSchoolModal: React.FC<RegisterSchoolModalProps> = ({
                     accept="image/*"
                     onChange={handleFileChange}
                     className="w-full px-4 py-3 text-gray-900 bg-white border border-gray-400 rounded-lg focus:ring-2 focus:outline-none focus:border-blue-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
-                    required
                   />
                   <p className="mt-1 text-xs text-gray-500">
-                    Upload your school logo (PNG, JPG, max 5MB)
+                    Upload your school logo (PNG, JPG, max 5MB) - Optional for now
                   </p>
                 </div>
 
@@ -538,7 +537,7 @@ const RegisterSchoolModal: React.FC<RegisterSchoolModalProps> = ({
                     htmlFor="schoolImage"
                     className="block mb-2 text-sm font-medium text-gray-900"
                   >
-                    School Overview Image <span className="text-red-500">*</span>
+                    School Overview Image (Optional)
                   </label>
                   <input
                     type="file"
@@ -547,10 +546,9 @@ const RegisterSchoolModal: React.FC<RegisterSchoolModalProps> = ({
                     accept="image/*"
                     onChange={handleFileChange}
                     className="w-full px-4 py-3 text-gray-900 bg-white border border-gray-400 rounded-lg focus:ring-2 focus:outline-none focus:border-blue-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-green-50 file:text-green-700 hover:file:bg-green-100"
-                    required
                   />
                   <p className="mt-1 text-xs text-gray-500">
-                    Upload a photo/overview of your school (PNG, JPG, max 10MB) - This will be displayed as the background when viewing your school profile
+                    Upload a photo/overview of your school (PNG, JPG, max 10MB) - Optional for now, will be displayed as background when viewing school profile
                   </p>
                 </div>
 
