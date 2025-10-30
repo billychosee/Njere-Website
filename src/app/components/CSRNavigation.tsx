@@ -61,6 +61,7 @@ const CSRNavigation = () => {
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="inline-flex items-center justify-center p-2 text-white rounded-md hover:bg-white hover:bg-opacity-10 focus:outline-none"
+              aria-label={isOpen ? "Close menu" : "Open menu"}
             >
               {isOpen ? (
                 <XMarkIcon className="block w-6 h-6" aria-hidden="true" />

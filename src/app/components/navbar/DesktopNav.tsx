@@ -119,7 +119,7 @@ export default function DesktopNav() {
     const isDropdownItem = hasDropdown(item);
     const isDropdownOnly =
       isDropdownItem &&
-      (item.label === 'INDUSTRIES' || item.label === 'PRODUCTS'); // Note: 'INDUSTRIES' and 'PRODUCTS' are examples not present in your config.ts
+      (item.label === 'INDUSTRIES' || item.label === 'PRODUCTS');
     const ChevronIcon = ICONS.chevronDown;
 
     const itemClassName = `relative px-1 py-1 text-sm font-medium transition-colors ${
@@ -198,7 +198,7 @@ export default function DesktopNav() {
 
         {/* Get Started Button */}
         <Link
-          href="/get-started"
+          href="/contact-us"
           className="bg-[#02ACC3] text-white px-5 py-2.5 rounded-full text-sm font-medium flex items-center shadow-lg transition-all duration-200 hover:bg-[#0296AD] active:scale-[0.98] whitespace-nowrap"
         >
           Get started

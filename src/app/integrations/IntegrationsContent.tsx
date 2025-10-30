@@ -172,6 +172,7 @@ const IntegrationsContent = () => {
 
                 {/* NEW BUTTON ADDED HERE */}
                 <button
+                  onClick={() => window.open('/integrations', '_self')}
                   className="inline-flex items-center px-6 py-3 font-bold text-white transition-all transform rounded-full shadow-lg hover:scale-105"
                   style={{ backgroundColor: ACCENT_COLOR }}
                 >

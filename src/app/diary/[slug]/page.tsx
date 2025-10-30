@@ -16,17 +16,24 @@ interface PageProps {
 }
 
 export async function generateStaticParams() {
-  const paths = await client.fetch(
-    `*[_type == "diaryEntry"]{ "slug": slug.current }`,
-  );
+  try {
+    const paths = await client.fetch(
+      `*[_type == "diaryEntry"]{ "slug": slug.current }`,
+    );
 
-  return paths.map((path: { slug: string }) => ({
-    slug: path.slug,
-  }));
+    return paths.map((path: { slug: string }) => ({
+      slug: path.slug,
+    }));
+  } catch (error) {
+    console.error('Error generating static params for diary entries:', error);
+    return [];
+  }
 }
 
 const DiaryPost = async ({ params }: PageProps) => {
   const { slug } = await params;
+
+  console.log('Looking for diary entry with slug:', slug);
 
   const entry: FullDiaryEntry | null = await client.fetch(
     `*[_type == "diaryEntry" && slug.current == $slug][0]{
@@ -40,19 +47,28 @@ const DiaryPost = async ({ params }: PageProps) => {
     { slug },
   );
 
+  console.log('Found diary entry:', entry);
+
   if (!entry) {
+    console.log('No entry found, calling notFound()');
     notFound();
   }
 
   return (
     <div className="min-h-screen bg-white">
       <header className="relative overflow-hidden h-96">
-        <Image
-          src={urlFor(entry.image).width(1200).height(600).url()}
-          alt={entry.image.alt || entry.title}
-          fill
-          style={{ objectFit: 'cover' }}
-        />
+        {entry.image && entry.image.asset ? (
+          <Image
+            src={urlFor(entry.image).width(1200).height(600).url()}
+            alt={entry.image.alt || entry.title}
+            fill
+            style={{ objectFit: 'cover' }}
+          />
+        ) : (
+          <div className="flex items-center justify-center w-full h-full bg-gray-200">
+            <span className="text-gray-500">No image available</span>
+          </div>
+        )}
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
         <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
           <div className="container mx-auto">
@@ -87,3 +103,4 @@ const DiaryPost = async ({ params }: PageProps) => {
 };
 
 export default DiaryPost;
+

@@ -78,7 +78,18 @@ const ModulesSection = () => {
                 </svg>
 
                 {/* Card Content */}
-                <div className="relative flex flex-col items-center justify-center p-8 transition-all duration-500 bg-white rounded-2xl h-72 group-hover:shadow-2xl group-hover:transform group-hover:-translate-y-2">
+                <a
+                  href={
+                    module.title === 'Administrative'
+                      ? '/modules'
+                      : module.title === 'Academics'
+                      ? '/modules/academics'
+                      : module.title === 'Finance'
+                      ? '/modules/finance'
+                      : '/modules'
+                  }
+                  className="relative flex flex-col items-center justify-center p-8 transition-all duration-500 bg-white cursor-pointer rounded-2xl h-72 group-hover:shadow-2xl group-hover:transform group-hover:-translate-y-2"
+                >
                   <div className="w-full h-32 mb-4 overflow-hidden rounded-lg">
                     <img
                       src={
@@ -100,7 +111,7 @@ const ModulesSection = () => {
                   <p className="font-medium text-center transition-colors duration-300 text-cyan-500 group-hover:text-cyan-500">
                     {module.count}
                   </p>
-                </div>
+                </a>
               </div>
             );
           })}

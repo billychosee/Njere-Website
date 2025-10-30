@@ -208,7 +208,10 @@ const DownloadPage = () => {
                 <div className="space-y-4">
                   {/* App Store Buttons */}
                   <div className="flex flex-col gap-4 sm:flex-row">
-                    <button className="flex items-center justify-center px-6 py-3 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors duration-300 flex-1">
+                    <button
+                      onClick={() => window.open('https://apps.apple.com', '_blank')}
+                      className="flex items-center justify-center flex-1 px-6 py-3 text-white transition-colors duration-300 bg-black rounded-lg hover:bg-gray-800"
+                    >
                       <Image
                         src="/app-store-badge.png"
                         alt="Download on App Store"
@@ -217,7 +220,10 @@ const DownloadPage = () => {
                         className="object-contain"
                       />
                     </button>
-                    <button className="flex items-center justify-center px-6 py-3 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors duration-300 flex-1">
+                    <button
+                      onClick={() => window.open('https://play.google.com', '_blank')}
+                      className="flex items-center justify-center flex-1 px-6 py-3 text-white transition-colors duration-300 bg-black rounded-lg hover:bg-gray-800"
+                    >
                       <Image
                         src="/google-play-badge.png"
                         alt="Get it on Google Play"
@@ -228,7 +234,10 @@ const DownloadPage = () => {
                     </button>
                   </div>
 
-                  <button className="flex items-center justify-center w-full px-6 py-3 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors duration-300">
+                  <button
+                    onClick={() => window.open('https://appgallery.huawei.com', '_blank')}
+                    className="flex items-center justify-center w-full px-6 py-3 text-white transition-colors duration-300 bg-black rounded-lg hover:bg-gray-800"
+                  >
                     <Image
                       src="/huawei-appgallery-badge.png"
                       alt="Explore Huawei AppGallery"

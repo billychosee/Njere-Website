@@ -852,11 +852,17 @@ const UnifiedCTASection = () => {
 
           {/* CTA Buttons */}
           <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <button className="flex items-center px-8 py-4 font-bold text-blue-900 transition-all transform bg-white rounded-full shadow-lg hover:bg-gray-100 hover:scale-105">
+            <button
+              onClick={() => window.open('/contact-us', '_self')}
+              className="flex items-center px-8 py-4 font-bold text-blue-900 transition-all transform bg-white rounded-full shadow-lg hover:bg-gray-100 hover:scale-105"
+            >
               Get Started Now
               <ArrowRightIcon className="w-5 h-5 ml-2" />
             </button>
-            <button className="px-8 py-4 font-bold text-white transition-all border-2 border-white rounded-full hover:bg-white hover:text-blue-900">
+            <button
+              onClick={() => window.open('/contact-us', '_self')}
+              className="px-8 py-4 font-bold text-white transition-all border-2 border-white rounded-full hover:bg-white hover:text-blue-900"
+            >
               Schedule a Demo
             </button>
           </div>

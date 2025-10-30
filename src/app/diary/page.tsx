@@ -85,13 +85,19 @@ console.log("Fetched diary entries:", diaryEntries);
                     className="overflow-hidden transition-all duration-300 bg-white shadow-lg rounded-2xl hover:shadow-xl"
                   >
                     <div className="relative h-48 overflow-hidden">
-                      <Image
-                        src={urlFor(entry.image).width(800).height(400).url()}
-                        alt={entry.image.alt || entry.title}
-                        fill
-                        style={{ objectFit: 'cover' }}
-                        className="transition-transform duration-300 hover:scale-105"
-                      />
+                      {entry.image && entry.image.asset ? (
+                        <Image
+                          src={urlFor(entry.image).width(800).height(400).url()}
+                          alt={entry.image.alt || entry.title}
+                          fill
+                          style={{ objectFit: 'cover' }}
+                          className="transition-transform duration-300 hover:scale-105"
+                        />
+                      ) : (
+                        <div className="flex items-center justify-center w-full h-full bg-gray-200">
+                          <span className="text-gray-500">No image available</span>
+                        </div>
+                      )}
                       <div className="absolute top-4 left-4">
                         <span className="px-3 py-1 text-xs font-semibold text-white rounded-full bg-black/50 backdrop-blur-sm">
                           {entry.category}
@@ -164,19 +170,21 @@ console.log("Fetched diary entries:", diaryEntries);
                 Subscribe to our diary updates and be the first to know about
                 new features, educational insights, and community initiatives.
               </p>
-              <div className="flex flex-col gap-4 sm:flex-row sm:justify-center">
+              <form className="flex flex-col gap-4 sm:flex-row sm:justify-center">
                 <input
                   type="email"
                   placeholder="Enter your email"
                   className="flex-1 max-w-sm px-4 py-3 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/50"
+                  required
                 />
                 <button
+                  type="submit"
                   className="px-6 py-3 font-bold text-blue-900 transition-all rounded-lg hover:opacity-90 whitespace-nowrap"
                   style={{ backgroundColor: ACCENT_COLOR }}
                 >
                   Subscribe
                 </button>
-              </div>
+              </form>
             </div>
           </div>
         </div>

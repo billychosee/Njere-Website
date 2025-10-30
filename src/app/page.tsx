@@ -116,7 +116,6 @@ const AnimatedHeadline = ({
     </motion.h2>
   );
 };
-// ---------------------------------------------
 
 // Define animation variants for features (reused from previous step)
 const fadeInUp = {

@@ -159,19 +159,19 @@ const AffiliateContent = () => {
               recurring commissions today.
             </p>
             <div className="flex flex-col justify-center gap-4 sm:flex-row">
-              <a
-                href="/sign-up"
+              <button
+                onClick={() => window.open('/contact-us', '_self')}
                 className="flex items-center justify-center px-8 py-4 font-bold text-blue-900 transition-all transform bg-white rounded-full shadow-lg cursor-pointer hover:bg-gray-100 hover:scale-105"
               >
                 Sign Up Now
                 <ArrowRightIcon className="w-5 h-5 ml-2" />
-              </a>
-              <a
-                href="/contact-us"
+              </button>
+              <button
+                onClick={() => window.open('/contact-us', '_self')}
                 className="flex items-center justify-center px-8 py-4 font-bold text-white transition-all border-2 border-white rounded-full cursor-pointer hover:bg-white hover:text-blue-900"
               >
                 Learn More
-              </a>
+              </button>
             </div>
           </div>
         </div>
@@ -242,14 +242,14 @@ const AffiliateContent = () => {
           </div>
 
           <div className="mt-16 text-center">
-            <a
-              href="/sign-up"
+            <button
+              onClick={() => window.open('/contact-us', '_self')}
               style={{ backgroundColor: PRIMARY_COLOR }}
               className="flex items-center justify-center px-8 py-3 mx-auto font-semibold text-white transition-all rounded-full cursor-pointer hover:opacity-90 w-fit"
             >
               Get Started Now
               <ArrowRightIcon className="w-5 h-5 ml-2" />
-            </a>
+            </button>
           </div>
         </div>
       </section>
@@ -536,13 +536,13 @@ const AffiliateContent = () => {
                           </span>
                         </li>
                       </ul>
-                      <a
-                        href="/sign-up"
+                      <button
+                        onClick={() => window.open('/contact-us', '_self')}
                         className="flex items-center justify-center w-full py-3 mt-4 font-bold text-white transition-all rounded-full cursor-pointer hover:opacity-90"
                         style={{ backgroundColor: ACCENT_COLOR }}
                       >
                         Start Connecting
-                      </a>
+                      </button>
                     </motion.div>
                   )}
                   {activeTab === 'earn' && (
@@ -586,13 +586,13 @@ const AffiliateContent = () => {
                           </span>
                         </li>
                       </ul>
-                      <a
-                        href="/sign-up"
+                      <button
+                        onClick={() => window.open('/contact-us', '_self')}
                         className="flex items-center justify-center w-full py-3 mt-4 font-bold text-white transition-all rounded-full cursor-pointer hover:opacity-90"
                         style={{ backgroundColor: ACCENT_COLOR }}
                       >
                         Start Earning
-                      </a>
+                      </button>
                     </motion.div>
                   )}
                   {activeTab === 'fusion' && (
@@ -636,13 +636,13 @@ const AffiliateContent = () => {
                           </span>
                         </li>
                       </ul>
-                      <a
-                        href="/sign-up"
+                      <button
+                        onClick={() => window.open('/contact-us', '_self')}
                         className="flex items-center justify-center w-full py-3 mt-4 font-bold text-white transition-all rounded-full cursor-pointer hover:opacity-90"
                         style={{ backgroundColor: ACCENT_COLOR }}
                       >
                         Start Fusing
-                      </a>
+                      </button>
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -783,13 +783,13 @@ const AffiliateContent = () => {
           </div>
           <div className="mt-12 text-center">
             <p className="mb-4 text-gray-600">Still have questions?</p>
-            <a
-              href="/contact-us"
+            <button
+              onClick={() => window.open('/contact-us', '_self')}
               className="inline-block px-8 py-3 font-semibold text-white transition-all rounded-full cursor-pointer hover:opacity-90"
               style={{ backgroundColor: PRIMARY_COLOR }}
             >
               Contact Support
-            </a>
+            </button>
           </div>
         </div>
       </section>
@@ -810,13 +810,13 @@ const AffiliateContent = () => {
             Join our affiliate program today and start earning recurring
             commissions with Njere ERP.
           </p>
-          <a
-            href="/sign-up"
+          <button
+            onClick={() => window.open('/contact-us', '_self')}
             className="flex items-center justify-center px-8 py-4 mx-auto font-bold text-blue-900 transition-transform bg-white rounded-full shadow-lg cursor-pointer hover:bg-gray-100 hover:scale-105 w-fit"
           >
             Become an Affiliate
             <ArrowRightIcon className="w-5 h-5 ml-2" />
-          </a>
+          </button>
         </div>
       </section>
     </div>

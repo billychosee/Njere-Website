@@ -82,6 +82,7 @@ const VideoStatsSection = () => {
                 <button
                   onClick={() => setIsModalOpen(true)}
                   className="flex items-center justify-center w-24 h-24 transition-all duration-300 rounded-full shadow-2xl bg-cyan-500 hover:bg-cyan-600 hover:scale-110 group"
+                  aria-label="Play video"
                 >
                   <Play className="w-10 h-10 ml-1 text-white fill-white" />
                 </button>
@@ -174,6 +175,7 @@ const VideoStatsSection = () => {
             <button
               onClick={() => setIsModalOpen(false)}
               className="absolute z-10 p-2 text-white transition-all bg-black bg-opacity-50 rounded-full top-4 right-4 hover:bg-opacity-75"
+              aria-label="Close video modal"
             >
               <X className="w-6 h-6" />
             </button>

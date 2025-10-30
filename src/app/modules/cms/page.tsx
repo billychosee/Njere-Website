@@ -360,7 +360,10 @@ const CmsPage = () => {
                         </li>
                       ))}
                     </ul>
-                    <button className="w-full px-4 py-2 bg-gradient-to-r from-[#00204f] to-[#02ACC3] text-white rounded-lg font-medium hover:from-[#001a3d] hover:to-[#0296ad] transition-all duration-300">
+                    <button
+                      onClick={() => alert('Template preview coming soon!')}
+                      className="w-full px-4 py-2 bg-gradient-to-r from-[#00204f] to-[#02ACC3] text-white rounded-lg font-medium hover:from-[#001a3d] hover:to-[#0296ad] transition-all duration-300"
+                    >
                       Preview Template
                     </button>
                   </div>

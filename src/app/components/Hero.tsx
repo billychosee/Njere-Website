@@ -84,7 +84,7 @@ const HeroNjereCSRConnect: React.FC = () => {
 
   const staggeredCardLayout = [
     {
-      top: '10%',
+      top: '20%',
       left: '10%',
       size: 'w-[160px] h-[120px]',
       rotation: '-8',
@@ -98,7 +98,7 @@ const HeroNjereCSRConnect: React.FC = () => {
       animation: 'float-card-two',
     },
     {
-      top: '15%',
+      top: '20%',
       right: '12%',
       size: 'w-[180px] h-[140px]',
       rotation: '10',
@@ -169,15 +169,14 @@ const HeroNjereCSRConnect: React.FC = () => {
           />
         </motion.div>
 
-        {/* Headline - UPDATED for "Education Management System" in black and "Platform" in gradient */}
+        
         <motion.h1
-          className="mb-4 text-4xl font-extrabold leading-tight text-gray-900 sm:text-5xl md:text-6xl lg:text-4xl"
+          className="mb-4 text-4xl font-extrabold leading-tight text-gray-900 sm:text-5xl md:text-6xl lg:text-4xl text-transparent bg-clip-text bg-gradient-to-r from-[#0296ad] to-blue-60"
           variants={itemVariants}
         >
-          Education Management System
+          Education Management
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0296AD] to-blue-600">
-            {' '}
-            Platform
+            System
           </span>
         </motion.h1>
 
