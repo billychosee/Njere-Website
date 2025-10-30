@@ -5,6 +5,7 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  transpilePackages: ['@sanity/ui', '@sanity/icons'],
 };
 
 module.exports = nextConfig;
