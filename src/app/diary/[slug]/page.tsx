@@ -65,7 +65,7 @@ const DiaryPost = async ({ params }: PageProps) => {
             style={{ objectFit: 'cover' }}
           />
         ) : (
-          <div className="flex items-center justify-center w-full h-full bg-gray-200">
+          <div className="flex items-center justify-center w-full h-full bg-gray-100">
             <span className="text-gray-500">No image available</span>
           </div>
         )}
