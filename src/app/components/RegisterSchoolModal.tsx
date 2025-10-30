@@ -83,27 +83,22 @@ const RegisterSchoolModal: React.FC<RegisterSchoolModalProps> = ({
     setLoading(true);
 
     try {
-      // Create FormData for file uploads
-      const submitData = new FormData();
+      // For testing: Send as JSON first to check if API works
+      const submitData = {
+        ...formData,
+        captchaToken: captchaToken || '',
+        // Don't include file objects in JSON
+        schoolLogo: undefined,
+        schoolImage: undefined,
+      };
 
-      // Add all form fields
-      Object.entries(formData).forEach(([key, value]) => {
-        if (value !== null && value !== undefined) {
-          if (value instanceof File) {
-            submitData.append(key, value);
-          } else {
-            submitData.append(key, String(value));
-          }
-        }
-      });
-
-      submitData.append('captchaToken', captchaToken || '');
+      console.log('Submitting data:', submitData); // Debug log
 
       const response = await axios.post(
         'https://csr-njere.smathub.com/api/schools',
         submitData,
         {
-          headers: { 'Content-Type': 'multipart/form-data' },
+          headers: { 'Content-Type': 'application/json' },
         },
       );
 
