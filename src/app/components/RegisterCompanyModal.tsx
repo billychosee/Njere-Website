@@ -60,6 +60,8 @@ const RegisterCompanyModal: React.FC<RegisterCompanyModalProps> = ({ isOpen, onC
     }
 
     try {
+      console.log('Submitting company data:', { ...formData, captchaToken });
+
       const response = await axios.post(
         'https://csr-njere.smathub.com/api/companies',
         { ...formData, captchaToken },
