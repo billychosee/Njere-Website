@@ -228,15 +228,16 @@ const RegisterSchoolModal: React.FC<RegisterSchoolModalProps> = ({
                       required
                     >
                       <option value="">Select Province</option>
-                      <option value="Eastern Cape">Eastern Cape</option>
-                      <option value="Free State">Free State</option>
-                      <option value="Gauteng">Gauteng</option>
-                      <option value="KwaZulu-Natal">KwaZulu-Natal</option>
-                      <option value="Limpopo">Limpopo</option>
-                      <option value="Mpumalanga">Mpumalanga</option>
-                      <option value="Northern Cape">Northern Cape</option>
-                      <option value="North West">North West</option>
-                      <option value="Western Cape">Western Cape</option>
+                      <option value="Bulawayo">Bulawayo</option>
+                      <option value="Harare">Harare</option>
+                      <option value="Manicaland">Manicaland</option>
+                      <option value="Mashonaland Central">Mashonaland Central</option>
+                      <option value="Mashonaland East">Mashonaland East</option>
+                      <option value="Mashonaland West">Mashonaland West</option>
+                      <option value="Masvingo">Masvingo</option>
+                      <option value="Matabeleland North">Matabeleland North</option>
+                      <option value="Matabeleland South">Matabeleland South</option>
+                      <option value="Midlands">Midlands</option>
                     </select>
                   </div>
                   <div>
