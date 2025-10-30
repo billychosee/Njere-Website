@@ -234,6 +234,18 @@ const CSRPage = () => {
                       fill
                       style={{ objectFit: 'cover' }}
                     />
+                    {/* School Logo Overlay */}
+                    {school.logo && (
+                      <div className="absolute z-10 top-4 left-4">
+                        <Image
+                          src={school.logo}
+                          alt={`${school.name} Logo`}
+                          width={50}
+                          height={50}
+                          className="p-1 bg-white border-2 border-white rounded-lg shadow-lg"
+                        />
+                      </div>
+                    )}
                     {school.urgent && (
                       <div
                         className="absolute px-3 py-1 text-xs font-bold text-white rounded-full top-4 right-4"

@@ -35,6 +35,8 @@ const RegisterSchoolModal: React.FC<RegisterSchoolModalProps> = ({
     areasOfNeed: '',
     motivation: '',
     consent: false,
+    schoolLogo: null as File | null,
+    schoolImage: null as File | null,
   });
 
   const [loading, setLoading] = useState(false);
@@ -55,6 +57,16 @@ const RegisterSchoolModal: React.FC<RegisterSchoolModalProps> = ({
     }));
   };
 
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, files } = e.target;
+    if (files && files[0]) {
+      setFormData((prev) => ({
+        ...prev,
+        [name]: files[0],
+      }));
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -71,11 +83,27 @@ const RegisterSchoolModal: React.FC<RegisterSchoolModalProps> = ({
     setLoading(true);
 
     try {
+      // Create FormData for file uploads
+      const submitData = new FormData();
+
+      // Add all form fields
+      Object.entries(formData).forEach(([key, value]) => {
+        if (value !== null && value !== undefined) {
+          if (value instanceof File) {
+            submitData.append(key, value);
+          } else {
+            submitData.append(key, String(value));
+          }
+        }
+      });
+
+      submitData.append('captchaToken', captchaToken || '');
+
       const response = await axios.post(
         'https://csr-njere.smathub.com/api/schools',
-        { ...formData, captchaToken },
+        submitData,
         {
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 'Content-Type': 'multipart/form-data' },
         },
       );
 
@@ -98,6 +126,8 @@ const RegisterSchoolModal: React.FC<RegisterSchoolModalProps> = ({
           areasOfNeed: '',
           motivation: '',
           consent: false,
+          schoolLogo: null,
+          schoolImage: null,
         });
         setCaptchaToken(null);
         recaptchaRef.current?.reset();
@@ -480,6 +510,50 @@ const RegisterSchoolModal: React.FC<RegisterSchoolModalProps> = ({
                   </select>
                 </div>
 
+                {/* School Logo Upload */}
+                <div>
+                  <label
+                    htmlFor="schoolLogo"
+                    className="block mb-2 text-sm font-medium text-gray-900"
+                  >
+                    School Logo <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="file"
+                    id="schoolLogo"
+                    name="schoolLogo"
+                    accept="image/*"
+                    onChange={handleFileChange}
+                    className="w-full px-4 py-3 text-gray-900 bg-white border border-gray-400 rounded-lg focus:ring-2 focus:outline-none focus:border-blue-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+                    required
+                  />
+                  <p className="mt-1 text-xs text-gray-500">
+                    Upload your school logo (PNG, JPG, max 5MB)
+                  </p>
+                </div>
+
+                {/* School Image Upload */}
+                <div>
+                  <label
+                    htmlFor="schoolImage"
+                    className="block mb-2 text-sm font-medium text-gray-900"
+                  >
+                    School Overview Image <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="file"
+                    id="schoolImage"
+                    name="schoolImage"
+                    accept="image/*"
+                    onChange={handleFileChange}
+                    className="w-full px-4 py-3 text-gray-900 bg-white border border-gray-400 rounded-lg focus:ring-2 focus:outline-none focus:border-blue-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-green-50 file:text-green-700 hover:file:bg-green-100"
+                    required
+                  />
+                  <p className="mt-1 text-xs text-gray-500">
+                    Upload a photo/overview of your school (PNG, JPG, max 10MB) - This will be displayed as the background when viewing your school profile
+                  </p>
+                </div>
+
                 {/* Motivation */}
                 <div>
                   <label
@@ -573,3 +647,4 @@ const RegisterSchoolModal: React.FC<RegisterSchoolModalProps> = ({
 };
 
 export default RegisterSchoolModal;
+
