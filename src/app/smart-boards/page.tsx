@@ -27,7 +27,7 @@ const SmartBoardFeatures: Feature[] = [
     description: 'Integrated VC module for hybrid learning environments.',
   },
   {
-    icon: <FaWifi className="w-6 h-6 text-white" />,
+    icon: <FaWifi className="w-6 h-6 text-[#fffff]" />,
     title: 'Wireless Projection',
     description: 'Share content from any device seamlessly.',
   },
