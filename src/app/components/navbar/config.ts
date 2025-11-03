@@ -59,6 +59,12 @@ export const NAV_ITEMS = [
     },
   },
   {
+    label: 'SMART BOARDS',
+    href: '/smart-boards',
+    icon: FiGrid,
+    iconClass: 'text-current',
+  },
+  {
     label: 'INTEGRATIONS',
     href: '/integrations',
     icon: FiGrid,
