@@ -85,7 +85,7 @@ export default function DesktopNav() {
                 key={subItem.href}
                 href={subItem.href}
                 onClick={() => setActiveDropdown(null)}
-                className="group relative overflow-hidden px-6 py-5 text-sm font-bold text-gray-800 transition-all duration-500 hover:text-white hover:bg-gradient-to-br hover:from-[#04baab] hover:via-[#03a8a0] hover:to-[#00204f] rounded-2xl text-center transform hover:scale-105 hover:shadow-2xl hover:-translate-y-3 border-2 border-transparent hover:border-white/30 backdrop-blur-sm"
+                className="group relative overflow-hidden px-6 py-5 text-[10px] lg:text-sm font-bold text-gray-800 transition-all duration-500 hover:text-white hover:bg-gradient-to-br hover:from-[#04baab] hover:via-[#03a8a0] hover:to-[#00204f] rounded-2xl text-center transform hover:scale-105 hover:shadow-2xl hover:-translate-y-3 border-2 border-transparent hover:border-white/30 backdrop-blur-sm"
                 style={{
                   animationDelay: `${index * 25}ms`,
                   animation:
@@ -122,7 +122,7 @@ export default function DesktopNav() {
       (item.label === 'INDUSTRIES' || item.label === 'PRODUCTS');
     const ChevronIcon = ICONS.chevronDown;
 
-    const itemClassName = `relative px-1 py-1 text-sm font-medium transition-colors ${
+    const itemClassName = `relative px-1 py-1 text-[10px] lg:text-sm font-medium transition-colors ${
       isActive
         ? 'text-[#04baab] font-semibold'
         : 'text-gray-700 hover:text-[#04baab]'
@@ -199,7 +199,7 @@ export default function DesktopNav() {
         {/* Get Started Button */}
         <Link
           href="/contact-us"
-          className="bg-[#02ACC3] text-white px-5 py-2.5 rounded-full text-sm font-medium flex items-center shadow-lg transition-all duration-200 hover:bg-[#0296AD] active:scale-[0.98] whitespace-nowrap"
+          className="bg-[#02ACC3] text-white px-5 py-2.5 rounded-full text-[10px] lg:text-sm font-medium flex items-center shadow-lg transition-all duration-200 hover:bg-[#0296AD] active:scale-[0.98] whitespace-nowrap"
         >
           Get started
           <span className="flex items-center justify-center w-4 h-4 ml-2 rounded-full bg-white/10">

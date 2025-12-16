@@ -86,56 +86,56 @@ const HeroNjereCSRConnect: React.FC = () => {
     {
       top: '20%',
       left: '10%',
-      size: 'w-[160px] h-[120px]',
+      size: 'w-[90px] h-[70px] xl:w-[160px] xl:h-[120px]',
       rotation: '-8',
       animation: 'float-card-one',
     },
     {
       top: '30%',
       left: '4%',
-      size: 'w-[140px] h-[100px]',
+      size: 'w-[80px] h-[60px] xl:w-[140px] xl:h-[100px]',
       rotation: '6',
       animation: 'float-card-two',
     },
     {
       top: '20%',
       right: '12%',
-      size: 'w-[180px] h-[140px]',
+      size: 'w-[100px] h-[80px] xl:w-[180px] xl:h-[140px]',
       rotation: '10',
       animation: 'float-card-three',
     },
     {
       top: '40%',
       right: '5%',
-      size: 'w-[150px] h-[110px]',
+      size: 'w-[85px] h-[65px] xl:w-[150px] xl:h-[110px]',
       rotation: '-4',
       animation: 'float-card-four',
     },
     {
       bottom: '15%',
       left: '8%',
-      size: 'w-[170px] h-[130px]',
+      size: 'w-[95px] h-[75px] xl:w-[170px] xl:h-[130px]',
       rotation: '3',
       animation: 'float-card-two',
     },
     {
       bottom: '35%',
       left: '15%',
-      size: 'w-[130px] h-[90px]',
+      size: 'w-[75px] h-[55px] xl:w-[130px] xl:h-[90px]',
       rotation: '-12',
       animation: 'float-card-one',
     },
     {
       bottom: '10%',
       right: '10%',
-      size: 'w-[190px] h-[150px]',
+      size: 'w-[105px] h-[85px] xl:w-[190px] xl:h-[150px]',
       rotation: '-5',
       animation: 'float-card-three',
     },
     {
       bottom: '30%',
       right: '18%',
-      size: 'w-[145px] h-[105px]',
+      size: 'w-[80px] h-[60px] xl:w-[145px] xl:h-[105px]',
       rotation: '8',
       animation: 'float-card-four',
     },
@@ -175,7 +175,7 @@ const HeroNjereCSRConnect: React.FC = () => {
           variants={itemVariants}
         >
           Education Management
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0296AD] to-blue-600">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0296AD] to-blue-600 pl-0 md:pl-2">
             System
           </span>
         </motion.h1>

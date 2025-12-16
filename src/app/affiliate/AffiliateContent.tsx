@@ -734,20 +734,17 @@ const AffiliateContent = () => {
                 className="mb-4 overflow-hidden bg-white border border-gray-100 shadow-lg rounded-xl"
               >
                 <motion.button
-                  className="flex items-center justify-between w-full p-6 text-left transition-colors cursor-pointer hover:bg-gray-50"
+                  className="flex items-center w-full p-5 text-left transition-colors cursor-pointer hover:bg-gray-50"
                   onClick={() =>
                     setExpandedFaq(expandedFaq === index ? null : index)
                   }
                   whileHover={{ x: 5 }}
                   transition={{ type: 'spring', stiffness: 400, damping: 10 }}
                 >
-                  <h3 className="pr-8 text-lg font-semibold text-gray-900">
-                    {faq.question}
-                  </h3>
                   <motion.div
                     animate={{ rotate: expandedFaq === index ? 45 : 0 }}
                     transition={{ duration: 0.3 }}
-                    className="flex items-center justify-center w-10 h-10 rounded-full"
+                    className="flex items-center justify-center w-10 h-10 mr-4 rounded-full"
                     style={{ backgroundColor: ACCENT_COLOR + '20' }}
                   >
                     {expandedFaq === index ? (
@@ -762,6 +759,9 @@ const AffiliateContent = () => {
                       />
                     )}
                   </motion.div>
+                  <h3 className="text-lg font-semibold text-gray-900">
+                    {faq.question}
+                  </h3>
                 </motion.button>
                 <AnimatePresence>
                   {expandedFaq === index && (
